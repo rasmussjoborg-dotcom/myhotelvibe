@@ -1,12 +1,11 @@
-import fs from 'fs';
-import path from 'path';
 import { createClient } from '@supabase/supabase-js';
-import { execSync } from 'child_process';
+import sharp from 'sharp';
+import 'dotenv/config';
 
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
 const SUPABASE_KEY = process.env.VITE_SUPABASE_ANON_KEY;
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
-const MODEL_VERSION = '42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b'; 
+const MODEL_VERSION = '42fed1c4974146d4d2414e2be2c5277c7fcf05fcc3a73abf41610695738c1d7b';
 
 if (!SUPABASE_URL || !SUPABASE_KEY || !REPLICATE_API_TOKEN) {
   console.error('Missing required environment variables');
@@ -21,13 +20,9 @@ async function sleep(ms) {
 
 async function upscaleImage(imageUrl) {
   let downscaledUrl = imageUrl;
-  // Booking.com: replace any max... folder with max1024
   if (downscaledUrl.includes('bstatic.com')) {
     downscaledUrl = downscaledUrl.replace(/\/max[^\/]+\//, '/max1024/');
   }
-  // Expedia: replace _z or _b with _y (which is typically smaller) if needed, or leave it.
-  // Actually Replicate can handle 1024px. If it's already a reasonable size, it's fine.
-
 
   let createRes;
   let retryCount = 0;
@@ -89,13 +84,6 @@ async function upscaleImage(imageUrl) {
   }
 }
 
-async function downloadImage(url, dest) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Failed to fetch image: ${res.statusText}`);
-  const buffer = await res.arrayBuffer();
-  fs.writeFileSync(dest, Buffer.from(buffer));
-}
-
 async function main() {
   const hotelId = process.argv[2];
   if (!hotelId) {
@@ -110,76 +98,80 @@ async function main() {
   }
 
   const hotel = hotels[0];
-    let imageUrls = hotel.images || [];
-    if (!Array.isArray(imageUrls) || imageUrls.length === 0) {
-      try {
-        imageUrls = typeof hotel.image === 'string' && hotel.image.startsWith('[') ? JSON.parse(hotel.image) : [hotel.image].filter(Boolean);
-      } catch(e) {
-        console.error('Failed to parse legacy image field', e);
-      }
+  let imageUrls = hotel.images || [];
+  if (!Array.isArray(imageUrls) || imageUrls.length === 0) {
+    try {
+      imageUrls = typeof hotel.image === 'string' && hotel.image.startsWith('[') ? JSON.parse(hotel.image) : [hotel.image].filter(Boolean);
+    } catch(e) {
+      console.error('Failed to parse legacy image field', e);
     }
+  }
 
-    // Check if it needs upscaling
-    if (!imageUrls.some(u => typeof u === 'string' && u.startsWith('http'))) {
-      console.log(`Skipping ${hotel.id}, already local.`);
-      return;
-    }
+  // Images in stays-images are the raw Booking.com JPEGs — they still need upscaling
 
-    console.log(`Processing ${hotel.id}...`);
-    const localPaths = [];
-    const dirPath = path.resolve(`public/stays/${hotel.id}`);
+  console.log(`Processing ${hotel.id}...`);
+  const newImagePaths = [];
+
+  for (let i = 0; i < imageUrls.length; i++) {
+    const originalUrl = imageUrls[i];
+    if (!originalUrl) continue;
     
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
+    // If it's already a local path, it's problematic but let's skip for now or try to use it
+    if (originalUrl.startsWith('/')) {
+      newImagePaths.push(originalUrl);
+      continue;
     }
 
-    for (let i = 0; i < imageUrls.length; i++) {
-      const originalUrl = imageUrls[i];
-      if (!originalUrl) continue;
+    console.log(`  Upscaling image ${i+1}/${imageUrls.length}...`);
+    try {
+      const upscaledUrl = await upscaleImage(originalUrl);
       
-      if (originalUrl.startsWith('/')) {
-        localPaths.push(originalUrl);
-        continue;
+      console.log(`  Downloading and compressing image ${i+1}...`);
+      const res = await fetch(upscaledUrl);
+      if (!res.ok) throw new Error(`Failed to fetch upscaled image: ${res.statusText}`);
+      const buffer = await res.arrayBuffer();
+
+      const optimizedBuffer = await sharp(buffer)
+        .resize({ width: 2000, withoutEnlargement: true })
+        .jpeg({ quality: 92 })
+        .toBuffer();
+
+      const filePath = `${hotel.id}/${i + 1}.jpg`;
+
+      console.log(`  Uploading image ${i+1} to Supabase...`);
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('stays-images')
+        .upload(filePath, optimizedBuffer, {
+          contentType: 'image/jpeg',
+          upsert: true
+        });
+
+      if (uploadError) {
+        throw uploadError;
       }
 
-      console.log(`  Upscaling image ${i+1}/${imageUrls.length}...`);
-      try {
-        const upscaledUrl = await upscaleImage(originalUrl);
-        const filename = `${hotel.id}-${i + 1}.jpg`;
-        const localPath = `/stays/${hotel.id}/${filename}`;
-        const absoluteDest = path.resolve(dirPath, filename);
-        
-        await downloadImage(upscaledUrl, absoluteDest);
-        
-        // Generate thumbnail
-        const thumbDest = path.resolve(dirPath, `${hotel.id}-${i + 1}-thumb.jpg`);
-        try {
-          execSync(`sips -Z 800 "${absoluteDest}" --out "${thumbDest}"`, { stdio: 'ignore' });
-        } catch (err) {
-          console.error(`  -> Failed to generate thumbnail for image ${i+1}:`, err.message);
-        }
-
-        localPaths.push(localPath);
-        console.log(`  -> Saved to ${localPath} and generated thumbnail`);
-      } catch (e) {
-        console.error(`  -> Failed to upscale/download image ${i+1}:`, e);
-        localPaths.push(originalUrl); // Fallback to original
-      }
+      const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/stays-images/${filePath}`;
+      newImagePaths.push(publicUrl);
+      console.log(`  -> Saved to ${publicUrl}`);
+    } catch (e) {
+      console.error(`  -> Failed to upscale/upload image ${i+1}:`, e.message);
+      newImagePaths.push(originalUrl); // Fallback to original
     }
+  }
 
-    // Update DB
-    const { error: updateError } = await supabase
-      .from('hotels')
-      .update({ 
-        image: localPaths.length > 0 ? JSON.stringify(localPaths) : hotel.image
-      })
-      .eq('id', hotel.id);
+  // Update DB
+  const { error: updateError } = await supabase
+    .from('hotels')
+    .update({ 
+      image: newImagePaths.length > 0 ? JSON.stringify(newImagePaths) : hotel.image
+    })
+    .eq('id', hotel.id);
 
-    if (updateError) {
-      console.error(`Error updating DB for ${hotel.id}:`, updateError);
-    } else {
-      console.log(`Successfully updated ${hotel.id} in Supabase!`);
-    }
+  if (updateError) {
+    console.error(`Error updating DB for ${hotel.id}:`, updateError);
+  } else {
+    console.log(`Successfully updated ${hotel.id} in Supabase!`);
+  }
 
   console.log('Finished processing hotel.');
 }
