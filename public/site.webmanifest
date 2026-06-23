@@ -1,0 +1,9 @@
+{
+  "name": "My Hotel Vibe",
+  "short_name": "My Hotel Vibe",
+  "description": "Editorial hotel discovery by mood, setting, and stay style.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF4EF",
+  "theme_color": "#F5F0F0"
+}

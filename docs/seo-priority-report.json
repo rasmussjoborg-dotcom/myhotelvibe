@@ -1,0 +1,881 @@
+{
+  "generatedAt": "2026-06-22T13:58:45.102Z",
+  "siteUrl": "https://myhotelvibe.com",
+  "totalHotels": 9,
+  "totalOpportunities": 21,
+  "priorities": {
+    "tier1": [
+      {
+        "kind": "country",
+        "label": "France",
+        "href": "/countries/france/",
+        "liveUrl": "https://myhotelvibe.com/countries/france/",
+        "hotelsCount": 8,
+        "destinationsCount": 8,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 8
+        },
+        "score": 74,
+        "tier": "Tier 1",
+        "intent": "Build authority around \"France hotels\" and related destination-level searches.",
+        "title": "France Hotel Guide | My Hotel Vibe",
+        "keywordCluster": [
+          "france hotels",
+          "best hotels in france",
+          "boutique hotels france"
+        ],
+        "supportingRoutes": [
+          "/hotels/la-mirande/",
+          "/hotels/le-coucou/",
+          "/hotels/cheval-blanc-paris/",
+          "/hotels/airelles-gordes-la-bastide/",
+          "/destinations/avignon-france/",
+          "/destinations/meribel-france/",
+          "/destinations/paris-france/",
+          "/destinations/gordes-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "La Mirande",
+            "location": "Avignon, France",
+            "url": "https://myhotelvibe.com/hotels/la-mirande/"
+          },
+          {
+            "name": "Le Coucou",
+            "location": "Méribel, France",
+            "url": "https://myhotelvibe.com/hotels/le-coucou/"
+          },
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          },
+          {
+            "name": "Airelles Gordes, La Bastide",
+            "location": "Gordes, France",
+            "url": "https://myhotelvibe.com/hotels/airelles-gordes-la-bastide/"
+          },
+          {
+            "name": "Hotel du Cap-Eden-Roc",
+            "location": "Antibes, France",
+            "url": "https://myhotelvibe.com/hotels/hotel-du-cap-eden-roc/"
+          },
+          {
+            "name": "Château de la Chèvre d'Or",
+            "location": "Èze, France",
+            "url": "https://myhotelvibe.com/hotels/chateau-de-la-chevre-d-or/"
+          },
+          {
+            "name": "Domaine des Etangs",
+            "location": "Massignac, France",
+            "url": "https://myhotelvibe.com/hotels/domaine-des-etangs/"
+          },
+          {
+            "name": "Les Roches Rouges",
+            "location": "Saint-Raphaël, France",
+            "url": "https://myhotelvibe.com/hotels/les-roches-rouges/"
+          }
+        ]
+      },
+      {
+        "kind": "vibe",
+        "label": "The Creative Retreat",
+        "href": "/vibes/the-creative-retreat/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-creative-retreat/",
+        "hotelsCount": 5,
+        "destinationsCount": 5,
+        "countriesCount": 2,
+        "priceMix": {
+          "Iconic (€€€€)": 5
+        },
+        "score": 45,
+        "tier": "Tier 1",
+        "intent": "Own editorial mood-led discovery around \"the creative retreat hotels\".",
+        "title": "The Creative Retreat Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the creative retreat hotels",
+          "the creative retreat stays",
+          "editorial hotel guide the creative retreat"
+        ],
+        "supportingRoutes": [
+          "/hotels/le-coucou/",
+          "/hotels/cheval-blanc-paris/",
+          "/hotels/airelles-gordes-la-bastide/",
+          "/hotels/domaine-des-etangs/",
+          "/destinations/meribel-france/",
+          "/destinations/paris-france/",
+          "/destinations/gordes-france/",
+          "/destinations/massignac-france/",
+          "/countries/france/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "Le Coucou",
+            "location": "Méribel, France",
+            "url": "https://myhotelvibe.com/hotels/le-coucou/"
+          },
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          },
+          {
+            "name": "Airelles Gordes, La Bastide",
+            "location": "Gordes, France",
+            "url": "https://myhotelvibe.com/hotels/airelles-gordes-la-bastide/"
+          },
+          {
+            "name": "Domaine des Etangs",
+            "location": "Massignac, France",
+            "url": "https://myhotelvibe.com/hotels/domaine-des-etangs/"
+          },
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      },
+      {
+        "kind": "vibe",
+        "label": "The Romantic Reset",
+        "href": "/vibes/the-romantic-reset/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-romantic-reset/",
+        "hotelsCount": 5,
+        "destinationsCount": 5,
+        "countriesCount": 2,
+        "priceMix": {
+          "Iconic (€€€€)": 5
+        },
+        "score": 45,
+        "tier": "Tier 1",
+        "intent": "Own editorial mood-led discovery around \"the romantic reset hotels\".",
+        "title": "The Romantic Reset Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the romantic reset hotels",
+          "the romantic reset stays",
+          "editorial hotel guide the romantic reset"
+        ],
+        "supportingRoutes": [
+          "/hotels/le-coucou/",
+          "/hotels/cheval-blanc-paris/",
+          "/hotels/airelles-gordes-la-bastide/",
+          "/hotels/domaine-des-etangs/",
+          "/destinations/meribel-france/",
+          "/destinations/paris-france/",
+          "/destinations/gordes-france/",
+          "/destinations/massignac-france/",
+          "/countries/france/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "Le Coucou",
+            "location": "Méribel, France",
+            "url": "https://myhotelvibe.com/hotels/le-coucou/"
+          },
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          },
+          {
+            "name": "Airelles Gordes, La Bastide",
+            "location": "Gordes, France",
+            "url": "https://myhotelvibe.com/hotels/airelles-gordes-la-bastide/"
+          },
+          {
+            "name": "Domaine des Etangs",
+            "location": "Massignac, France",
+            "url": "https://myhotelvibe.com/hotels/domaine-des-etangs/"
+          },
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      },
+      {
+        "kind": "vibe",
+        "label": "The Urban Explorer",
+        "href": "/vibes/the-urban-explorer/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-urban-explorer/",
+        "hotelsCount": 3,
+        "destinationsCount": 3,
+        "countriesCount": 2,
+        "priceMix": {
+          "Iconic (€€€€)": 3
+        },
+        "score": 31,
+        "tier": "Tier 1",
+        "intent": "Own editorial mood-led discovery around \"the urban explorer hotels\".",
+        "title": "The Urban Explorer Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the urban explorer hotels",
+          "the urban explorer stays",
+          "editorial hotel guide the urban explorer"
+        ],
+        "supportingRoutes": [
+          "/hotels/la-mirande/",
+          "/hotels/cheval-blanc-paris/",
+          "/hotels/the-ritz-london/",
+          "/destinations/avignon-france/",
+          "/destinations/paris-france/",
+          "/destinations/london-uk/",
+          "/countries/france/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "La Mirande",
+            "location": "Avignon, France",
+            "url": "https://myhotelvibe.com/hotels/la-mirande/"
+          },
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          },
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      },
+      {
+        "kind": "vibe",
+        "label": "The Social Weekender",
+        "href": "/vibes/the-social-weekender/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-social-weekender/",
+        "hotelsCount": 3,
+        "destinationsCount": 3,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 3
+        },
+        "score": 28,
+        "tier": "Tier 1",
+        "intent": "Own editorial mood-led discovery around \"the social weekender hotels\".",
+        "title": "The Social Weekender Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the social weekender hotels",
+          "the social weekender stays",
+          "editorial hotel guide the social weekender"
+        ],
+        "supportingRoutes": [
+          "/hotels/hotel-du-cap-eden-roc/",
+          "/hotels/chateau-de-la-chevre-d-or/",
+          "/hotels/les-roches-rouges/",
+          "/destinations/antibes-france/",
+          "/destinations/eze-france/",
+          "/destinations/saint-raphael-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Hotel du Cap-Eden-Roc",
+            "location": "Antibes, France",
+            "url": "https://myhotelvibe.com/hotels/hotel-du-cap-eden-roc/"
+          },
+          {
+            "name": "Château de la Chèvre d'Or",
+            "location": "Èze, France",
+            "url": "https://myhotelvibe.com/hotels/chateau-de-la-chevre-d-or/"
+          },
+          {
+            "name": "Les Roches Rouges",
+            "location": "Saint-Raphaël, France",
+            "url": "https://myhotelvibe.com/hotels/les-roches-rouges/"
+          }
+        ]
+      },
+      {
+        "kind": "vibe",
+        "label": "The Sun-Drenched Escape",
+        "href": "/vibes/the-sun-drenched-escape/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-sun-drenched-escape/",
+        "hotelsCount": 3,
+        "destinationsCount": 3,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 3
+        },
+        "score": 28,
+        "tier": "Tier 1",
+        "intent": "Own editorial mood-led discovery around \"the sun-drenched escape hotels\".",
+        "title": "The Sun-Drenched Escape Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the sun-drenched escape hotels",
+          "the sun-drenched escape stays",
+          "editorial hotel guide the sun-drenched escape"
+        ],
+        "supportingRoutes": [
+          "/hotels/hotel-du-cap-eden-roc/",
+          "/hotels/chateau-de-la-chevre-d-or/",
+          "/hotels/les-roches-rouges/",
+          "/destinations/antibes-france/",
+          "/destinations/eze-france/",
+          "/destinations/saint-raphael-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Hotel du Cap-Eden-Roc",
+            "location": "Antibes, France",
+            "url": "https://myhotelvibe.com/hotels/hotel-du-cap-eden-roc/"
+          },
+          {
+            "name": "Château de la Chèvre d'Or",
+            "location": "Èze, France",
+            "url": "https://myhotelvibe.com/hotels/chateau-de-la-chevre-d-or/"
+          },
+          {
+            "name": "Les Roches Rouges",
+            "location": "Saint-Raphaël, France",
+            "url": "https://myhotelvibe.com/hotels/les-roches-rouges/"
+          }
+        ]
+      },
+      {
+        "kind": "backdrop",
+        "label": "Iconic Cities",
+        "href": "/backdrops/iconic-cities/",
+        "liveUrl": "https://myhotelvibe.com/backdrops/iconic-cities/",
+        "hotelsCount": 3,
+        "destinationsCount": 3,
+        "countriesCount": 2,
+        "priceMix": {
+          "Iconic (€€€€)": 3
+        },
+        "score": 27,
+        "tier": "Tier 1",
+        "intent": "Capture setting-first searches around \"iconic cities hotels\".",
+        "title": "Iconic Cities Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "iconic cities hotels",
+          "best iconic cities hotels",
+          "iconic cities stay guide"
+        ],
+        "supportingRoutes": [
+          "/hotels/la-mirande/",
+          "/hotels/cheval-blanc-paris/",
+          "/hotels/the-ritz-london/",
+          "/destinations/avignon-france/",
+          "/destinations/paris-france/",
+          "/destinations/london-uk/",
+          "/countries/france/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "La Mirande",
+            "location": "Avignon, France",
+            "url": "https://myhotelvibe.com/hotels/la-mirande/"
+          },
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          },
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      },
+      {
+        "kind": "backdrop",
+        "label": "Pristine Shores",
+        "href": "/backdrops/pristine-shores/",
+        "liveUrl": "https://myhotelvibe.com/backdrops/pristine-shores/",
+        "hotelsCount": 3,
+        "destinationsCount": 3,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 3
+        },
+        "score": 25,
+        "tier": "Tier 1",
+        "intent": "Capture setting-first searches around \"pristine shores hotels\".",
+        "title": "Pristine Shores Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "pristine shores hotels",
+          "best pristine shores hotels",
+          "pristine shores stay guide"
+        ],
+        "supportingRoutes": [
+          "/hotels/hotel-du-cap-eden-roc/",
+          "/hotels/chateau-de-la-chevre-d-or/",
+          "/hotels/les-roches-rouges/",
+          "/destinations/antibes-france/",
+          "/destinations/eze-france/",
+          "/destinations/saint-raphael-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Hotel du Cap-Eden-Roc",
+            "location": "Antibes, France",
+            "url": "https://myhotelvibe.com/hotels/hotel-du-cap-eden-roc/"
+          },
+          {
+            "name": "Château de la Chèvre d'Or",
+            "location": "Èze, France",
+            "url": "https://myhotelvibe.com/hotels/chateau-de-la-chevre-d-or/"
+          },
+          {
+            "name": "Les Roches Rouges",
+            "location": "Saint-Raphaël, France",
+            "url": "https://myhotelvibe.com/hotels/les-roches-rouges/"
+          }
+        ]
+      },
+      {
+        "kind": "backdrop",
+        "label": "Remote Sanctuaries",
+        "href": "/backdrops/remote-sanctuaries/",
+        "liveUrl": "https://myhotelvibe.com/backdrops/remote-sanctuaries/",
+        "hotelsCount": 2,
+        "destinationsCount": 2,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 2
+        },
+        "score": 18,
+        "tier": "Tier 1",
+        "intent": "Capture setting-first searches around \"remote sanctuaries hotels\".",
+        "title": "Remote Sanctuaries Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "remote sanctuaries hotels",
+          "best remote sanctuaries hotels",
+          "remote sanctuaries stay guide"
+        ],
+        "supportingRoutes": [
+          "/hotels/airelles-gordes-la-bastide/",
+          "/hotels/domaine-des-etangs/",
+          "/destinations/gordes-france/",
+          "/destinations/massignac-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Airelles Gordes, La Bastide",
+            "location": "Gordes, France",
+            "url": "https://myhotelvibe.com/hotels/airelles-gordes-la-bastide/"
+          },
+          {
+            "name": "Domaine des Etangs",
+            "location": "Massignac, France",
+            "url": "https://myhotelvibe.com/hotels/domaine-des-etangs/"
+          }
+        ]
+      }
+    ],
+    "tier2": [
+      {
+        "kind": "vibe",
+        "label": "The Epicurean Pilgrimage",
+        "href": "/vibes/the-epicurean-pilgrimage/",
+        "liveUrl": "https://myhotelvibe.com/vibes/the-epicurean-pilgrimage/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 14,
+        "tier": "Tier 2",
+        "intent": "Own editorial mood-led discovery around \"the epicurean pilgrimage hotels\".",
+        "title": "The Epicurean Pilgrimage Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "the epicurean pilgrimage hotels",
+          "the epicurean pilgrimage stays",
+          "editorial hotel guide the epicurean pilgrimage"
+        ],
+        "supportingRoutes": [
+          "/hotels/la-mirande/",
+          "/destinations/avignon-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "La Mirande",
+            "location": "Avignon, France",
+            "url": "https://myhotelvibe.com/hotels/la-mirande/"
+          }
+        ]
+      },
+      {
+        "kind": "backdrop",
+        "label": "Alpine & Peaks",
+        "href": "/backdrops/alpine-and-peaks/",
+        "liveUrl": "https://myhotelvibe.com/backdrops/alpine-and-peaks/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 11,
+        "tier": "Tier 2",
+        "intent": "Capture setting-first searches around \"alpine & peaks hotels\".",
+        "title": "Alpine & Peaks Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "alpine & peaks hotels",
+          "best alpine & peaks hotels",
+          "alpine & peaks stay guide"
+        ],
+        "supportingRoutes": [
+          "/hotels/le-coucou/",
+          "/destinations/meribel-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Le Coucou",
+            "location": "Méribel, France",
+            "url": "https://myhotelvibe.com/hotels/le-coucou/"
+          }
+        ]
+      },
+      {
+        "kind": "country",
+        "label": "UK",
+        "href": "/countries/uk/",
+        "liveUrl": "https://myhotelvibe.com/countries/uk/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 11,
+        "tier": "Tier 2",
+        "intent": "Build authority around \"UK hotels\" and related destination-level searches.",
+        "title": "UK Hotel Guide | My Hotel Vibe",
+        "keywordCluster": [
+          "uk hotels",
+          "best hotels in uk",
+          "boutique hotels uk"
+        ],
+        "supportingRoutes": [
+          "/hotels/the-ritz-london/",
+          "/destinations/london-uk/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      }
+    ],
+    "tier3": [
+      {
+        "kind": "destination",
+        "label": "Antibes, France",
+        "href": "/destinations/antibes-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/antibes-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Antibes, France hotels\".",
+        "title": "Antibes, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "antibes, france hotels",
+          "best hotels in antibes, france",
+          "luxury hotels antibes, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/hotel-du-cap-eden-roc/",
+          "/destinations/antibes-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Hotel du Cap-Eden-Roc",
+            "location": "Antibes, France",
+            "url": "https://myhotelvibe.com/hotels/hotel-du-cap-eden-roc/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Avignon, France",
+        "href": "/destinations/avignon-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/avignon-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Avignon, France hotels\".",
+        "title": "Avignon, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "avignon, france hotels",
+          "best hotels in avignon, france",
+          "luxury hotels avignon, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/la-mirande/",
+          "/destinations/avignon-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "La Mirande",
+            "location": "Avignon, France",
+            "url": "https://myhotelvibe.com/hotels/la-mirande/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Èze, France",
+        "href": "/destinations/eze-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/eze-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Èze, France hotels\".",
+        "title": "Èze, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "èze, france hotels",
+          "best hotels in èze, france",
+          "luxury hotels èze, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/chateau-de-la-chevre-d-or/",
+          "/destinations/eze-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Château de la Chèvre d'Or",
+            "location": "Èze, France",
+            "url": "https://myhotelvibe.com/hotels/chateau-de-la-chevre-d-or/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Gordes, France",
+        "href": "/destinations/gordes-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/gordes-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Gordes, France hotels\".",
+        "title": "Gordes, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "gordes, france hotels",
+          "best hotels in gordes, france",
+          "luxury hotels gordes, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/airelles-gordes-la-bastide/",
+          "/destinations/gordes-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Airelles Gordes, La Bastide",
+            "location": "Gordes, France",
+            "url": "https://myhotelvibe.com/hotels/airelles-gordes-la-bastide/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "London, UK",
+        "href": "/destinations/london-uk/",
+        "liveUrl": "https://myhotelvibe.com/destinations/london-uk/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"London, UK hotels\".",
+        "title": "London, UK Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "london, uk hotels",
+          "best hotels in london, uk",
+          "luxury hotels london, uk"
+        ],
+        "supportingRoutes": [
+          "/hotels/the-ritz-london/",
+          "/destinations/london-uk/",
+          "/countries/uk/"
+        ],
+        "hotels": [
+          {
+            "name": "The Ritz London",
+            "location": "London, UK",
+            "url": "https://myhotelvibe.com/hotels/the-ritz-london/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Massignac, France",
+        "href": "/destinations/massignac-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/massignac-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Massignac, France hotels\".",
+        "title": "Massignac, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "massignac, france hotels",
+          "best hotels in massignac, france",
+          "luxury hotels massignac, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/domaine-des-etangs/",
+          "/destinations/massignac-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Domaine des Etangs",
+            "location": "Massignac, France",
+            "url": "https://myhotelvibe.com/hotels/domaine-des-etangs/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Méribel, France",
+        "href": "/destinations/meribel-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/meribel-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Méribel, France hotels\".",
+        "title": "Méribel, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "méribel, france hotels",
+          "best hotels in méribel, france",
+          "luxury hotels méribel, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/le-coucou/",
+          "/destinations/meribel-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Le Coucou",
+            "location": "Méribel, France",
+            "url": "https://myhotelvibe.com/hotels/le-coucou/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Paris, France",
+        "href": "/destinations/paris-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/paris-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Paris, France hotels\".",
+        "title": "Paris, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "paris, france hotels",
+          "best hotels in paris, france",
+          "luxury hotels paris, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/cheval-blanc-paris/",
+          "/destinations/paris-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Cheval Blanc Paris",
+            "location": "Paris, France",
+            "url": "https://myhotelvibe.com/hotels/cheval-blanc-paris/"
+          }
+        ]
+      },
+      {
+        "kind": "destination",
+        "label": "Saint-Raphaël, France",
+        "href": "/destinations/saint-raphael-france/",
+        "liveUrl": "https://myhotelvibe.com/destinations/saint-raphael-france/",
+        "hotelsCount": 1,
+        "destinationsCount": 1,
+        "countriesCount": 1,
+        "priceMix": {
+          "Iconic (€€€€)": 1
+        },
+        "score": 7,
+        "tier": "Tier 3",
+        "intent": "Target exact-match destination intent around \"Saint-Raphaël, France hotels\".",
+        "title": "Saint-Raphaël, France Hotels | My Hotel Vibe",
+        "keywordCluster": [
+          "saint-raphaël, france hotels",
+          "best hotels in saint-raphaël, france",
+          "luxury hotels saint-raphaël, france"
+        ],
+        "supportingRoutes": [
+          "/hotels/les-roches-rouges/",
+          "/destinations/saint-raphael-france/",
+          "/countries/france/"
+        ],
+        "hotels": [
+          {
+            "name": "Les Roches Rouges",
+            "location": "Saint-Raphaël, France",
+            "url": "https://myhotelvibe.com/hotels/les-roches-rouges/"
+          }
+        ]
+      }
+    ]
+  }
+}

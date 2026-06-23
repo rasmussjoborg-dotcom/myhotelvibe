@@ -1,0 +1,223 @@
+{
+  "generatedAt": "2026-06-22T18:36:04.825Z",
+  "totalHotels": 9,
+  "totals": {
+    "countries": 2,
+    "destinations": 9,
+    "vibes": 5,
+    "backdrops": 4
+  },
+  "countries": [
+    {
+      "slug": "france",
+      "label": "France",
+      "count": 8,
+      "hotels": [
+        "La Mirande",
+        "Le Coucou",
+        "Cheval Blanc Paris",
+        "Airelles Gordes, La Bastide",
+        "Hotel du Cap-Eden-Roc",
+        "Château de la Chèvre d'Or",
+        "Domaine des Etangs",
+        "Les Roches Rouges"
+      ],
+      "url": "https://myhotelvibe.com/countries/france/"
+    },
+    {
+      "slug": "united-kingdom",
+      "label": "United Kingdom",
+      "count": 1,
+      "hotels": [
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/countries/united-kingdom/"
+    }
+  ],
+  "destinations": [
+    {
+      "slug": "antibes-france",
+      "label": "Antibes, France",
+      "count": 1,
+      "hotels": [
+        "Hotel du Cap-Eden-Roc"
+      ],
+      "url": "https://myhotelvibe.com/destinations/antibes-france/"
+    },
+    {
+      "slug": "avignon-france",
+      "label": "Avignon, France",
+      "count": 1,
+      "hotels": [
+        "La Mirande"
+      ],
+      "url": "https://myhotelvibe.com/destinations/avignon-france/"
+    },
+    {
+      "slug": "eze-france",
+      "label": "Èze, France",
+      "count": 1,
+      "hotels": [
+        "Château de la Chèvre d'Or"
+      ],
+      "url": "https://myhotelvibe.com/destinations/eze-france/"
+    },
+    {
+      "slug": "gordes-france",
+      "label": "Gordes, France",
+      "count": 1,
+      "hotels": [
+        "Airelles Gordes, La Bastide"
+      ],
+      "url": "https://myhotelvibe.com/destinations/gordes-france/"
+    },
+    {
+      "slug": "london-united-kingdom",
+      "label": "London, United Kingdom",
+      "count": 1,
+      "hotels": [
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/destinations/london-united-kingdom/"
+    },
+    {
+      "slug": "massignac-france",
+      "label": "Massignac, France",
+      "count": 1,
+      "hotels": [
+        "Domaine des Etangs"
+      ],
+      "url": "https://myhotelvibe.com/destinations/massignac-france/"
+    },
+    {
+      "slug": "meribel-france",
+      "label": "Méribel, France",
+      "count": 1,
+      "hotels": [
+        "Le Coucou"
+      ],
+      "url": "https://myhotelvibe.com/destinations/meribel-france/"
+    },
+    {
+      "slug": "paris-france",
+      "label": "Paris, France",
+      "count": 1,
+      "hotels": [
+        "Cheval Blanc Paris"
+      ],
+      "url": "https://myhotelvibe.com/destinations/paris-france/"
+    },
+    {
+      "slug": "saint-raphael-france",
+      "label": "Saint-Raphaël, France",
+      "count": 1,
+      "hotels": [
+        "Les Roches Rouges"
+      ],
+      "url": "https://myhotelvibe.com/destinations/saint-raphael-france/"
+    }
+  ],
+  "vibes": [
+    {
+      "slug": "the-creative-retreat",
+      "label": "The Creative Retreat",
+      "count": 5,
+      "hotels": [
+        "Le Coucou",
+        "Cheval Blanc Paris",
+        "Airelles Gordes, La Bastide",
+        "Domaine des Etangs",
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/vibes/the-creative-retreat/"
+    },
+    {
+      "slug": "the-social-weekender",
+      "label": "The Social Weekender",
+      "count": 3,
+      "hotels": [
+        "Hotel du Cap-Eden-Roc",
+        "Château de la Chèvre d'Or",
+        "Les Roches Rouges"
+      ],
+      "url": "https://myhotelvibe.com/vibes/the-social-weekender/"
+    },
+    {
+      "slug": "the-sun-drenched-escape",
+      "label": "The Sun-Drenched Escape",
+      "count": 3,
+      "hotels": [
+        "Hotel du Cap-Eden-Roc",
+        "Château de la Chèvre d'Or",
+        "Les Roches Rouges"
+      ],
+      "url": "https://myhotelvibe.com/vibes/the-sun-drenched-escape/"
+    },
+    {
+      "slug": "the-urban-explorer",
+      "label": "The Urban Explorer",
+      "count": 3,
+      "hotels": [
+        "La Mirande",
+        "Cheval Blanc Paris",
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/vibes/the-urban-explorer/"
+    },
+    {
+      "slug": "the-epicurean-pilgrimage",
+      "label": "The Epicurean Pilgrimage",
+      "count": 1,
+      "hotels": [
+        "La Mirande"
+      ],
+      "url": "https://myhotelvibe.com/vibes/the-epicurean-pilgrimage/"
+    }
+  ],
+  "backdrops": [
+    {
+      "slug": "remote-sanctuaries",
+      "label": "Remote Sanctuaries",
+      "count": 5,
+      "hotels": [
+        "Le Coucou",
+        "Cheval Blanc Paris",
+        "Airelles Gordes, La Bastide",
+        "Domaine des Etangs",
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/backdrops/remote-sanctuaries/"
+    },
+    {
+      "slug": "iconic-cities",
+      "label": "Iconic Cities",
+      "count": 3,
+      "hotels": [
+        "La Mirande",
+        "Cheval Blanc Paris",
+        "The Ritz London"
+      ],
+      "url": "https://myhotelvibe.com/backdrops/iconic-cities/"
+    },
+    {
+      "slug": "pristine-shores",
+      "label": "Pristine Shores",
+      "count": 3,
+      "hotels": [
+        "Hotel du Cap-Eden-Roc",
+        "Château de la Chèvre d'Or",
+        "Les Roches Rouges"
+      ],
+      "url": "https://myhotelvibe.com/backdrops/pristine-shores/"
+    },
+    {
+      "slug": "alpine-and-peaks",
+      "label": "Alpine & Peaks",
+      "count": 1,
+      "hotels": [
+        "Le Coucou"
+      ],
+      "url": "https://myhotelvibe.com/backdrops/alpine-and-peaks/"
+    }
+  ]
+}

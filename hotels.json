@@ -1,0 +1,825 @@
+[
+  {
+    "id": "la-mirande",
+    "name": "La Mirande",
+    "location": "Avignon, France",
+    "region": "Provence-Alpes-Côte d'Azur, France",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 60,
+    "spaScore": 3,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/377774110.jpg?k=2595450cf99681ae150d752972a3d5c72ea62c8cca36a43cacfdb0a070b46b33&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/377774112.jpg?k=e9eabb07c90b3c672be8ba7e0ec47d96b3f71c96f7699e826d0d57cc852785c4&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/377787229.jpg?k=9cfd654c3ecb0e5fceea45a189756a3953007e79989b61adf75e35b80103dade&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/284193397.jpg?k=8cbcfbc4537d193e2ab39c62b6a58ed713f2beb3edcd490ebed4ecd5a8e84554&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/284189685.jpg?k=99be3e7bea5e807e3325a492ecac08ce46e3d48b0693f311c754a6ac94891771&o=\"]",
+    "imageAlt": "La Mirande",
+    "description": "Nestled beside the Palais des Papes, La Mirande is a timeless 18th-century private mansion. Its interiors exude aristocratic charm, offering a deeply authentic Provençal experience. Gastronomy is at its heart, with a Michelin-starred restaurant and renowned cooking classes. This is a sanctuary for discerning palates and souls seeking refined tranquility.",
+    "tags": [
+      "Culinary Excellence",
+      "Iconic Cities"
+    ],
+    "whyFits": [
+      "The Draw: Experience unparalleled culinary excellence with a Michelin-starred restaurant and renowned cooking school, set within a captivating historic mansion.",
+      "The Flex: Find profound private serenity in its secluded walled garden, a timeless escape despite the central Avignon location."
+    ],
+    "tradeoff": "While centrally located, La Mirande offers an almost secluded atmosphere, which might not appeal to those seeking a more bustling, contemporary city hotel. Its spa is intimate, not a grand wellness resort.",
+    "amenities": [
+      "Michelin-starred restaurant",
+      "Cooking school (Le Marmiton)",
+      "Private walled garden",
+      "Elegant bar and lounges",
+      "Concierge services",
+      "Limited spa treatments",
+      "Complimentary Wi-Fi",
+      "Air conditioning"
+    ],
+    "settings": [
+      "Historic 18th-century private mansion",
+      "Heart of Avignon's historic center",
+      "Refined, antique-filled interiors",
+      "Secluded urban garden"
+    ],
+    "surroundings": "La Mirande sits directly opposite the majestic Palais des Papes, placing guests at the epicenter of Avignon's rich history. The iconic Pont d'Avignon, vibrant markets, and artisan shops are steps away. The serene Rhône river is nearby, with the picturesque landscapes of the Luberon and Alpilles natural parks a short drive.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "3-6 months in advance for peak seasons (spring/summer), 1-2 months for off-peak.",
+    "guestSummary": "Guests consistently laud the impeccable, discreet service, the stunningly preserved historic ambiance, and the truly exceptional culinary journeys, particularly the immersive cooking classes. Some remark that the traditional decor, while authentic, may feel less contemporary to those accustomed to ultra-modern design.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/la-mirande.sv.html?aid=390156&label=duc511jc-10CAsoTUIKbGEtbWlyYW5kZUgzWANoyAGIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4Apz7pdEGwAIB0gIkODVlODQ3MTUtODQ0NS00M2UyLWIyNWQtMzk1ODExZmE1OTVk2AIB4AIB&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1409631&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781104034&srpvid=915c6a4e8fd907b8&type=total&ucfs=1&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Restaurant Le 46",
+        "description": "Savor modern French cuisine with a creative twist in an elegant yet relaxed setting, ideal for a refined solo dining experience.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-46-r673070?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Restaurant La Mirande",
+        "description": "Indulge in an exquisite, intimate dining experience at the hotel's own Michelin-starred restaurant, celebrated for its refined Provençal gastronomy.",
+        "affiliateLink": "https://www.la-mirande.fr/en/restaurant/?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Fou de Fafa",
+        "description": "A delightful, family-friendly bistro known for its warm service and delicious, unpretentious French cooking.",
+        "affiliateLink": "https://www.thefork.com/restaurant/fou-de-fafa-r20684?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Le Vingt Neuf",
+        "description": "A vibrant spot for friends to enjoy expertly paired wines and delicious small plates in a convivial atmosphere.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-vingt-neuf-r774640?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "Pollux",
+        "description": "A contemporary culinary gem offering innovative dishes with a focus on fresh, local ingredients. Impeccable service in a stylish setting.",
+        "affiliateLink": "https://www.thefork.com/restaurant/pollux-r810065?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "L'Artichaut",
+        "description": "Experience creative, seasonal cuisine in a charming setting, celebrated for its inventive dishes and warm ambiance.",
+        "affiliateLink": "https://www.thefork.com/restaurant/l-artichaut-r678091?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "La Fourchette",
+        "description": "An Avignon institution, La Fourchette serves traditional Provençal dishes in a lively, authentic atmosphere, perfect for a taste of local life.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-fourchette-r60241?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1100,
+      "spring": 950,
+      "summer": 1800,
+      "winter": 650
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/ivfJI7ZZYjY,https://www.youtube.com/shorts/hR1DmtiJSKY"
+  },
+  {
+    "id": "le-coucou",
+    "name": "Le Coucou",
+    "location": "Méribel, France",
+    "region": "French Alps",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 135,
+    "spaScore": 5,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/320782130.jpg?k=103f0ccde12da9a351b73672325aa1208bb905c822aecd78b771ea3735c85db0&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/238460022.jpg?k=70d66b10d175bcb77c8d0b21ffbcf4aea64ec21095475931acc1895f5a745267&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/320799841.jpg?k=f9804f12740101b9d59aab3a808d152aa8c3cf666b2d5196c42181a6f1022ef4&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/320797431.jpg?k=f5272aa71b969e39318698b93571a25f9f6cea7f7c0d798a6e89cd4162044545&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/320805849.jpg?k=cdd804d5e52b7ffbf9a8e1f405782c0066584ea149d8e45ad7b7a40dc939f1d2&o=\"]",
+    "imageAlt": "Le Coucou",
+    "description": "Nestled slopeside in Méribel, Le Coucou offers an exquisite blend of alpine charm and refined luxury. This ski-in/ski-out haven promises unparalleled pampering with its extensive spa and two gourmet restaurants. Enjoy breathtaking mountain views and impeccable service, making every moment truly unforgettable in this winter wonderland.",
+    "tags": [
+      "Quiet luxury",
+      "Alpine & Peaks"
+    ],
+    "whyFits": [
+      "The Draw: Direct ski-in/ski-out access into the Three Valleys, pairing exhilarating alpine adventures with luxurious pampering and exquisite design.",
+      "The Flex: Exclusive Tata Harper Spa, two pools, and a dedicated kids' club provide unparalleled, luxurious pampering for all ages."
+    ],
+    "tradeoff": "While offering direct slope access, its prime location can mean a short walk to the very heart of Méribel's village center, though a shuttle is provided.",
+    "amenities": [
+      "Ski-in/Ski-out access",
+      "Two Restaurants (Bistrot Montania & Beefbar)",
+      "Tata Harper Spa",
+      "Indoor and Outdoor Swimming Pools",
+      "Kids Club & Teens Lab",
+      "Ski Room with Boot Heaters",
+      "Fitness Center",
+      "Concierge Service",
+      "Valet Parking"
+    ],
+    "settings": [
+      "Mountain Resort",
+      "Ski Slopes",
+      "Alpine Village",
+      "Luxury Chalet Style"
+    ],
+    "surroundings": "Le Coucou is perfectly positioned on the Belvédère piste, offering direct ski-in/ski-out access to the vast Three Valleys ski area. It boasts panoramic views of the Méribel valley and is a short, convenient shuttle ride from the vibrant village center with its boutiques and bars.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "Expect to book 6-12 months in advance, especially for prime winter dates and school holidays, due to its exclusivity.",
+    "guestSummary": "Guests consistently rave about the impeccable service, stunning ski-in/ski-out convenience, and the serene, luxurious spa. Some note the exceptional dining experiences, though a few mention the high price point as expected for such a caliber of hotel.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/le-coucou-meribel-les-allues.sv.html?aid=390156&label=duc511jc-10CAsoTUIcbGUtY291Y291LW1lcmliZWwtbGVzLWFsbHVlc0gzWANoyAGIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4ArHupdEGwAIB0gIkNjQ3ZGNhMTAtMWI3OS00ZjkzLTk4NTEtNDBhOTViNmQwYTg42AIB4AIB&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1451016&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781102404&srpvid=03f0671964d90e05&type=total&ucfs=1&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Chez Kiki",
+        "description": "A Méribel institution, perfect for a solo diner seeking a warm atmosphere and hearty, traditional Savoyard grilled meats cooked over an open fire.",
+        "affiliateLink": "https://www.thefork.com/restaurant/chez-kiki-r246810?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Le Clos Bernard",
+        "description": "Accessible by ski or a charming forest walk, this rustic yet refined chalet offers an intimate, romantic setting with delicious local specialties by the fireplace.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-clos-bernard-r135790?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Aux Petits Oignons",
+        "description": "A welcoming and friendly restaurant offering quality French cuisine with options suitable for all ages, making it a great choice for families.",
+        "affiliateLink": "https://www.thefork.com/restaurant/aux-petits-oignons-r334455?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "La Fruitière at La Folie Douce",
+        "description": "For a lively group of friends, this mountain-top restaurant combines gourmet dining with vibrant après-ski entertainment and stunning views.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-fruitiere-meribel-r112233?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "La Table des Airelles",
+        "description": "Located within Le Coucou, this restaurant offers refined French cuisine with a focus on fresh, seasonal ingredients, served in an elegant alpine setting.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-table-des-airelles-r654321?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "L'Ekrin by Laurent Azoulay",
+        "description": "A Michelin-starred culinary journey at Hôtel Le Kaila, presenting inventive and sophisticated dishes that elevate mountain gastronomy.",
+        "affiliateLink": "https://www.thefork.com/restaurant/l-ekrin-r123456?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Le Cèpe",
+        "description": "A unique restaurant dedicated to mushrooms in all their forms, offering a gourmet experience with a creative and earthy menu.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-cepe-r987654?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1200,
+      "spring": 1800,
+      "summer": 950,
+      "winter": 3200
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/eJJSjt8hZ3U,https://www.youtube.com/shorts/H7uNN2d9sk8"
+  },
+  {
+    "id": "cheval-blanc-paris",
+    "name": "Cheval Blanc Paris",
+    "location": "Paris, France",
+    "region": "Paris",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 50,
+    "spaScore": 5,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/570774323.jpg?k=5fc9e42e82c18e13c1d30fca8bb903c9ec20bc92e10666bfa90a834027b82b56&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/570759811.jpg?k=94a4ea3a4d9c996f1d4436d761a10769e768f9ff13987be76e6347afbef9b01f&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/570766466.jpg?k=197b80c0e45cb9f0bcf1acd5504f4448cad0996f8313d9bddfd95b4d5d6e80d5&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/570774514.jpg?k=5a92f98ac2a498582e8c7ec01628f80c2073364250a4b05bb0598e1e5e801af5&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/570766565.jpg?k=627c7681f7d5fff83f18a06beb81777c704a290cb0507ec220da8ab0ae9dc40f&o=\"]",
+    "imageAlt": "Cheval Blanc Paris",
+    "description": "Nestled within the iconic La Samaritaine, Cheval Blanc Paris redefines urban luxury. Its Art Deco elegance offers breathtaking Seine views and an exclusive Dior Spa. Experience unparalleled service and sophisticated design at this Parisian gem, perfect for discerning travelers seeking indulgence.",
+    "tags": [
+      "Quiet luxury",
+      "Iconic Cities"
+    ],
+    "whyFits": [
+      "The Draw: Its coveted location by the Seine, coupled with an exclusive Dior Spa, offers an unparalleled Parisian escape.",
+      "The Flex: Seamlessly blending historic grandeur with contemporary luxury, it provides bespoke experiences from Michelin-starred dining to private river cruises."
+    ],
+    "tradeoff": "The exquisite luxury comes with an equally exclusive price tag, making it a splurge rather than a casual stay.",
+    "amenities": [
+      "Dior Spa",
+      "Indoor pool",
+      "Michelin-starred restaurants",
+      "Bespoke concierge services",
+      "River view rooms",
+      "Private balconies",
+      "Fitness center"
+    ],
+    "settings": [
+      "City center",
+      "Riverside",
+      "Historic building",
+      "Luxury boutique",
+      "Art Deco"
+    ],
+    "surroundings": "Located directly on the Seine, offering panoramic views of iconic Parisian landmarks like the Pont Neuf and Notre Dame. It's steps away from high-fashion boutiques, renowned museums, and vibrant cultural sites in the heart of Paris.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "6-12 months in advance, especially for high season or specific suites.",
+    "guestSummary": "Guests consistently rave about the impeccable service, stunning river views, and the exceptional Dior Spa. Some note the opulent pricing, but agree it reflects an unparalleled luxury experience.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/cheval-blanc-paris.sv.html?aid=390156&label=duc511jc-10CAsoTUISY2hldmFsLWJsYW5jLXBhcmlzSDNYA2jIAYgBAZgBM7gBB8gBDNgBA-gBAfgBAYgCAagCAbgCwKKk0QbAAgHSAiQ4NTY0ODExNy1lZmI5LTRjMzAtOGZhMS0xODQ2ZWIxYWU3ZjbYAgHgAgE&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1456928&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781076293&srpvid=7b633421a3e603ad&type=total&ucfs=1&activeTab=photosGallery",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Frenchie Wine Bar",
+        "description": "A vibrant, casual yet sophisticated spot perfect for solo diners to enjoy small plates and an exceptional wine selection without the formality.",
+        "affiliateLink": "https://www.thefork.com/restaurant/frenchie-wine-bar-r206260?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Yam'Tcha",
+        "description": "An intimate, Michelin-starred restaurant offering a unique French-Chinese fusion menu, perfect for a romantic and adventurous culinary journey.",
+        "affiliateLink": "https://www.thefork.com/restaurant/yam-tcha-r35661?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Le Relais de l'Entrecôte",
+        "description": "Famous for its single-item menu (steak frites with secret sauce), it's a fun and delicious experience for families, offering efficiency and quality.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-relais-de-lentrecote-r14571?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Le Comptoir du Relais",
+        "description": "A bustling, iconic Parisian bistro known for classic French dishes and a lively atmosphere, ideal for sharing good food and wine with friends.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-comptoir-du-relais-r18904?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "Plénitude by Chef Arnaud Donckele",
+        "description": "Experience culinary artistry at its peak with Chef Donckele's exquisite sauces and broths, awarded three Michelin stars within the hotel itself.",
+        "affiliateLink": "https://www.thefork.com/restaurant/plenitude-r718018?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "Le Cinq",
+        "description": "A legendary gastronomic experience at Four Seasons George V, offering sublime French cuisine in an opulent setting, a short drive from Cheval Blanc.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-cinq-r15589?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Septime",
+        "description": "A highly sought-after contemporary bistro known for its innovative, seasonal tasting menus and minimalist chic ambiance. Booking essential.",
+        "affiliateLink": "https://www.thefork.com/restaurant/septime-r241071?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1900,
+      "spring": 1800,
+      "summer": 2500,
+      "winter": 1600
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/dRSrPMV6BzY,https://www.youtube.com/shorts/bSxWAnWdMhQ,https://m.youtube.com/shorts/mXxbm7kYEoA,https://www.youtube.com/shorts/hFIPrZ-eRrM,https://www.youtube.com/shorts/nrq2wK_lhBM"
+  },
+  {
+    "id": "airelles-gordes-la-bastide",
+    "name": "Airelles Gordes, La Bastide",
+    "location": "Gordes, France",
+    "region": "Provence-Alpes-Côte d'Azur, France",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 75,
+    "spaScore": 5,
+    "image": "[\"https://images.trvl-media.com/lodging/2000000/1060000/1054700/1054613/7dee23e3.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/2000000/1060000/1054700/1054613/0ff00fc9.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/2000000/1060000/1054700/1054613/5c538599.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/2000000/1060000/1054700/1054613/f88b0b7d.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/2000000/1060000/1054700/1054613/095ef541.jpg?impolicy=resizecrop&rw=1200&ra=fit\"]",
+    "imageAlt": "Airelles Gordes, La Bastide",
+    "description": "Perched majestically within the ancient village of Gordes, Airelles La Bastide offers an unparalleled escape. This historic palace redefines quiet luxury, blending opulent interiors with breathtaking panoramic views of the Luberon. Experience a tranquil haven where time slows down, surrounded by the serene beauty of Provence. Every detail is curated for an exclusive, unforgettable stay.",
+    "tags": [
+      "Quiet luxury",
+      "Remote Sanctuaries"
+    ],
+    "whyFits": [
+      "The Draw: Authentic Provençal luxury in a historic bastide, offering unrivalled panoramic views of the stunning Luberon valley.",
+      "The Flex: Indulge in tailored, world-class dining and service, perfectly secluded within the iconic, accessible village of Gordes."
+    ],
+    "tradeoff": "While offering unparalleled exclusivity, the tranquil village setting means vibrant nightlife or extensive immediate walking access to diverse shops are limited. The focus is on serene relaxation and on-site indulgence.",
+    "amenities": [
+      "Michelin-starred restaurant",
+      "Award-winning spa",
+      "Multiple pools",
+      "Kids' club",
+      "Valet parking",
+      "Concierge services",
+      "Boutique shops",
+      "Private butler service",
+      "Cooking classes"
+    ],
+    "settings": [
+      "Historic Village",
+      "Hilltop",
+      "Panoramic Views",
+      "Countryside",
+      "Secluded"
+    ],
+    "surroundings": "Perched dramatically on a cliffside, the hotel offers sweeping vistas of the Luberon valley and surrounding Provençal landscapes. It's nestled within the picturesque village of Gordes, famed for its stone architecture and proximity to lavender fields, vineyards, and charming market towns.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "6-12 months in advance, especially for peak season and suites.",
+    "guestSummary": "Guests consistently rave about the impeccable service, stunning views, and the hotel's ability to create a truly magical, luxurious Provençal experience. Some note the prices for on-site dining and services are very high, even for a luxury property.",
+    "bookingUrl": "",
+    "expediaUrl": "https://uk.hotels.com/ho312492/airelles-la-bastide-de-gordes-gordes-france/?chkin=2026-06-24&chkout=2026-06-25&x_pwa=1&rfrr=HSR&pwa_ts=1781101673056&referrerUrl=aHR0cHM6Ly9zdi5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%253D%253D&useRewards=false&rm1=a2&regionId=500456&destination=Gordes%252C%20Vaucluse%20%2528l%25C3%25A4n%2529%252C%20Frankrike&destType=MARKET&selected=1054613&latLong=43.911316%252C5.200176&sort=RECOMMENDED&gclid=Cj0KCQjwlqTRBhCBARIsANrkrxg2k7a0RhmnuRk-4RfeKUBYZUiGwNLjYdZeiiKvNJl-YhjTi3UDT50aAqCEEALw_wcB&semcid=HCOM-SE.UB.GOOGLE.DT-c-SV.HOTEL&semdtl=a113700618803.b1124718864392.g1aud-2191522228734%253Akwd-567938736672.e1c.m1Cj0KCQjwlqTRBhCBARIsANrkrxg2k7a0RhmnuRk-4RfeKUBYZUiGwNLjYdZeiiKvNJl-YhjTi3UDT50aAqCEEALw_wcB.r1899322dfd09689391a509e76971a2f99ed2c8013d021bb395df3b4d4d73472dd.c1.j19062456.k19218718.d1795137228635.h1b.i1.l1.n1.o1.p1.q1.s1hotell%20gordes.t1.x1.f1.u1.v1.w1&userIntent=&expediaPropertyId=1054613&searchId=b330c741-d63f-4674-906d-4e4e367005b5&siteid=300000005&locale=en_GB&currency=GBP",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Le TIGrr Gordes",
+        "description": "A stylish spot for sophisticated Asian fusion cuisine with a vibrant atmosphere, ideal for a chic solo dining experience.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-tigrr-gordes?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Restaurant Le Diapason",
+        "description": "Indulge in a romantic evening with refined French cuisine and an intimate ambiance, perfect for a memorable dinner for two in Gordes.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-diapason-gordes?aff_id=STITCH"
+      },
+      "family": {
+        "title": "La Trattoria",
+        "description": "Enjoy delicious, authentic Italian fare in a relaxed setting at the hotel, perfect for a delightful and convenient family meal.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-trattoria-gordes?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "L'Outsider",
+        "description": "A casual-chic restaurant in Gordes offering delicious, well-executed French dishes, ideal for a convivial meal with friends.",
+        "affiliateLink": "https://www.thefork.com/restaurant/l-outsider-gordes?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "Pèir I Pierre Gagnaire",
+        "description": "Experience the pinnacle of Provençal gastronomy with Chef Pierre Gagnaire's exquisite Michelin-starred cuisine, offering breathtaking views from the hotel.",
+        "affiliateLink": "https://www.thefork.com/restaurant/peir-i-pierre-gagniare-gordes?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "L'Orangerie",
+        "description": "Enjoy refined French cuisine in a beautiful, elegant setting overlooking the valley, perfect for an sophisticated evening within the hotel.",
+        "affiliateLink": "https://www.thefork.com/restaurant/l-orangerie-gordes?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "La Bastide de Pierres",
+        "description": "Savor authentic Provençal dishes in a charming, traditional setting within the heart of Gordes village, a short stroll from the hotel.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-bastide-de-pierres-gordes?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1500,
+      "spring": 1200,
+      "summer": 2500,
+      "winter": 800
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/lrZuWfF4ong,https://www.youtube.com/shorts/YJAbg7JMR6A,https://www.youtube.com/shorts/sD2WlrvhZbo"
+  },
+  {
+    "id": "hotel-du-cap-eden-roc",
+    "name": "Hotel du Cap-Eden-Roc",
+    "location": "Antibes, France",
+    "region": "French Riviera, France",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 40,
+    "spaScore": 5,
+    "image": "[\"https://images.trvl-media.com/lodging/1000000/530000/528700/528650/113ea20b.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/1000000/530000/528700/528650/80efcafc.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/1000000/530000/528700/528650/5eb86db7.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/1000000/530000/528700/528650/8a339d27.jpg?impolicy=resizecrop&rw=1200&ra=fit\",\"https://images.trvl-media.com/lodging/1000000/530000/528700/528650/c5f6b33b.jpg?impolicy=resizecrop&rw=1200&ra=fit\"]",
+    "imageAlt": "Hotel du Cap-Eden-Roc",
+    "description": "Nestled on the tip of Cap d'Antibes, Hotel du Cap-Eden-Roc is an icon of Riviera glamour. This legendary palace offers unparalleled elegance, timeless charm, and breathtaking sea views. It's a sanctuary where history meets ultimate luxury, promising an unforgettable escape under the Mediterranean sun.",
+    "tags": [
+      "Riviera Lifestyle",
+      "Pristine Shores"
+    ],
+    "whyFits": [
+      "The Draw: Experience timeless elegance and unparalleled privacy, offering discreet service for discerning travelers seeking serenity on the Riviera.",
+      "The Flex: Indulge in the legendary heated seawater pool, dramatically overlooking the Mediterranean, providing an iconic and unforgettable Riviera experience."
+    ],
+    "tradeoff": "Exclusivity comes with a significant price point, reflecting its legendary status and unparalleled service.",
+    "amenities": [
+      "Private Beach Club",
+      "Heated Seawater Pool",
+      "Spa & Wellness Centre",
+      "Tennis Courts",
+      "Fine Dining Restaurants",
+      "Boutique",
+      "Kids Club (seasonal)"
+    ],
+    "settings": [
+      "Seaside",
+      "Historic Estate",
+      "Lush Gardens",
+      "Cliffside Views"
+    ],
+    "surroundings": "Perched on the southernmost tip of Cap d'Antibes, the hotel is surrounded by nine hectares of meticulously manicured gardens, offering direct access to the Mediterranean Sea. It's a short drive from the charming old town of Antibes and the vibrant art scene of Saint-Paul-de-Vence.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "12+ months in advance, especially for peak season and specific suites.",
+    "guestSummary": "Guests consistently rave about the impeccable service, the stunning setting, and the legendary pool. While some note the traditional decor, most appreciate its timeless elegance, sense of history, and the unparalleled feeling of stepping into a bygone era of luxury.",
+    "bookingUrl": "",
+    "expediaUrl": "https://sv.hotels.com/ho173201/hotel-eden-roc-positano-italien/?chkin=2026-06-24&chkout=2026-06-25&x_pwa=1&rfrr=HSR&pwa_ts=1781102210184&referrerUrl=aHR0cHM6Ly9zdi5ob3RlbHMuY29tL0hvdGVsLVNlYXJjaA%3D%3D&useRewards=false&rm1=a2&regionId=4330&destination=Positano%2C+Campania%2C+Italien&destType=MARKET&neighborhoodId=553248633938943655&selected=528650&latLong=40.628175%2C14.484998&sort=RECOMMENDED&top_dp=11625&top_cur=SEK&gclid=Cj0KCQjwlqTRBhCBARIsANrkrxhD2TzO5vAFqzeAcPYIRsf52S9eHpH5nxCVENNpvUDwfPa4KvPf5DQaAuEREALw_wcB&semcid=HCOM-SE.UB.GOOGLE.PT-c-SV.HOTEL&semdtl=a115309891536.b1136304727091.g1aud-2141179518447%3Akwd-400191947.e1c.m1Cj0KCQjwlqTRBhCBARIsANrkrxhD2TzO5vAFqzeAcPYIRsf52S9eHpH5nxCVENNpvUDwfPa4KvPf5DQaAuEREALw_wcB.r19ca30b9e0ec782b70e75389a9a850a5e0905371c7cbe1d686bdbcb3b02d78b35.c1.j19062456.k19260452.d1570306422879.h1p.i1.l1.n1.o1.p1.q1.s1hotel+eden+roc.t1.x1.f1.u1.v1.w1&userIntent=&selectedRoomType=477986&selectedRatePlan=1845574&expediaPropertyId=528650&searchId=f5af73c5-f079-4730-8a7d-fda83f77bdf5",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Le Figuier de Saint-Esprit",
+        "description": "A delightful Michelin-starred experience in Antibes' old town, offering refined Provençal cuisine in a charming, intimate courtyard setting perfect for a solo indulgence.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-figuier-de-saint-esprit-r16900?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "La Passagère",
+        "description": "At Hotel Belles Rives, this Michelin-starred restaurant offers a romantic setting with exquisite Mediterranean flavors and stunning views over the Bay of Juan-les-Pins, ideal for a memorable evening.",
+        "affiliateLink": "https://www.thefork.com/restaurant/la-passagere-r40632?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Le Pêcheur",
+        "description": "Enjoy fresh seafood and a relaxed, family-friendly atmosphere with beautiful sea views, offering a casual yet quality dining experience near the hotel.",
+        "affiliateLink": "https://www.restaurantlepecheur.fr/?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Plage Keller",
+        "description": "A vibrant beachside restaurant at Plage de la Garoupe, perfect for friends seeking delicious seafood, rosé, and a lively atmosphere right on the water.",
+        "affiliateLink": "https://www.plagekeller.fr/?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "Eden-Roc Restaurant",
+        "description": "Experience exquisite Mediterranean cuisine with unparalleled sea views at this legendary on-site restaurant, a true Riviera institution.",
+        "affiliateLink": "https://www.oetkercollection.com/hotels/hotel-du-cap-eden-roc/restaurants-bars/eden-roc-restaurant/?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "Louroc",
+        "description": "Discover refined, contemporary French cuisine in an intimate setting, offering a sophisticated culinary journey within the hotel's timeless elegance.",
+        "affiliateLink": "https://www.oetkercollection.com/hotels/hotel-du-cap-eden-roc/restaurants-bars/louroc/?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Restaurant de Bacon",
+        "description": "A legendary establishment on Cap d'Antibes, renowned for its exceptional fresh seafood and stunning panoramic views of the sea and Antibes old town.",
+        "affiliateLink": "https://restaurantdebacon.com/?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 2800,
+      "spring": 2200,
+      "summer": 4500,
+      "winter": 1500
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/ozdaK7MXBPA,https://www.youtube.com/shorts/y3T6UmmFmyI,https://www.youtube.com/shorts/9JsLspqDsjQ,https://www.youtube.com/shorts/X_HqOr76ifc,https://www.youtube.com/shorts/CvPD5oSLkm4"
+  },
+  {
+    "id": "ch-teau-de-la-ch-vre-d-or",
+    "name": "Château de la Chèvre d'Or",
+    "location": "Èze, France",
+    "region": "French Riviera",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 45,
+    "spaScore": 4,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/290058424.jpg?k=c955fb2b3dc91847193beb465bc3ab4aba5f4cc6bbf2150a747c27588a29cb0d&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/508995957.jpg?k=a65b15a9bfa7469388c0db6d0bc85df22cba796aa06dadb6c4987236276da3ad&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/508996460.jpg?k=b1a6c1297ce056bda423db24199c7b666c1f7c46c460c537d440b117304bb9d4&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/508996511.jpg?k=5757b1abbc23b7378602a03f8ea6c37c924cb531fef38ad7838e17a193876977&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/608245214.jpg?k=01a1dc4c008e6427ff56ee89ea6f23dc6fae4d03637da911b014e226ede0c5c0&o=\"]",
+    "imageAlt": "Château de la Chèvre d'Or",
+    "description": "Perched impossibly on a medieval village cliff, Château de la Chèvre d'Or offers breathtaking panoramic views of the Mediterranean. This iconic sanctuary blends historic charm with unparalleled luxury, creating an idyllic escape. Each room is a unique haven, promising an unforgettable, romantic experience high above the sea.",
+    "tags": [
+      "Riviera Lifestyle",
+      "Pristine Shores"
+    ],
+    "whyFits": [
+      "The Draw: Experience unparalleled Mediterranean luxury and breathtaking panoramic vistas from a historic medieval village, offering a romantic ambiance.",
+      "The Flex: Savor Michelin-starred dining while surrounded by the charm of a medieval village, an exquisite culinary journey amidst history."
+    ],
+    "tradeoff": "Its cliffside location means many steps and steep paths, which might be challenging for guests with mobility issues. The village itself can get crowded with day-trippers.",
+    "amenities": [
+      "Michelin-starred Restaurant",
+      "Outdoor Infinity Pool",
+      "Private Gardens",
+      "Spa Services",
+      "Valet Parking",
+      "Concierge",
+      "Terrace Dining",
+      "Boutique Shop"
+    ],
+    "settings": [
+      "Cliffside",
+      "Medieval Village",
+      "Coastal",
+      "Mountainous",
+      "Historic"
+    ],
+    "surroundings": "Nestled within the ancient, cobblestoned village of Èze, the hotel offers direct access to artisan shops, art galleries, and the exotic Jardin d'Èze. It overlooks the shimmering Mediterranean Sea, with easy drives to Monaco, Nice, and Saint-Jean-Cap-Ferrat.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "6-12 months in advance for peak season, 3-6 months for off-peak.",
+    "guestSummary": "Guests consistently rave about the unparalleled views, the exceptional service, and the exquisite dining. Some note the challenging terrain of the village and the occasional crowds during the day.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/la-chevre-d-or.sv.html?aid=390156&label=duc511jc-10CAsoTUIObGEtY2hldnJlLWQtb3JIM1gDaMgBiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuAL_76XRBsACAdICJDQ0YzhiYTFjLWJkMGMtNGZlNy1iY2IzLWM2ZTI0NWJmMWIyNNgCAeACAQ&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1426187&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781102602&srpvid=e71f678081530334&type=total&ucfs=1&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "La Mère Germaine (Villefranche)",
+        "description": "Indulge in classic seafood and Provençal specialties on the waterfront in Villefranche-sur-Mer, perfect for a contemplative meal.",
+        "affiliateLink": "https://www.lameregermaine.com/?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Château Eza Restaurant",
+        "description": "Dine in an intimate, romantic setting with equally spectacular views and refined French cuisine, just steps from La Chèvre d'Or.",
+        "affiliateLink": "https://www.chateaueza.com/en/restaurant-bar-eze-village/?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Le Saint-Paul Restaurant (St-Paul-de-Vence)",
+        "description": "Enjoy a delightful meal in the picturesque village of Saint-Paul-de-Vence, with a menu featuring fresh, seasonal ingredients in a family-friendly setting.",
+        "affiliateLink": "https://www.lesaintpaul.com/en/restaurant/?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Plage Paloma (St-Jean-Cap-Ferrat)",
+        "description": "A chic beach club and restaurant offering a relaxed yet sophisticated atmosphere with delicious Mediterranean food and rosé by the sea.",
+        "affiliateLink": "https://www.paloma-beach.com/?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "La Chèvre d'Or (Hotel Restaurant)",
+        "description": "Experience exquisite Michelin-starred cuisine with unparalleled panoramic views of the Mediterranean. A culinary journey in a magical setting.",
+        "affiliateLink": "https://www.chevredor.com/restaurant/?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "Les Remparts",
+        "description": "Enjoy traditional French and Mediterranean dishes in a charming setting, often with live music, right within the medieval village.",
+        "affiliateLink": "https://www.lesremparts-eze.com/?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Le Pinocchio (Nice)",
+        "description": "A vibrant, classic Italian trattoria in Nice, known for its lively atmosphere and authentic pasta dishes. A short drive from Èze.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-pinocchio-r54728?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1100,
+      "spring": 950,
+      "summer": 2200,
+      "winter": 700
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/Dp6wW9nJj0c,https://m.youtube.com/shorts/DPwbyq3ONog,https://www.youtube.com/shorts/YjVwMdcSm30,https://www.youtube.com/shorts/wXYP73_kO1Y,https://www.youtube.com/shorts/yWIcEyY70fg"
+  },
+  {
+    "id": "domaine-des-etangs",
+    "name": "Domaine des Etangs",
+    "location": "Massignac, France",
+    "region": "Nouvelle-Aquitaine, France",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 60,
+    "spaScore": 5,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/753708134.jpg?k=3be3159fe497d5f9536dbf6fad3cab0208b35eea2c03e3c834f6266b29eb8f89&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/242152827.jpg?k=9f634d30688d10a2782979686ca3b19876f02fe92fe1b28a0fc6223dac0ef715&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/753712049.jpg?k=b2d0f72ffd96ea56e2f1429f2314668a86a265c3e7131cec226a8f1251a0f96b&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/753689436.jpg?k=dcc8955f0be249df04ee64ecaa613c2548ce920daf30e19f340000e8736c0e7e&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/744521289.jpg?k=18691bffa601a6ad4ae8b16d82ce636160483d9c95df07de1de3abaddbeddee5&o=\"]",
+    "imageAlt": "Domaine des Etangs",
+    "description": "Domaine des Etangs is a pastoral masterpiece nestled deep in the Charente countryside, an ode to refined country living. This meticulously restored estate, complete with a château, farm, and ancient mills, offers an unparalleled escape. Here, luxury intertwines seamlessly with untouched nature, inviting guests to truly reconnect with the earth.",
+    "tags": [
+      "Quiet luxury",
+      "Remote Sanctuaries"
+    ],
+    "whyFits": [
+      "The Draw: Experience unparalleled tranquility and privacy on an expansive historic estate, blending luxurious comfort with an immersive natural escape.",
+      "The Flex: Savor exquisite farm-to-table dining, with ingredients sourced directly from the estate, alongside abundant private outdoor activities."
+    ],
+    "tradeoff": "Its remote location means limited immediate external dining or entertainment options; guests fully embrace the estate's offerings.",
+    "amenities": [
+      "Michelin-starred restaurant",
+      "Award-winning spa",
+      "Heated indoor and outdoor pools",
+      "Art gallery",
+      "Organic farm",
+      "Horse stables",
+      "Tennis courts",
+      "Boating on lakes",
+      "Complimentary bicycles"
+    ],
+    "settings": [
+      "Historic château",
+      "Lakeside villas",
+      "Restored farmhouses",
+      "Ancient forests",
+      "Rolling meadows",
+      "Organic gardens"
+    ],
+    "surroundings": "Nestled amidst 1,000 hectares of pristine Charente landscape, the Domaine des Etangs is surrounded by lakes, forests, and untouched farmland. It offers profound solitude, with the nearest villages providing only essential amenities, ensuring a complete disconnect from urban life.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "6-12 months in advance, especially for summer and holiday periods, due to its unique exclusivity.",
+    "guestSummary": "Guests consistently rave about the impeccable service, the stunning natural beauty, and the profound sense of peace. The exquisite dining and luxurious, yet understated, accommodations are frequently highlighted.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/domaine-des-etangs-massignac.sv.html?aid=390156&label=duc511jc-10CAsoTUIcZG9tYWluZS1kZXMtZXRhbmdzLW1hc3NpZ25hY0gzWANoyAGIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AqX5pdEGwAIB0gIkODM5ZjIzZmYtOTAwNC00ODVmLWIxZjItMTEyMzY3MzJhOGU02AIB4AIB&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1450193&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781103800&srpvid=703269d342ae04ec&type=total&ucfs=1&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Le Bistrot des Quais",
+        "description": "A charming, high-quality bistro in Angoulême, offering a relaxed yet refined dining experience with fresh, seasonal dishes, ideal for a solo gourmet outing.",
+        "affiliateLink": "https://www.lebistrotdesquais.fr/?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "La Ribaudière",
+        "description": "Indulge in a romantic evening at this Michelin-starred gem, offering an intimate atmosphere and exceptional fine dining, perfect for couples.",
+        "affiliateLink": "https://www.laribaudiere.com/?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Dyades",
+        "description": "Enjoy the convenience and quality of the estate's own Michelin-starred restaurant, offering a sophisticated yet welcoming environment for families.",
+        "affiliateLink": "https://www.domainedesetangs.com/restaurants/dyades/?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Les Foudres",
+        "description": "Gather friends for a memorable culinary journey in Cognac, enjoying expertly crafted dishes and a superb wine list in a unique setting.",
+        "affiliateLink": "https://www.hotelchaismonnet.com/en/restaurants-bars/les-foudres/?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "Dyades",
+        "description": "The Domaine's own Michelin-starred restaurant, offering exquisite, seasonal cuisine sourced directly from the estate's organic farm and local producers.",
+        "affiliateLink": "https://www.domainedesetangs.com/restaurants/dyades/?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "La Ribaudière",
+        "description": "A celebrated Michelin-starred restaurant near Angoulême, known for its refined French gastronomy and elegant riverside setting, perfect for a special occasion.",
+        "affiliateLink": "https://www.laribaudiere.com/?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Les Foudres",
+        "description": "Located in Cognac, this sophisticated restaurant offers modern French cuisine with a focus on regional ingredients, set within an impressive former aging cellar.",
+        "affiliateLink": "https://www.hotelchaismonnet.com/en/restaurants-bars/les-foudres/?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1500,
+      "spring": 1200,
+      "summer": 2500,
+      "winter": 900
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/FahZ-5zV4io,https://www.youtube.com/shorts/MpQuw4mJ_No"
+  },
+  {
+    "id": "les-roches-rouges",
+    "name": "Les Roches Rouges",
+    "location": "Saint-Raphaël, France",
+    "region": "Provence-Alpes-Côte d'Azur",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 50,
+    "spaScore": 5,
+    "image": "[\"https://cf.bstatic.com/xdata/images/hotel/max2000/827205262.jpg?k=597a5967bfcbf6846a894af52e6be25eff1696fc166b54951a6c376f1d356f8e&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/764043668.jpg?k=4ae618aa4183e69af5c47e0615584e0ebba6d640d002808371a584fb77274faf&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/815817996.jpg?k=e856c6931f6802ff7b745ee61b498b4df45b50a41e8ec5224e92683ce2d18236&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/820303220.jpg?k=c1c04a1802c42dfdb4722526c196cce5d92132e5c66a190cddcdf2378ff28919&o=\",\"https://cf.bstatic.com/xdata/images/hotel/max2000/815817937.jpg?k=3ebc9a0ff1d131ebb01620ae94ab78bcf1baa4d96fd63665454264d50d8e647a&o=\"]",
+    "imageAlt": "Les Roches Rouges",
+    "description": "Perched dramatically on the Esterel coast, Les Roches Rouges is a modernist marvel blending seamlessly with its fiery red cliffs. This iconic hotel offers direct access to the sea, two pools including a natural seawater basin, and breathtaking Mediterranean vistas. Its minimalist design and serene atmosphere make it an aesthetic hunter's dream.",
+    "tags": [
+      "Riviera Lifestyle",
+      "Pristine Shores"
+    ],
+    "whyFits": [
+      "The Draw: Experience the French Riviera's magic with direct sea access and breathtaking Esterel coast views, framed by stunning minimalist architecture.",
+      "The Flex: Features an iconic natural seawater pool, providing a unique, refreshing direct connection to the Mediterranean Sea's natural beauty."
+    ],
+    "tradeoff": "While offering sublime serenity and design, the remote location requires a car for exploring beyond the immediate vicinity.",
+    "amenities": [
+      "Two swimming pools (one natural seawater)",
+      "Michelin-starred restaurant",
+      "Spa by Esthederm",
+      "Private beach access",
+      "Water sports",
+      "Fitness center",
+      "Room service"
+    ],
+    "settings": [
+      "Seaside",
+      "Clifftop",
+      "Modernist architecture",
+      "Mediterranean garden"
+    ],
+    "surroundings": "Nestled between the red rocks of the Esterel Massif and the azure Mediterranean, the hotel offers direct access to a tranquil beach and a natural seawater pool. It's a short drive from Saint-Raphaël's vibrant port and Fréjus, providing a perfect blend of secluded luxury and coastal exploration.",
+    "timeZone": "CET (Central European Time)",
+    "bookingWindow": "Due to its unique appeal and popularity, booking 6-9 months in advance is highly recommended, especially for peak season.",
+    "guestSummary": "Guests consistently rave about the hotel's striking design, unparalleled sea views, and the serene, adult-oriented atmosphere. Some note that service, while attentive, can occasionally feel reserved, and dining options, though exquisite, come at a premium.",
+    "bookingUrl": "https://www.booking.com/hotel/fr/les-roches-rouges.sv.html?aid=390156&label=duc511jc-10CAsoTUIRbGVzLXJvY2hlcy1yb3VnZXNIM1gDaMgBiAEBmAEzuAEHyAEM2AED6AEB-AEBiAIBqAIBuALuwaXRBsACAdICJDY3Yjg4MGQ4LThiMDctNDdlYy1hZjk2LTA4NDdhMTZkZTlmZdgCAeACAQ&sid=a046e38c1a35194e6f1caf99e85173ca&dest_id=-1468219&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&hpos=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&srepoch=1781096702&srpvid=4e755bf7cbcb01cc&type=total&ucfs=1&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Le Sud",
+        "description": "An elegant bistro in Saint-Raphaël offering contemporary French dishes with a delightful terrace. Ideal for a sophisticated solo meal.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-sud-r12345?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "La Colette",
+        "description": "A romantic restaurant with a charming ambiance and refined Mediterranean menu, perfect for a special evening for two in Saint-Raphaël.",
+        "affiliateLink": "https://www.opentable.fr/r/la-colette-saint-raphael?aff_id=STITCH"
+      },
+      "family": {
+        "title": "Les Voiles",
+        "description": "A relaxed beachfront restaurant in Saint-Raphaël offering a diverse menu with options for all ages, from fresh seafood to classic French fare.",
+        "affiliateLink": "https://www.thefork.com/restaurant/les-voiles-r24680?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Le Mange Tout",
+        "description": "A lively and popular spot in Fréjus, renowned for its excellent tapas and sharing plates, perfect for a fun evening with friends.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-mange-tout-r98765?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "L'Arbousier",
+        "description": "The hotel's own gourmet restaurant, offering exquisite Mediterranean cuisine with panoramic sea views. A culinary journey reflecting the region's bounty.",
+        "affiliateLink": "https://www.lesrochesrouges.com/restaurants/larbousier/?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "Le Club de la Plage",
+        "description": "A chic, relaxed beachfront restaurant serving fresh seafood and Mediterranean dishes directly on the sand. Perfect for a leisurely lunch by the waves.",
+        "affiliateLink": "https://www.thefork.com/restaurant/le-club-de-la-plage-r67890?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "La Table de Marcel",
+        "description": "A refined dining experience in Saint-Raphaël, known for its creative French cuisine using seasonal, local ingredients in an intimate setting.",
+        "affiliateLink": "https://www.opentable.fr/r/la-table-de-marcel-saint-raphael?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 950,
+      "spring": 800,
+      "summer": 1800,
+      "winter": 650
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/tM2yrTkshbA,https://www.youtube.com/shorts/oy_sASZ9s2M,https://www.youtube.com/shorts/gGtDBVpvI4A,https://www.youtube.com/shorts/nh1inUFzLT0,https://www.youtube.com/shorts/QdqCqaKH45I"
+  },
+  {
+    "id": "the-ritz-london",
+    "name": "The Ritz London",
+    "location": "London, UK",
+    "region": "UK",
+    "priceCategory": "€€€€",
+    "priceValue": 0,
+    "luxuriousValue": 5,
+    "distanceValue": 60,
+    "spaScore": 4,
+    "image": "[\"/stays/ritz-london/ritz-1.jpg\",\"/stays/ritz-london/ritz-2.jpg\",\"/stays/ritz-london/ritz-3.jpg\",\"/stays/ritz-london/ritz-4.jpg\",\"/stays/ritz-london/ritz-5.jpg\"]",
+    "imageAlt": "The Ritz London",
+    "description": "An icon of timeless British elegance, The Ritz London offers an unparalleled stay in Mayfair. Its opulent interiors and legendary service define luxury. Indulge in world-renowned Afternoon Tea and Michelin-starred dining, a serene escape from the bustling city.",
+    "tags": [
+      "Quiet luxury",
+      "Iconic Cities"
+    ],
+    "whyFits": [
+      "The Draw: Experience timeless British grandeur and unparalleled luxury, offering an opulent, sophisticated escape from London's urban energy.",
+      "The Flex: Legendary, impeccable, and discreet service ensures every personal whim is anticipated and catered to with unmatched precision."
+    ],
+    "tradeoff": "Its deeply traditional aesthetic may not appeal to those seeking ultra-modern design or a more minimalist experience.",
+    "amenities": [
+      "Michelin-starred Dining",
+      "World-renowned Afternoon Tea",
+      "24-hour Butler Service",
+      "Fitness Room",
+      "Spa Treatments (in-room or nearby)",
+      "Private Gardens",
+      "Concierge"
+    ],
+    "settings": [
+      "Historic Landmark",
+      "City Center",
+      "Mayfair",
+      "Regent Street Proximity"
+    ],
+    "surroundings": "Nestled in prestigious Mayfair, The Ritz stands proudly on Piccadilly, offering immediate access to Green Park. It's a short stroll to world-class shopping on Bond Street and the vibrant West End theatres.",
+    "timeZone": "GMT (Greenwich Mean Time)",
+    "bookingWindow": "Typically 6-12 months in advance for peak seasons and special events, 3-6 months for standard stays.",
+    "guestSummary": "Guests consistently rave about the impeccable service, the stunning traditional decor, and the unforgettable Afternoon Tea experience. Some note the classic style may not appeal to those seeking modern aesthetics, and the prices reflect its elite status.",
+    "bookingUrl": "https://www.booking.com/hotel/gb/the-ritz-london.sv.html?label=gen173nr-10CAsoUEIPdGhlLXJpdHotbG9uZG9uSClYBGjIAYgBAZgBM7gBB8gBDNgBA-gBAfgBAYgCAagCAbgC0uKq0QbAAgHSAiRiNWUyZjM0NS04MGQ3LTQ4YTQtYTBiOC1mZDMxZWU4MmFjZjjYAgHgAgE&sid=a046e38c1a35194e6f1caf99e85173ca&dist=0&group_adults=2&keep_landing=1&sb_price_type=total&type=total&",
+    "expediaUrl": "",
+    "image2": null,
+    "image3": null,
+    "localGems": {
+      "solo": {
+        "title": "Fallow",
+        "description": "A popular modern British restaurant focusing on sustainable, nose-to-tail dining. Its counter seating offers a vibrant solo experience.",
+        "affiliateLink": "https://www.opentable.co.uk/r/fallow-london?aff_id=STITCH"
+      },
+      "couple": {
+        "title": "Clos Maggiore",
+        "description": "Often cited as London's most romantic restaurant, famous for its stunning floral conservatory and modern French cuisine.",
+        "affiliateLink": "https://www.thefork.com/restaurant/clos-maggiore-r12345?aff_id=STITCH"
+      },
+      "family": {
+        "title": "The Delaunay",
+        "description": "A refined European Grand Café in Covent Garden, offering a sophisticated yet welcoming ambiance suitable for elegant family dining.",
+        "affiliateLink": "https://www.opentable.co.uk/r/the-delaunay-london?aff_id=STITCH"
+      },
+      "friends": {
+        "title": "Sexy Fish",
+        "description": "A vibrant Mayfair hotspot offering Japanese-inspired cuisine, exotic cocktails, and a lively atmosphere perfect for a group of friends.",
+        "affiliateLink": "https://www.opentable.co.uk/r/sexy-fish-london?aff_id=STITCH"
+      },
+      "static1": {
+        "title": "The Wolseley",
+        "description": "A grand European café and restaurant offering an all-day menu from breakfast to late-night dining in a magnificent setting.",
+        "affiliateLink": "https://www.opentable.co.uk/r/the-wolseley-london?aff_id=STITCH"
+      },
+      "static2": {
+        "title": "Gymkhana",
+        "description": "A Michelin-starred Indian restaurant serving contemporary interpretations of classic Indian cuisine in a sophisticated colonial-themed setting.",
+        "affiliateLink": "https://www.opentable.co.uk/r/gymkhana-london?aff_id=STITCH"
+      },
+      "static3": {
+        "title": "Sketch (The Gallery)",
+        "description": "An iconic, art-filled dining room renowned for its unique pink interiors and modern European cuisine, perfect for an experience.",
+        "affiliateLink": "https://www.opentable.co.uk/r/sketch-the-gallery-london?aff_id=STITCH"
+      }
+    },
+    "seasonalPrices": {
+      "autumn": 1600,
+      "spring": 1500,
+      "summer": 2800,
+      "winter": 1300
+    },
+    "youtubeUrl": "https://www.youtube.com/shorts/dN379duuVCM,https://www.youtube.com/shorts/oNru9UXP5SU,https://www.youtube.com/shorts/YUE_WU_sFtk,https://www.youtube.com/shorts/605bg8yQtg0,https://www.youtube.com/shorts/FOM0Q_qGrWs"
+  }
+]

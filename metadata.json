@@ -1,0 +1,6 @@
+{
+  "name": "StayFirst",
+  "description": "An ethereal, custom-made luxury escape finder matching travellers with surrealist dreamscape hideouts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
