@@ -1,6 +1,6 @@
 # SEO Coverage Report
 
-Generated: 2026-06-22T18:36:04.825Z
+Generated: 2026-06-25T12:33:52.758Z
 
 ## Totals
 
@@ -15,7 +15,7 @@ Generated: 2026-06-22T18:36:04.825Z
 | Route | Hotels | URL |
 | --- | ---: | --- |
 | France | 8 | https://myhotelvibe.com/countries/france/ |
-| United Kingdom | 1 | https://myhotelvibe.com/countries/united-kingdom/ |
+| United Kingdom | 1 | https://myhotelvibe.com/countries/uk/ |
 
 
 ## Destinations

@@ -53,14 +53,15 @@ const fileHtml = `<!doctype html>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>StayFirst — Discover</title>
+    <title>My Hotel Vibe — Local Preview</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <!-- build: ${buildStamp} -->
     <link rel="stylesheet" href="./assets/${cssFile}?v=${encodeURIComponent(buildStamp)}">
   </head>
   <body>
     <div id="root">
       <div style="font:14px/1.4 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;padding:24px;color:#444;">
-        Loading StayFirst…
+        Loading My Hotel Vibe…
       </div>
     </div>
     <script type="module" src="./assets/${jsFile}?v=${encodeURIComponent(buildStamp)}"></script>
@@ -76,7 +77,8 @@ const out = `<!doctype html>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <title>StayFirst — Discover</title>
+    <title>My Hotel Vibe — Standalone Preview</title>
+    <meta name="robots" content="noindex,nofollow,noarchive" />
     <!-- build: ${buildStamp} -->
     <style>${css}</style>
   </head>

@@ -20,6 +20,12 @@ export type RankedCollectionRoute = CollectionRoute & {
   countryCount: number;
 };
 
+export type CollectionIndexDecision =
+  | 'index-now'
+  | 'index-lightly'
+  | 'keep-accessible'
+  | 'support-internally';
+
 export function getLocationParts(location = '') {
   const normalized = normalizeLocation(location, '');
 
@@ -111,6 +117,32 @@ export function getCollectionPath(route: CollectionRoute) {
   return `/backdrops/${route.slug}/`;
 }
 
+export function getCollectionIndexDecision(route: CollectionRoute, stays: Stay[]): CollectionIndexDecision {
+  const hotelCount = stays.length;
+  const destinationCount = new Set(stays.map((stay) => getDestinationSlug(stay.location))).size;
+  const countryCount = new Set(stays.map((stay) => getCountrySlug(stay.location))).size;
+
+  if (route.kind === 'country') {
+    return hotelCount >= 3 && destinationCount >= 2 ? 'index-now' : 'keep-accessible';
+  }
+
+  if (route.kind === 'destination') {
+    if (hotelCount >= 3) return 'index-now';
+    if (hotelCount === 2) return 'index-lightly';
+    return 'keep-accessible';
+  }
+
+  if (route.kind === 'vibe') {
+    if (hotelCount >= 6 && destinationCount >= 3 && countryCount >= 2) return 'index-now';
+    if (hotelCount >= 4 && destinationCount >= 2) return 'index-lightly';
+    return 'support-internally';
+  }
+
+  if (hotelCount >= 6 && destinationCount >= 3) return 'index-now';
+  if (hotelCount >= 4 && destinationCount >= 2) return 'index-lightly';
+  return 'support-internally';
+}
+
 export function getCollectionDisplayLabel(route: CollectionRoute, stays: Stay[]) {
   if (route.kind === 'destination') {
     return stays[0]?.location || route.label;
@@ -157,33 +189,41 @@ export function getCollectionRelatedLinks(stays: Stay[]) {
     }
   }
 
-  const sortLinks = (entries: Array<[string, { label: string; count: number }]>) =>
-    entries.sort((a, b) => {
-      if (b[1].count !== a[1].count) return b[1].count - a[1].count;
-      return a[1].label.localeCompare(b[1].label);
-    });
+  const decisionRank = (decision: CollectionIndexDecision) => {
+    if (decision === 'index-now') return 4;
+    if (decision === 'index-lightly') return 3;
+    if (decision === 'keep-accessible') return 2;
+    return 1;
+  };
+
+  const buildLinks = (
+    kind: CollectionRoute['kind'],
+    entries: Array<[string, { label: string; count: number }]>
+  ) =>
+    entries
+      .map(([slug, value]) => {
+        const route = { kind, slug, label: value.label } satisfies CollectionRoute;
+        const routeStays = stays.filter((stay) => matchesCollectionRoute(stay, route));
+        const decision = getCollectionIndexDecision(route, routeStays);
+        return {
+          href: getCollectionPath(route),
+          label: value.label,
+          count: value.count,
+          decision,
+        };
+      })
+      .sort((a, b) => {
+        const decisionDelta = decisionRank(b.decision) - decisionRank(a.decision);
+        if (decisionDelta !== 0) return decisionDelta;
+        if (b.count !== a.count) return b.count - a.count;
+        return a.label.localeCompare(b.label);
+      });
 
   return {
-    destinations: sortLinks([...destinations.entries()]).map(([slug, value]) => ({
-      href: `/destinations/${slug}/`,
-      label: value.label,
-      count: value.count,
-    })),
-    countries: sortLinks([...countries.entries()]).map(([slug, value]) => ({
-      href: `/countries/${slug}/`,
-      label: value.label,
-      count: value.count,
-    })),
-    backdrops: sortLinks([...backdrops.entries()]).map(([slug, value]) => ({
-      href: `/backdrops/${slug}/`,
-      label: value.label,
-      count: value.count,
-    })),
-    vibes: sortLinks([...vibes.entries()]).map(([slug, value]) => ({
-      href: `/vibes/${slug}/`,
-      label: value.label,
-      count: value.count,
-    })),
+    destinations: buildLinks('destination', [...destinations.entries()]),
+    countries: buildLinks('country', [...countries.entries()]),
+    backdrops: buildLinks('backdrop', [...backdrops.entries()]),
+    vibes: buildLinks('vibe', [...vibes.entries()]),
   };
 }
 

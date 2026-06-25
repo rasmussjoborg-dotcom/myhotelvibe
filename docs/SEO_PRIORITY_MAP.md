@@ -1,6 +1,6 @@
 # SEO Priority Map
 
-Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe.com) on June 22, 2026.
+Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe.com) on June 25, 2026.
 
 ## Snapshot
 
@@ -25,6 +25,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 8
 - Destination spread: 8
 - Country spread: 1
+- Recommended action: Index now
+- Why: Country route has enough hotel depth and destination spread to function as an authority page.
 - Intent: Build authority around "France hotels" and related destination-level searches.
 - Suggested title: France Hotel Guide | My Hotel Vibe
 - Keyword cluster: france hotels | best hotels in france | boutique hotels france
@@ -37,6 +39,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 5
 - Destination spread: 5
 - Country spread: 2
+- Recommended action: Index lightly
+- Why: Vibe route is emerging, but needs broader catalog depth before it deserves heavier editorial investment.
 - Intent: Own editorial mood-led discovery around "the creative retreat hotels".
 - Suggested title: The Creative Retreat Hotels | My Hotel Vibe
 - Keyword cluster: the creative retreat hotels | the creative retreat stays | editorial hotel guide the creative retreat
@@ -49,6 +53,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 5
 - Destination spread: 5
 - Country spread: 2
+- Recommended action: Index lightly
+- Why: Vibe route is emerging, but needs broader catalog depth before it deserves heavier editorial investment.
 - Intent: Own editorial mood-led discovery around "the romantic reset hotels".
 - Suggested title: The Romantic Reset Hotels | My Hotel Vibe
 - Keyword cluster: the romantic reset hotels | the romantic reset stays | editorial hotel guide the romantic reset
@@ -61,6 +67,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 3
 - Destination spread: 3
 - Country spread: 2
+- Recommended action: Support internally only
+- Why: Vibe route is still too thin to become a major search entry point at scale.
 - Intent: Own editorial mood-led discovery around "the urban explorer hotels".
 - Suggested title: The Urban Explorer Hotels | My Hotel Vibe
 - Keyword cluster: the urban explorer hotels | the urban explorer stays | editorial hotel guide the urban explorer
@@ -73,6 +81,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 3
 - Destination spread: 3
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Vibe route is still too thin to become a major search entry point at scale.
 - Intent: Own editorial mood-led discovery around "the social weekender hotels".
 - Suggested title: The Social Weekender Hotels | My Hotel Vibe
 - Keyword cluster: the social weekender hotels | the social weekender stays | editorial hotel guide the social weekender
@@ -85,6 +95,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 3
 - Destination spread: 3
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Vibe route is still too thin to become a major search entry point at scale.
 - Intent: Own editorial mood-led discovery around "the sun-drenched escape hotels".
 - Suggested title: The Sun-Drenched Escape Hotels | My Hotel Vibe
 - Keyword cluster: the sun-drenched escape hotels | the sun-drenched escape stays | editorial hotel guide the sun-drenched escape
@@ -97,6 +109,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 3
 - Destination spread: 3
 - Country spread: 2
+- Recommended action: Support internally only
+- Why: Backdrop route is better used as internal linking support than a primary SEO target for now.
 - Intent: Capture setting-first searches around "iconic cities hotels".
 - Suggested title: Iconic Cities Hotels | My Hotel Vibe
 - Keyword cluster: iconic cities hotels | best iconic cities hotels | iconic cities stay guide
@@ -109,6 +123,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 3
 - Destination spread: 3
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Backdrop route is better used as internal linking support than a primary SEO target for now.
 - Intent: Capture setting-first searches around "pristine shores hotels".
 - Suggested title: Pristine Shores Hotels | My Hotel Vibe
 - Keyword cluster: pristine shores hotels | best pristine shores hotels | pristine shores stay guide
@@ -121,6 +137,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 2
 - Destination spread: 2
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Backdrop route is better used as internal linking support than a primary SEO target for now.
 - Intent: Capture setting-first searches around "remote sanctuaries hotels".
 - Suggested title: Remote Sanctuaries Hotels | My Hotel Vibe
 - Keyword cluster: remote sanctuaries hotels | best remote sanctuaries hotels | remote sanctuaries stay guide
@@ -136,6 +154,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Vibe route is still too thin to become a major search entry point at scale.
 - Intent: Own editorial mood-led discovery around "the epicurean pilgrimage hotels".
 - Suggested title: The Epicurean Pilgrimage Hotels | My Hotel Vibe
 - Keyword cluster: the epicurean pilgrimage hotels | the epicurean pilgrimage stays | editorial hotel guide the epicurean pilgrimage
@@ -148,6 +168,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Support internally only
+- Why: Backdrop route is better used as internal linking support than a primary SEO target for now.
 - Intent: Capture setting-first searches around "alpine & peaks hotels".
 - Suggested title: Alpine & Peaks Hotels | My Hotel Vibe
 - Keyword cluster: alpine & peaks hotels | best alpine & peaks hotels | alpine & peaks stay guide
@@ -160,6 +182,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Build before prioritizing
+- Why: Country route needs broader destination coverage before it becomes a strong SEO landing page.
 - Intent: Build authority around "UK hotels" and related destination-level searches.
 - Suggested title: UK Hotel Guide | My Hotel Vibe
 - Keyword cluster: uk hotels | best hotels in uk | boutique hotels uk
@@ -175,6 +199,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Antibes, France hotels".
 - Suggested title: Antibes, France Hotels | My Hotel Vibe
 - Keyword cluster: antibes, france hotels | best hotels in antibes, france | luxury hotels antibes, france
@@ -187,6 +213,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Avignon, France hotels".
 - Suggested title: Avignon, France Hotels | My Hotel Vibe
 - Keyword cluster: avignon, france hotels | best hotels in avignon, france | luxury hotels avignon, france
@@ -199,6 +227,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Èze, France hotels".
 - Suggested title: Èze, France Hotels | My Hotel Vibe
 - Keyword cluster: èze, france hotels | best hotels in èze, france | luxury hotels èze, france
@@ -211,6 +241,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Gordes, France hotels".
 - Suggested title: Gordes, France Hotels | My Hotel Vibe
 - Keyword cluster: gordes, france hotels | best hotels in gordes, france | luxury hotels gordes, france
@@ -223,6 +255,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "London, UK hotels".
 - Suggested title: London, UK Hotels | My Hotel Vibe
 - Keyword cluster: london, uk hotels | best hotels in london, uk | luxury hotels london, uk
@@ -235,6 +269,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Massignac, France hotels".
 - Suggested title: Massignac, France Hotels | My Hotel Vibe
 - Keyword cluster: massignac, france hotels | best hotels in massignac, france | luxury hotels massignac, france
@@ -247,6 +283,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Méribel, France hotels".
 - Suggested title: Méribel, France Hotels | My Hotel Vibe
 - Keyword cluster: méribel, france hotels | best hotels in méribel, france | luxury hotels méribel, france
@@ -259,6 +297,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Paris, France hotels".
 - Suggested title: Paris, France Hotels | My Hotel Vibe
 - Keyword cluster: paris, france hotels | best hotels in paris, france | luxury hotels paris, france
@@ -271,6 +311,8 @@ Generated from the live hotel database for [myhotelvibe.com](https://myhotelvibe
 - Hotels: 1
 - Destination spread: 1
 - Country spread: 1
+- Recommended action: Keep accessible, not a growth priority
+- Why: Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.
 - Intent: Target exact-match destination intent around "Saint-Raphaël, France hotels".
 - Suggested title: Saint-Raphaël, France Hotels | My Hotel Vibe
 - Keyword cluster: saint-raphaël, france hotels | best hotels in saint-raphaël, france | luxury hotels saint-raphaël, france

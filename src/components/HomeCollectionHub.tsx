@@ -12,23 +12,27 @@ type Props = {
 export default function HomeCollectionHub({ stays }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const related = getCollectionRelatedLinks(stays);
+  const visibleCountries = related.countries.filter((link) => link.decision !== 'support-internally').slice(0, 4);
+  const visibleDestinations = related.destinations.filter((link) => link.decision !== 'support-internally').slice(0, 8);
+  const visibleVibes = related.vibes.filter((link) => link.decision !== 'support-internally').slice(0, 6);
+  const visibleBackdrops = related.backdrops.filter((link) => link.decision !== 'support-internally').slice(0, 6);
 
   const groups = [
     {
       label: 'Countries',
-      links: related.countries.slice(0, 4),
+      links: visibleCountries,
     },
     {
       label: 'Destinations',
-      links: related.destinations.slice(0, 8),
+      links: visibleDestinations,
     },
     {
       label: 'Vibes',
-      links: related.vibes.slice(0, 6),
+      links: visibleVibes,
     },
     {
       label: 'Backdrops',
-      links: related.backdrops.slice(0, 6),
+      links: visibleBackdrops,
     },
   ].filter((group) => group.links.length > 0);
 

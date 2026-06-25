@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T13:58:45.102Z",
+  "generatedAt": "2026-06-25T12:14:09.702Z",
   "siteUrl": "https://myhotelvibe.com",
   "totalHotels": 9,
   "totalOpportunities": 21,
@@ -18,6 +18,8 @@
         },
         "score": 74,
         "tier": "Tier 1",
+        "decision": "Index now",
+        "reason": "Country route has enough hotel depth and destination spread to function as an authority page.",
         "intent": "Build authority around \"France hotels\" and related destination-level searches.",
         "title": "France Hotel Guide | My Hotel Vibe",
         "keywordCluster": [
@@ -92,6 +94,8 @@
         },
         "score": 45,
         "tier": "Tier 1",
+        "decision": "Index lightly",
+        "reason": "Vibe route is emerging, but needs broader catalog depth before it deserves heavier editorial investment.",
         "intent": "Own editorial mood-led discovery around \"the creative retreat hotels\".",
         "title": "The Creative Retreat Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -152,6 +156,8 @@
         },
         "score": 45,
         "tier": "Tier 1",
+        "decision": "Index lightly",
+        "reason": "Vibe route is emerging, but needs broader catalog depth before it deserves heavier editorial investment.",
         "intent": "Own editorial mood-led discovery around \"the romantic reset hotels\".",
         "title": "The Romantic Reset Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -212,6 +218,8 @@
         },
         "score": 31,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Vibe route is still too thin to become a major search entry point at scale.",
         "intent": "Own editorial mood-led discovery around \"the urban explorer hotels\".",
         "title": "The Urban Explorer Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -260,6 +268,8 @@
         },
         "score": 28,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Vibe route is still too thin to become a major search entry point at scale.",
         "intent": "Own editorial mood-led discovery around \"the social weekender hotels\".",
         "title": "The Social Weekender Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -307,6 +317,8 @@
         },
         "score": 28,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Vibe route is still too thin to become a major search entry point at scale.",
         "intent": "Own editorial mood-led discovery around \"the sun-drenched escape hotels\".",
         "title": "The Sun-Drenched Escape Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -354,6 +366,8 @@
         },
         "score": 27,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Backdrop route is better used as internal linking support than a primary SEO target for now.",
         "intent": "Capture setting-first searches around \"iconic cities hotels\".",
         "title": "Iconic Cities Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -402,6 +416,8 @@
         },
         "score": 25,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Backdrop route is better used as internal linking support than a primary SEO target for now.",
         "intent": "Capture setting-first searches around \"pristine shores hotels\".",
         "title": "Pristine Shores Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -449,6 +465,8 @@
         },
         "score": 18,
         "tier": "Tier 1",
+        "decision": "Support internally only",
+        "reason": "Backdrop route is better used as internal linking support than a primary SEO target for now.",
         "intent": "Capture setting-first searches around \"remote sanctuaries hotels\".",
         "title": "Remote Sanctuaries Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -491,6 +509,8 @@
         },
         "score": 14,
         "tier": "Tier 2",
+        "decision": "Support internally only",
+        "reason": "Vibe route is still too thin to become a major search entry point at scale.",
         "intent": "Own editorial mood-led discovery around \"the epicurean pilgrimage hotels\".",
         "title": "The Epicurean Pilgrimage Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -524,6 +544,8 @@
         },
         "score": 11,
         "tier": "Tier 2",
+        "decision": "Support internally only",
+        "reason": "Backdrop route is better used as internal linking support than a primary SEO target for now.",
         "intent": "Capture setting-first searches around \"alpine & peaks hotels\".",
         "title": "Alpine & Peaks Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -557,6 +579,8 @@
         },
         "score": 11,
         "tier": "Tier 2",
+        "decision": "Build before prioritizing",
+        "reason": "Country route needs broader destination coverage before it becomes a strong SEO landing page.",
         "intent": "Build authority around \"UK hotels\" and related destination-level searches.",
         "title": "UK Hotel Guide | My Hotel Vibe",
         "keywordCluster": [
@@ -592,6 +616,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Antibes, France hotels\".",
         "title": "Antibes, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -625,6 +651,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Avignon, France hotels\".",
         "title": "Avignon, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -658,6 +686,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Èze, France hotels\".",
         "title": "Èze, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -691,6 +721,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Gordes, France hotels\".",
         "title": "Gordes, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -724,6 +756,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"London, UK hotels\".",
         "title": "London, UK Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -757,6 +791,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Massignac, France hotels\".",
         "title": "Massignac, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -790,6 +826,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Méribel, France hotels\".",
         "title": "Méribel, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -823,6 +861,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Paris, France hotels\".",
         "title": "Paris, France Hotels | My Hotel Vibe",
         "keywordCluster": [
@@ -856,6 +896,8 @@
         },
         "score": 7,
         "tier": "Tier 3",
+        "decision": "Keep accessible, not a growth priority",
+        "reason": "Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.",
         "intent": "Target exact-match destination intent around \"Saint-Raphaël, France hotels\".",
         "title": "Saint-Raphaël, France Hotels | My Hotel Vibe",
         "keywordCluster": [

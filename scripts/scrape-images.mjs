@@ -58,32 +58,47 @@ async function main() {
       images = [...images, ...matches];
     }
     
-    // Cleanup and deduplicate
-    let uniqueImages = images
+    // Cleanup basic formatting
+    let rawImages = images
       .filter(u => u.startsWith('http') && !u.includes('maps.googleapis') && !u.includes('captcha-delivery.com'))
       .map(u => u.replace(/&amp;/g, '&'))
       .map(u => u.replace(/\\/g, ''));
 
-    uniqueImages = [...new Set(uniqueImages)];
+    // Upgrade resolution natively and deduplicate by EXACT image ID to preserve order
+    // and grab the first 10 truly unique images from the gallery.
+    const seenIds = new Set();
+    const trulyUniqueImages = [];
 
-    // Upgrade resolution natively without losing the security token!
-    // We proved that the token validates the image ID, not the size format!
-    uniqueImages = uniqueImages.map(u => {
+    for (let u of rawImages) {
+      if (trulyUniqueImages.length >= 10) break; // Only need 10
+      
+      let id = u;
+      let upgradedUrl = u;
+
       if (u.includes('bstatic.com')) {
-        // Upgrade Booking.com to max1280x900 (reliable high-res)
-        return u.replace(/\/images\/hotel\/[^\/]+\//i, '/images/hotel/max1280x900/');
+        // Extract Booking.com core ID
+        const match = u.match(/\/([^\/]+)\.(?:jpg|jpeg|png|webp)/i);
+        if (match) id = `booking_${match[1]}`;
+        // Upgrade resolution
+        upgradedUrl = u.replace(/\/images\/hotel\/[^\/]+\//i, '/images/hotel/max1280x900/');
+      } else if (u.includes('trvl-media.com')) {
+        // Extract Expedia/Hotels.com ID
+        const match = u.match(/\/([^\/]+)\.(?:jpg|jpeg|png|webp)/i);
+        if (match) {
+          let coreId = match[1].replace(/_[a-z]$/i, '');
+          id = `expedia_${coreId}`;
+        }
+        // Upgrade resolution
+        upgradedUrl = u.replace(/_[a-z]\.jpg/i, '_z.jpg');
       }
-      if (u.includes('trvl-media.com')) {
-        // Upgrade Expedia/Hotels.com to _z or _b (large)
-        return u.replace(/_[a-z]\.jpg/i, '_z.jpg');
+
+      if (!seenIds.has(id)) {
+        seenIds.add(id);
+        trulyUniqueImages.push(upgradedUrl);
       }
-      return u;
-    });
+    }
 
-    // Remove duplicates again in case different sizes mapped to same upgraded URL
-    uniqueImages = [...new Set(uniqueImages)];
-
-    console.log(JSON.stringify({ images: uniqueImages.slice(0, 10) }));
+    console.log(JSON.stringify({ images: trulyUniqueImages }));
   } catch (err) {
     console.error(JSON.stringify({ error: err.message }));
     process.exit(1);

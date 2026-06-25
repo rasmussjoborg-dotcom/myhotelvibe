@@ -1,6 +1,6 @@
 {
-  "name": "StayFirst",
-  "description": "An ethereal, custom-made luxury escape finder matching travellers with surrealist dreamscape hideouts.",
+  "name": "My Hotel Vibe",
+  "description": "Editorial hotel discovery for travelers choosing by mood, setting, and the kind of stay they want to remember.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

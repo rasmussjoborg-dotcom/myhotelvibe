@@ -206,6 +206,12 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
     setIsExpanded(false);
     setIsSaving(false);
     
+    const needsUpscale = editImages.some(img => img && img.startsWith('http'));
+    if (!needsUpscale) {
+      setFetchStatus({ type: 'success', msg: 'Saved successfully!' });
+      return;
+    }
+
     // Trigger background upscaling and wait for it
     setFetchStatus({ type: 'info', msg: 'Upscaling to 5K resolution... this will take a few minutes.' });
     try {

@@ -9,3 +9,16 @@ coverage/
 .agents/
 .impeccable/
 .vercel
+
+# Ignored test files with secrets
+test_duffel.ts
+test_duffel_raw.ts
+scripts/upscale-ritz.mjs
+test.jpg
+test_booking.jpg
+upscale-progress.json
+scripts/migrate_local_to_supabase.ts
+scripts/check_db.ts
+scripts/get_countries.ts
+scripts/recover_images.ts
+scripts/upscale-retry.mjs

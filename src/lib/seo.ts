@@ -6,6 +6,7 @@ import {
   getCollectionEditorialContent,
   getCollectionDisplayLabel,
   getCollectionFaq,
+  getCollectionIndexDecision,
   getCollectionItemList,
   getCollectionPath,
   getCollectionRelatedLinks,
@@ -18,6 +19,7 @@ type SeoPayload = {
   canonicalPath?: string;
   image?: string;
   type?: 'website' | 'article';
+  robots?: string;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 };
 
@@ -29,6 +31,10 @@ function upsertMeta(name: 'name' | 'property', key: string, content: string) {
     document.head.appendChild(node);
   }
   node.setAttribute('content', content);
+}
+
+function removeMeta(name: 'name' | 'property', key: string) {
+  document.head.querySelector<HTMLMetaElement>(`meta[${name}="${key}"]`)?.remove();
 }
 
 function upsertLink(rel: string, href: string) {
@@ -71,10 +77,11 @@ export function applySeo(payload: SeoPayload) {
   const title = payload.title.trim();
   const image = toAbsoluteMediaUrl(payload.image);
   const type = payload.type || 'website';
+  const robots = payload.robots || 'index,follow,max-image-preview:large';
 
   document.title = title;
   upsertMeta('name', 'description', description);
-  upsertMeta('name', 'robots', 'index,follow,max-image-preview:large');
+  upsertMeta('name', 'robots', robots);
   upsertMeta('property', 'og:title', title);
   upsertMeta('property', 'og:description', description);
   upsertMeta('property', 'og:type', type);
@@ -83,6 +90,9 @@ export function applySeo(payload: SeoPayload) {
   if (image) {
     upsertMeta('property', 'og:image', image);
     upsertMeta('name', 'twitter:image', image);
+  } else {
+    removeMeta('property', 'og:image');
+    removeMeta('name', 'twitter:image');
   }
   upsertMeta('name', 'twitter:card', 'summary_large_image');
   upsertMeta('name', 'twitter:title', title);
@@ -218,6 +228,34 @@ export function buildHomeSeo(stays: Stay[] = []) {
   } satisfies SeoPayload;
 }
 
+function getHotelFaq(stay: Stay) {
+  const faqs = [];
+
+  if (stay.primaryPersona) {
+    faqs.push({
+      question: `What kind of traveler is ${stay.name} best for?`,
+      answer: `${stay.name} is highly recommended for travelers seeking a ${stay.primaryPersona.toLowerCase()} experience. It caters to those who appreciate thoughtful design and a specific aesthetic mood.`,
+    });
+  }
+
+  if (stay.primaryBackdrop) {
+    faqs.push({
+      question: `What is the setting and location like at ${stay.name}?`,
+      answer: `The hotel is located in ${stay.location}, offering a stunning ${stay.primaryBackdrop.toLowerCase()} setting. This backdrop plays a major role in the overall atmosphere of the stay.`,
+    });
+  }
+
+  const notableAmenities = (stay.amenities || []).slice(0, 3).join(', ').toLowerCase();
+  if (notableAmenities) {
+    faqs.push({
+      question: `What are the standout amenities at ${stay.name}?`,
+      answer: `Guests can expect premium amenities including ${notableAmenities}, contributing to a highly curated and comfortable experience.`,
+    });
+  }
+
+  return faqs;
+}
+
 export function buildHotelSeo(stay: Stay) {
   const image = toAbsoluteMediaUrl(stay.images?.[0] || stay.image);
   const bodyCopy = getStayCardBodyCopy(stay);
@@ -268,6 +306,22 @@ export function buildHotelSeo(stay: Stay) {
           },
         ],
       },
+      ...(getHotelFaq(stay).length > 0
+        ? [
+            {
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: getHotelFaq(stay).map((item) => ({
+                '@type': 'Question',
+                name: item.question,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: item.answer,
+                },
+              })),
+            },
+          ]
+        : []),
     ],
   } satisfies SeoPayload;
 }
@@ -278,6 +332,7 @@ export function buildCollectionSeo(route: CollectionRoute, stays: Stay[]) {
   const image = toAbsoluteMediaUrl(stays[0]?.images?.[0] || stays[0]?.image);
   const editorial = getCollectionEditorialContent(route, stays);
   const faq = getCollectionFaq(route, stays);
+  const indexDecision = getCollectionIndexDecision(route, stays);
 
   const title =
     route.kind === 'destination'
@@ -289,6 +344,10 @@ export function buildCollectionSeo(route: CollectionRoute, stays: Stay[]) {
           : `${label} Hotels | ${SITE_NAME}`;
 
   const description = editorial.seoDescription;
+  const robots =
+    indexDecision === 'index-now' || indexDecision === 'index-lightly'
+      ? 'index,follow,max-image-preview:large'
+      : 'noindex,follow,max-image-preview:large';
 
   return {
     title,
@@ -296,6 +355,7 @@ export function buildCollectionSeo(route: CollectionRoute, stays: Stay[]) {
     canonicalPath,
     image,
     type: 'website',
+    robots,
     structuredData: [
       {
         '@context': 'https://schema.org',

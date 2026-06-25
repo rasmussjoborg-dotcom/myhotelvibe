@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T18:36:04.825Z",
+  "generatedAt": "2026-06-25T12:33:52.758Z",
   "totalHotels": 9,
   "totals": {
     "countries": 2,
@@ -25,13 +25,13 @@
       "url": "https://myhotelvibe.com/countries/france/"
     },
     {
-      "slug": "united-kingdom",
+      "slug": "uk",
       "label": "United Kingdom",
       "count": 1,
       "hotels": [
         "The Ritz London"
       ],
-      "url": "https://myhotelvibe.com/countries/united-kingdom/"
+      "url": "https://myhotelvibe.com/countries/uk/"
     }
   ],
   "destinations": [

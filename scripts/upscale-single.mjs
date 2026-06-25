@@ -18,68 +18,102 @@ async function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function upscaleImage(imageUrl) {
+async function upscaleImage(imageUrl, hotelId, index) {
   let downscaledUrl = imageUrl;
   if (downscaledUrl.includes('bstatic.com')) {
     downscaledUrl = downscaledUrl.replace(/\/max[^\/]+\//, '/max1024/');
   }
 
-  let createRes;
-  let retryCount = 0;
-  while (retryCount < 5) {
-    createRes = await fetch('https://api.replicate.com/v1/predictions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${REPLICATE_API_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        version: MODEL_VERSION,
-        input: {
-          image: downscaledUrl,
-          scale: 4,
-          face_enhance: false
-        }
-      })
-    });
+  const runReplicate = async (inputUrl) => {
+    let createRes;
+    let retryCount = 0;
+    while (retryCount < 5) {
+      createRes = await fetch('https://api.replicate.com/v1/predictions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${REPLICATE_API_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          version: MODEL_VERSION,
+          input: {
+            image: inputUrl,
+            scale: 4,
+            face_enhance: false
+          }
+        })
+      });
 
-    if (createRes.status === 429) {
-      console.log('  Rate limited by Replicate. Waiting 5 seconds before retrying...');
-      await sleep(5000);
-      retryCount++;
-      continue;
+      if (createRes.status === 429) {
+        console.log('  Rate limited by Replicate. Waiting 5 seconds before retrying...');
+        await sleep(5000);
+        retryCount++;
+        continue;
+      }
+      
+      if (!createRes.ok) {
+        throw new Error(`Failed to create prediction: ${await createRes.text()}`);
+      }
+      break;
     }
     
-    if (!createRes.ok) {
-      throw new Error(`Failed to create prediction: ${await createRes.text()}`);
+    if (!createRes || !createRes.ok) {
+       throw new Error(`Failed to create prediction after retries.`);
     }
-    break;
-  }
-  
-  if (!createRes || !createRes.ok) {
-     throw new Error(`Failed to create prediction after retries.`);
-  }
 
-  const prediction = await createRes.json();
-  const id = prediction.id;
+    const prediction = await createRes.json();
+    const id = prediction.id;
 
-  while (true) {
-    await sleep(2000);
-    const pollRes = await fetch(`https://api.replicate.com/v1/predictions/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${REPLICATE_API_TOKEN}`
+    while (true) {
+      await sleep(2000);
+      const pollRes = await fetch(`https://api.replicate.com/v1/predictions/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${REPLICATE_API_TOKEN}`
+        }
+      });
+
+      if (!pollRes.ok) {
+        throw new Error(`Poll failed: ${await pollRes.text()}`);
       }
-    });
 
-    if (!pollRes.ok) {
-      throw new Error(`Poll failed: ${await pollRes.text()}`);
+      const pollData = await pollRes.json();
+      if (pollData.status === 'succeeded') {
+        return pollData.output;
+      } else if (pollData.status === 'failed' || pollData.status === 'canceled') {
+        throw new Error(pollData.error);
+      }
     }
+  };
 
-    const pollData = await pollRes.json();
-    if (pollData.status === 'succeeded') {
-      return pollData.output;
-    } else if (pollData.status === 'failed' || pollData.status === 'canceled') {
-      throw new Error(`Prediction failed: ${pollData.error}`);
+  try {
+    return await runReplicate(downscaledUrl);
+  } catch (err) {
+    if (err.message.includes('CUDA out of memory') || err.message.includes('greater than the max size') || err.message.includes('out of memory')) {
+      console.log(`    Replicate OOM error detected. Pre-downscaling image to 1024px before retry...`);
+      const res = await fetch(imageUrl);
+      const buffer = await res.arrayBuffer();
+      const tempBuffer = await sharp(buffer)
+        .resize({ width: 1024, withoutEnlargement: true })
+        .jpeg({ quality: 90 })
+        .toBuffer();
+      
+      const tempPath = `${hotelId}/${index}-temp.jpg`;
+      const { error: uploadError } = await supabase.storage
+        .from('stays-images')
+        .upload(tempPath, tempBuffer, { contentType: 'image/jpeg', upsert: true });
+        
+      if (uploadError) throw new Error(`Failed to upload temp image: ${uploadError.message}`);
+      
+      const tempUrl = `${SUPABASE_URL}/storage/v1/object/public/stays-images/${tempPath}`;
+      console.log(`    Retrying Replicate with pre-downscaled image: ${tempUrl}`);
+      
+      const output = await runReplicate(tempUrl);
+      
+      // Cleanup temp
+      await supabase.storage.from('stays-images').remove([tempPath]);
+      return output;
+    } else {
+      throw err;
     }
   }
 }
@@ -116,8 +150,9 @@ async function main() {
     const originalUrl = imageUrls[i];
     if (!originalUrl) continue;
     
-    // If it's already a local path, it's problematic but let's skip for now or try to use it
-    if (originalUrl.startsWith('/')) {
+    // Idempotency check: if the image is already processed and hosted on our Supabase or is a local path, skip it entirely
+    if (originalUrl.startsWith('/') || originalUrl.includes('.supabase.co/storage/')) {
+      console.log(`  Image ${i+1} is already a processed Supabase/local image. Skipping upscale.`);
       newImagePaths.push(originalUrl);
       continue;
     }

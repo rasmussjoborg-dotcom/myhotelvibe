@@ -161,6 +161,10 @@ function normalizeHotelRecord(hotel) {
 async function loadHotels() {
   const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
   const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
+  const requireLiveSeoSource =
+    process.env.SEO_REQUIRE_SUPABASE === 'true' ||
+    process.env.SEO_REQUIRE_SUPABASE === '1' ||
+    process.env.VERCEL === '1';
 
   if (supabaseUrl && supabaseKey) {
     try {
@@ -180,7 +184,21 @@ async function loadHotels() {
             ? JSON.stringify(error)
             : String(error)
       );
+
+      if (requireLiveSeoSource) {
+        console.error(
+          'SEO generation is configured to require Supabase, but the live source could not be loaded.'
+        );
+        process.exit(1);
+      }
     }
+  }
+
+  if (requireLiveSeoSource) {
+    console.error(
+      'SEO generation is configured to require Supabase, but VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are not both set.'
+    );
+    process.exit(1);
   }
 
   const localHotels = JSON.parse(fs.readFileSync(hotelsPath, 'utf8'));
@@ -312,6 +330,32 @@ function getCollectionPath(route) {
   if (route.kind === 'country') return `/countries/${route.slug}/`;
   if (route.kind === 'vibe') return `/vibes/${route.slug}/`;
   return `/backdrops/${route.slug}/`;
+}
+
+function getCollectionIndexDecision(kind, hotels) {
+  const hotelCount = hotels.length;
+  const destinationCount = new Set(hotels.map((hotel) => getDestinationSlug(hotel.location))).size;
+  const countryCount = new Set(hotels.map((hotel) => getCountrySlug(hotel.location))).size;
+
+  if (kind === 'country') {
+    return hotelCount >= 3 && destinationCount >= 2 ? 'index-now' : 'keep-accessible';
+  }
+
+  if (kind === 'destination') {
+    if (hotelCount >= 3) return 'index-now';
+    if (hotelCount === 2) return 'index-lightly';
+    return 'keep-accessible';
+  }
+
+  if (kind === 'vibe') {
+    if (hotelCount >= 6 && destinationCount >= 3 && countryCount >= 2) return 'index-now';
+    if (hotelCount >= 4 && destinationCount >= 2) return 'index-lightly';
+    return 'support-internally';
+  }
+
+  if (hotelCount >= 6 && destinationCount >= 3) return 'index-now';
+  if (hotelCount >= 4 && destinationCount >= 2) return 'index-lightly';
+  return 'support-internally';
 }
 
 function getPriorityCollectionRoutes(hotels, max = 8) {
@@ -570,6 +614,34 @@ function buildItemListSchema(items) {
   }));
 }
 
+function getHotelFaq(stay) {
+  const faqs = [];
+
+  if (stay.primaryPersona) {
+    faqs.push({
+      question: `What kind of traveler is ${stay.name} best for?`,
+      answer: `${stay.name} is highly recommended for travelers seeking a ${stay.primaryPersona.toLowerCase()} experience. It caters to those who appreciate thoughtful design and a specific aesthetic mood.`,
+    });
+  }
+
+  if (stay.primaryBackdrop) {
+    faqs.push({
+      question: `What is the setting and location like at ${stay.name}?`,
+      answer: `The hotel is located in ${stay.location}, offering a stunning ${stay.primaryBackdrop.toLowerCase()} setting. This backdrop plays a major role in the overall atmosphere of the stay.`,
+    });
+  }
+
+  const notableAmenities = (stay.amenities || []).slice(0, 3).join(', ').toLowerCase();
+  if (notableAmenities) {
+    faqs.push({
+      question: `What are the standout amenities at ${stay.name}?`,
+      answer: `Guests can expect premium amenities including ${notableAmenities}, contributing to a highly curated and comfortable experience.`,
+    });
+  }
+
+  return faqs;
+}
+
 function buildHotelSchema(hotel, description, image) {
   return [
     {
@@ -608,6 +680,22 @@ function buildHotelSchema(hotel, description, image) {
         },
       ],
     },
+    ...(getHotelFaq(hotel).length > 0
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: getHotelFaq(hotel).map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+              },
+            })),
+          },
+        ]
+      : []),
   ];
 }
 
@@ -862,7 +950,7 @@ function buildHotelPage(hotel) {
         </section>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="/" style="display: inline-block; border: 1px solid #1540c5; border-radius: 999px; padding: 12px 18px; color: #1540c5; text-decoration: none; font-weight: 600;">Open in My Hotel Vibe</a>
-          ${hotel.bookingUrl ? `<a href="${escapeHtml(hotel.bookingUrl)}" style="display: inline-block; background: #1540c5; border-radius: 999px; padding: 12px 18px; color: white; text-decoration: none; font-weight: 600;">Check rates</a>` : ''}
+          ${hotel.bookingUrl ? `<a href="${escapeHtml(hotel.bookingUrl)}" style="display: inline-block; background: #1540c5; border-radius: 999px; padding: 12px 18px; color: white; text-decoration: none; font-weight: 600;">Book now</a>` : ''}
         </div>
       </main>
     </div>
@@ -888,6 +976,11 @@ function buildCollectionPage({
   const socialImage = absoluteMediaUrl(image);
   const summary = getCollectionSummary(kind, hotels);
   const faq = getCollectionFaq(kind, heading.replace(/\s+hotels$/i, ''), hotels);
+  const indexDecision = getCollectionIndexDecision(kind, hotels);
+  const robots =
+    indexDecision === 'index-now' || indexDecision === 'index-lightly'
+      ? 'index,follow,max-image-preview:large'
+      : 'noindex,follow,max-image-preview:large';
   const schema = [
     {
       '@context': 'https://schema.org',
@@ -945,7 +1038,7 @@ function buildCollectionPage({
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
-    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="robots" content="${robots}" />
     <link rel="canonical" href="${escapeHtml(pageUrl)}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
@@ -1012,6 +1105,68 @@ function buildCollectionPage({
       </main>
     </div>
     <script type="module" src="../../assets/${jsFile}"></script>
+  </body>
+</html>`;
+}
+
+function buildHubPage({ title, description, pagePath, eyebrow, heading, intro, links }) {
+  const pageUrl = absoluteUrl(pagePath);
+  const robots = 'index,follow';
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: title,
+      description,
+      url: pageUrl,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: siteName,
+          item: absoluteUrl('/'),
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: heading,
+          item: pageUrl,
+        },
+      ],
+    }
+  ];
+
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>${escapeHtml(title)}</title>
+    <meta name="description" content="${escapeHtml(description)}" />
+    <meta name="robots" content="${robots}" />
+    <link rel="canonical" href="${escapeHtml(pageUrl)}" />
+    <script type="application/ld+json">${JSON.stringify(schema)}</script>
+    <link rel="stylesheet" href="../assets/${cssFile}" />
+  </head>
+  <body>
+    <div id="root">
+      <main style="max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #222;">
+        <p style="margin: 0 0 10px; color: #1540c5; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;">${escapeHtml(eyebrow)}</p>
+        <h1 style="margin: 0 0 12px; font-size: 42px; line-height: 1.05;">${escapeHtml(heading)}</h1>
+        <p style="font-size: 19px; line-height: 1.7; margin: 0 0 24px;">${escapeHtml(intro)}</p>
+        <section style="margin: 0 0 32px;">
+          <ul style="padding-left: 20px; line-height: 1.9; margin: 0;">
+            ${links
+              .map((link) => `<li><a href="${link.href}">${escapeHtml(link.label)}</a> <span style="color:#666;">(${link.count} hotels)</span></li>`)
+              .join('')}
+          </ul>
+        </section>
+      </main>
+    </div>
   </body>
 </html>`;
 }
@@ -1134,13 +1289,69 @@ for (const group of vibeGroups) {
   );
 }
 
+writeFile(
+  path.join(distDir, 'destinations', 'index.html'),
+  buildHubPage({
+    title: `All Destinations | ${siteName}`,
+    description: `Discover boutique and luxury hotels across all our curated destinations.`,
+    pagePath: '/destinations/',
+    eyebrow: 'Directory',
+    heading: 'All Destinations',
+    intro: 'Browse our collection of handpicked hotels by destination.',
+    links: destinationGroups.map((group) => ({
+      href: destinationPath(group.label),
+      label: group.label,
+      count: group.hotels.length,
+    })).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
+  })
+);
+
+writeFile(
+  path.join(distDir, 'vibes', 'index.html'),
+  buildHubPage({
+    title: `All Vibes | ${siteName}`,
+    description: `Find your perfect stay based on the vibe you are looking for.`,
+    pagePath: '/vibes/',
+    eyebrow: 'Directory',
+    heading: 'All Vibes',
+    intro: 'Explore hotels curated by mood, setting, and experience.',
+    links: vibeGroups.map((group) => ({
+      href: vibePath(group.label),
+      label: group.label,
+      count: group.hotels.length,
+    })).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
+  })
+);
+
 const sitemapUrls = [
   absoluteUrl('/'),
+  absoluteUrl('/destinations/'),
+  absoluteUrl('/vibes/'),
   ...hotels.map((hotel) => absoluteUrl(hotelPath(hotel))),
-  ...destinationGroups.map((group) => absoluteUrl(destinationPath(group.label))),
-  ...countryGroups.map((group) => absoluteUrl(countryPath(group.label))),
-  ...backdropGroups.map((group) => absoluteUrl(backdropPath(group.label))),
-  ...vibeGroups.map((group) => absoluteUrl(vibePath(group.label))),
+  ...destinationGroups
+    .filter((group) => {
+      const decision = getCollectionIndexDecision('destination', group.hotels);
+      return decision === 'index-now' || decision === 'index-lightly';
+    })
+    .map((group) => absoluteUrl(destinationPath(group.label))),
+  ...countryGroups
+    .filter((group) => {
+      const decision = getCollectionIndexDecision('country', group.hotels);
+      return decision === 'index-now' || decision === 'index-lightly';
+    })
+    .map((group) => absoluteUrl(countryPath(group.label))),
+  ...backdropGroups
+    .filter((group) => {
+      const decision = getCollectionIndexDecision('backdrop', group.hotels);
+      return decision === 'index-now' || decision === 'index-lightly';
+    })
+    .map((group) => absoluteUrl(backdropPath(group.label))),
+  ...vibeGroups
+    .filter((group) => {
+      const decision = getCollectionIndexDecision('vibe', group.hotels);
+      return decision === 'index-now' || decision === 'index-lightly';
+    })
+    .map((group) => absoluteUrl(vibePath(group.label))),
 ];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

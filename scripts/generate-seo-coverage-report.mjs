@@ -96,6 +96,10 @@ function slugify(value = '') {
     .replace(/-{2,}/g, '-');
 }
 
+function getCountryRouteSlug(country = '') {
+  return country === 'United Kingdom' ? 'uk' : slugify(country);
+}
+
 function extractCountryFromText(text = '') {
   if (!text) return '';
 
@@ -194,7 +198,7 @@ const backdrops = new Map();
 
 for (const hotel of hotels) {
   if (hotel.country && hotel.country !== 'Unknown') {
-    increment(countries, slugify(hotel.country), hotel.country, hotel.name);
+    increment(countries, getCountryRouteSlug(hotel.country), hotel.country, hotel.name);
   }
 
   if (hotel.destination && hotel.destination !== 'Unknown') {

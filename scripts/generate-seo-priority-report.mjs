@@ -156,6 +156,87 @@ function getPriorityTier(score) {
   return 'Tier 3';
 }
 
+function getIndexabilityDecision(group) {
+  const hotels = group.hotels.length;
+  const destinations = group.destinations.size;
+  const countries = group.countries.size;
+
+  if (group.kind === 'country') {
+    if (hotels >= 3 && destinations >= 2) {
+      return {
+        decision: 'Index now',
+        reason: 'Country route has enough hotel depth and destination spread to function as an authority page.',
+      };
+    }
+
+    return {
+      decision: 'Build before prioritizing',
+      reason: 'Country route needs broader destination coverage before it becomes a strong SEO landing page.',
+    };
+  }
+
+  if (group.kind === 'destination') {
+    if (hotels >= 3) {
+      return {
+        decision: 'Index now',
+        reason: 'Destination route has enough hotel depth to satisfy direct place-based search intent.',
+      };
+    }
+
+    if (hotels === 2) {
+      return {
+        decision: 'Index lightly',
+        reason: 'Destination route is viable, but should stay concise until more hotel depth is added.',
+      };
+    }
+
+    return {
+      decision: 'Keep accessible, not a growth priority',
+      reason: 'Single-hotel destinations are useful for navigation, but should not absorb heavy SEO effort until the destination fills out.',
+    };
+  }
+
+  if (group.kind === 'vibe') {
+    if (hotels >= 6 && destinations >= 3 && countries >= 2) {
+      return {
+        decision: 'Index now',
+        reason: 'Vibe route has enough cross-market depth to earn a standalone mood-led landing page.',
+      };
+    }
+
+    if (hotels >= 4 && destinations >= 2) {
+      return {
+        decision: 'Index lightly',
+        reason: 'Vibe route is emerging, but needs broader catalog depth before it deserves heavier editorial investment.',
+      };
+    }
+
+    return {
+      decision: 'Support internally only',
+      reason: 'Vibe route is still too thin to become a major search entry point at scale.',
+    };
+  }
+
+  if (hotels >= 6 && destinations >= 3) {
+    return {
+      decision: 'Index now',
+      reason: 'Backdrop route has enough hotel volume and setting diversity to justify its own collection page.',
+    };
+  }
+
+  if (hotels >= 4 && destinations >= 2) {
+    return {
+      decision: 'Index lightly',
+      reason: 'Backdrop route is valid, but should stay compact until the setting cluster grows.',
+    };
+  }
+
+  return {
+    decision: 'Support internally only',
+    reason: 'Backdrop route is better used as internal linking support than a primary SEO target for now.',
+  };
+}
+
 function getIntent(group) {
   if (group.kind === 'country') {
     return `Build authority around "${group.label} hotels" and related destination-level searches.`;
@@ -258,6 +339,7 @@ const rankedGroups = [...groups.values()]
       priceMix: Object.fromEntries(group.priceTiers),
       score,
       tier: getPriorityTier(score),
+      ...getIndexabilityDecision(group),
       intent: getIntent(group),
       title: getSuggestedTitle(group),
       keywordCluster: getSuggestedKeywordCluster(group),
@@ -301,6 +383,8 @@ function renderSection(title, groupsInTier) {
         `- Hotels: ${group.hotelsCount}\n` +
         `- Destination spread: ${group.destinationsCount}\n` +
         `- Country spread: ${group.countriesCount}\n` +
+        `- Recommended action: ${group.decision}\n` +
+        `- Why: ${group.reason}\n` +
         `- Intent: ${group.intent}\n` +
         `- Suggested title: ${group.title}\n` +
         `- Keyword cluster: ${group.keywordCluster.join(' | ')}\n` +

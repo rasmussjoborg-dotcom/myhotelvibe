@@ -12,19 +12,23 @@ type Props = {
 export default function CollectionSeoFooter({ route, stays }: Props) {
   const faq = getCollectionFaq(route, stays);
   const related = getCollectionRelatedLinks(stays);
+  const eligibleCountries = related.countries.filter((link) => link.decision !== 'support-internally');
+  const eligibleDestinations = related.destinations.filter((link) => link.decision !== 'support-internally');
+  const eligibleBackdrops = related.backdrops.filter((link) => link.decision !== 'support-internally');
+  const eligibleVibes = related.vibes.filter((link) => link.decision !== 'support-internally');
 
   const relatedGroups = [
-    route.kind !== 'country' && related.countries.length
-      ? { label: 'Country', links: related.countries.slice(0, 1) }
+    route.kind !== 'country' && eligibleCountries.length
+      ? { label: 'Country', links: eligibleCountries.slice(0, 1) }
       : null,
-    route.kind !== 'destination' && related.destinations.length
-      ? { label: 'Destinations', links: related.destinations.slice(0, 2) }
+    route.kind !== 'destination' && eligibleDestinations.length
+      ? { label: 'Destinations', links: eligibleDestinations.slice(0, 2) }
       : null,
-    route.kind !== 'backdrop' && related.backdrops.length
-      ? { label: 'Backdrops', links: related.backdrops.slice(0, 2) }
+    route.kind !== 'backdrop' && eligibleBackdrops.length
+      ? { label: 'Backdrops', links: eligibleBackdrops.slice(0, 2) }
       : null,
-    route.kind !== 'vibe' && related.vibes.length
-      ? { label: 'Vibes', links: related.vibes.slice(0, 2) }
+    route.kind !== 'vibe' && eligibleVibes.length
+      ? { label: 'Vibes', links: eligibleVibes.slice(0, 2) }
       : null,
   ].filter(Boolean) as Array<{ label: string; links: Array<{ href: string; label: string }> }>;
 
