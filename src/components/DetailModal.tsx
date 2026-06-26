@@ -725,7 +725,7 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                   <h3 itemProp="name">What is the vibe at {safeName}?</h3>
                   <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
                     <p itemProp="text">
-                      The vibe at {safeName} can be described as {safeVibe}. It is an excellent choice for {safePrimaryPersona} travelers.
+                      The vibe at {safeName} can be described as {safeVibe}. It is an excellent choice for {safePersona} travelers.
                     </p>
                   </div>
                 </div>
