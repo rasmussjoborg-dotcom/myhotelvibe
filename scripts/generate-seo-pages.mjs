@@ -198,12 +198,34 @@ async function loadHotels() {
   if (supabaseUrl && supabaseKey) {
     try {
       const supabase = createClient(supabaseUrl, supabaseKey);
-      const { data, error } = await supabase.from('hotels').select('*');
-      if (error) throw error;
-      if (Array.isArray(data) && data.length) {
-        console.log(`Loaded ${data.length} hotels from Supabase for SEO generation`);
-        return data.map(normalizeHotelRecord);
+      console.log('Fetching hotels from Supabase...');
+      let data = [];
+      let from = 0;
+      const pageSize = 1000;
+
+      while (true) {
+        const { data: pageData, error } = await supabase
+          .from('hotels')
+          .select('*')
+          .range(from, from + pageSize - 1);
+
+        if (error) {
+          console.error('Error fetching from Supabase:', error.message);
+          process.exit(1);
+        }
+
+        if (pageData && pageData.length > 0) {
+          data = [...data, ...pageData];
+        }
+
+        if (!pageData || pageData.length < pageSize) {
+          break;
+        }
+
+        from += pageSize;
       }
+      console.log(`Loaded ${data.length} hotels from Supabase for SEO generation`);
+      return data.map(normalizeHotelRecord);
     } catch (error) {
       console.warn('Supabase SEO source unavailable, falling back to local hotels.json');
       console.warn(

@@ -83,19 +83,36 @@ function getThemeSong(hotel: any): string {
 }
 
 export async function fetchHotels(timeline: string = 'Flexible'): Promise<Stay[]> {
-  const { data, error } = await supabase
-    .from('hotels')
-    .select('*');
+  let allData: any[] = [];
+  let from = 0;
+  const pageSize = 1000;
 
-  if (error) {
-    console.error('Error fetching hotels:', error);
-    return [];
+  while (true) {
+    const { data, error } = await supabase
+      .from('hotels')
+      .select('*')
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      console.error('Error fetching hotels:', error);
+      return [];
+    }
+
+    if (data && data.length > 0) {
+      allData = [...allData, ...data];
+    }
+
+    if (!data || data.length < pageSize) {
+      break;
+    }
+
+    from += pageSize;
   }
 
   const { checkIn, checkOut } = getDatesFromTimeline(timeline);
   const multiplier = calculatePriceMultiplier(checkIn, checkOut);
 
-  return (data || []).map((hotel: any) => {
+  return (allData || []).map((hotel: any) => {
     const normalizedLocation = normalizeLocation(hotel.location, hotel.region);
     let parsedImages = [
       hotel.image,
