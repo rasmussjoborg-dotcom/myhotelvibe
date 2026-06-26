@@ -918,7 +918,7 @@ function buildHotelPage(hotel) {
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     ${image ? `<meta name="twitter:image" content="${escapeHtml(image)}" />` : ''}
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
-    <link rel="stylesheet" href="../../assets/${cssFile}" />
+    <link rel="stylesheet" href="/assets/${cssFile}" />
   </head>
   <body>
     <div id="root">
@@ -955,7 +955,7 @@ function buildHotelPage(hotel) {
       </main>
     </div>
     <script>window.__SEO_HOTEL_SLUG=${JSON.stringify(slugifyHotelValue(hotel.name || hotel.id))};</script>
-    <script type="module" src="../../assets/${jsFile}"></script>
+    <script type="module" src="/assets/${jsFile}"></script>
   </body>
 </html>`;
 }
@@ -1051,7 +1051,7 @@ function buildCollectionPage({
     <meta name="twitter:description" content="${escapeHtml(description)}" />
     ${socialImage ? `<meta name="twitter:image" content="${escapeHtml(socialImage)}" />` : ''}
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
-    <link rel="stylesheet" href="../../assets/${cssFile}" />
+    <link rel="stylesheet" href="/assets/${cssFile}" />
   </head>
   <body>
     <div id="root">
@@ -1104,7 +1104,7 @@ function buildCollectionPage({
         }
       </main>
     </div>
-    <script type="module" src="../../assets/${jsFile}"></script>
+    <script type="module" src="/assets/${jsFile}"></script>
   </body>
 </html>`;
 }
