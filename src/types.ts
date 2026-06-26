@@ -60,6 +60,8 @@ export interface Stay {
   bookingWindow?: string;
   guestSummary?: string;
   bookingUrl?: string;
+  vibe?: string;
+  whyWeLoveIt?: string;
   updated_at?: string;
   is_locked?: boolean;
   youtubeUrl?: string;

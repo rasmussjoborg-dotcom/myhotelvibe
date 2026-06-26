@@ -253,13 +253,53 @@ function getHotelFaq(stay: Stay) {
     });
   }
 
+  if (stay.vibe) {
+    faqs.push({
+      question: `What is the overall vibe and aesthetic of ${stay.name}?`,
+      answer: `The vibe at ${stay.name} can be described as: ${stay.vibe}. It is an ideal destination for travelers who prioritize atmosphere and aesthetic in their stays.`,
+    });
+  }
+  
+  if (stay.whyWeLoveIt) {
+    faqs.push({
+      question: `Why is ${stay.name} considered a curated or standout hotel?`,
+      answer: `We particularly love this property because: ${stay.whyWeLoveIt}. This makes it a standout choice for discerning guests looking for unique experiences rather than generic accommodations.`,
+    });
+  }
+
+  if (stay.tags && stay.tags.length > 0) {
+    faqs.push({
+      question: `What are some key highlights or tags associated with ${stay.name}?`,
+      answer: `Key highlights include: ${stay.tags.join(', ')}. These elements contribute to making it a unique and memorable place to stay.`,
+    });
+  }
+
+  if (stay.settings && stay.settings.length > 0) {
+    faqs.push({
+      question: `What is the surrounding environment like at ${stay.name}?`,
+      answer: `The property is situated in an environment that features: ${stay.settings.join(', ')}. This natural setting enhances the overall guest experience.`,
+    });
+  }
+
+  if (stay.isAdultsOnly) {
+    faqs.push({
+      question: `Is ${stay.name} adults only or family friendly?`,
+      answer: `${stay.name} is an adults-only property, making it perfect for romantic getaways, honeymoons, or peaceful retreats without children.`,
+    });
+  }
+
   return faqs;
 }
 
 export function buildHotelSeo(stay: Stay) {
   const image = toAbsoluteMediaUrl(stay.images?.[0] || stay.image);
   const bodyCopy = getStayCardBodyCopy(stay);
-  const description = normalizeDescription(bodyCopy || stay.description || DEFAULT_DESCRIPTION);
+  const baseDescription = normalizeDescription(bodyCopy || stay.description || DEFAULT_DESCRIPTION);
+  
+  // LLM Optimization: Inject vibe and editorial notes into the hidden description and schema
+  const llmoContext = stay.vibe || stay.whyWeLoveIt ? `Vibe & Experience: ${stay.vibe || ''} ${stay.whyWeLoveIt || ''}`.trim() : '';
+  const description = normalizeDescription(`${baseDescription} ${llmoContext}`);
+  
   const title = `${stay.name} in ${stay.location} | ${SITE_NAME}`;
   const canonicalPath = buildHotelPath(getHotelSlug(stay));
 

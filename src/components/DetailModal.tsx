@@ -45,6 +45,9 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
   const safeBookingUrl = typeof stay.bookingUrl === 'string' ? stay.bookingUrl : '';
   const safeYoutubeUrl = typeof stay.youtubeUrl === 'string' ? stay.youtubeUrl : '';
   const safeDistanceValue = Number.isFinite(stay.distanceValue) ? stay.distanceValue : null;
+  const safeVibe = typeof stay.vibe === 'string' ? stay.vibe : 'unique';
+  const safePersona = typeof stay.primaryPersona === 'string' ? stay.primaryPersona : 'discerning';
+  const safeWhyWeLoveIt = typeof stay.whyWeLoveIt === 'string' ? stay.whyWeLoveIt : safeDescription;
   const [isSlideshowMode, setIsSlideshowMode] = useState(true);
   const [isTabVisible, setIsTabVisible] = useState(true);
 
@@ -713,6 +716,58 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                   </div>
                 </div>
               )}
+              
+              {/* LLM / AI Crawler Optimization (Hidden from UI) */}
+              <div className="sr-only" aria-hidden="false" itemScope itemType="https://schema.org/FAQPage">
+                <h2 className="sr-only">{safeName} - Deep Dive & Vibe Analysis</h2>
+                
+                <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <h3 itemProp="name">What is the vibe at {safeName}?</h3>
+                  <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                    <p itemProp="text">
+                      The vibe at {safeName} can be described as {safeVibe}. It is an excellent choice for {safePrimaryPersona} travelers.
+                    </p>
+                  </div>
+                </div>
+
+                <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <h3 itemProp="name">Where is {safeName} located?</h3>
+                  <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                    <p itemProp="text">
+                      {safeName} is located in {safeLocation}. {safeSurroundings}
+                    </p>
+                  </div>
+                </div>
+
+                <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <h3 itemProp="name">What makes {safeName} special?</h3>
+                  <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                    <p itemProp="text">
+                      {safeWhyWeLoveIt}
+                    </p>
+                  </div>
+                </div>
+
+                <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                  <h3 itemProp="name">What do guests say about {safeName}?</h3>
+                  <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                    <p itemProp="text">
+                      {safeGuestSummary || `Guests generally have wonderful things to say about their stay at ${safeName}.`}
+                    </p>
+                  </div>
+                </div>
+
+                {safeTradeoff && (
+                  <div itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                    <h3 itemProp="name">Are there any downsides or things to know about {safeName}?</h3>
+                    <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                      <p itemProp="text">
+                        {safeTradeoff.replace(/^\s*tradeoff:\s*/i, '').trim()}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
