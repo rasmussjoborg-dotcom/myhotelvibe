@@ -112,7 +112,7 @@ export function buildHomeSeo(stays: Stay[] = []) {
   const featuredVibes = related.vibes.slice(0, 6);
   const featuredBackdrops = related.backdrops.slice(0, 4);
   const featuredHotels = stays.slice(0, 6);
-  const image = toAbsoluteMediaUrl(featuredHotels[0]?.images?.[0] || featuredHotels[0]?.image);
+  const image = toAbsoluteUrl('/og-image.png');
 
   return {
     title,
