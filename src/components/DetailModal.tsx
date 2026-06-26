@@ -21,6 +21,7 @@ import { calculatePriceMultiplier } from "../lib/pricingEngine";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { getRelatedHotels, getStayCollectionLinks } from '../lib/collections';
 import { buildHotelPath, getHotelSlug } from '../lib/site';
+import { buildAffiliateUrl } from '../lib/affiliate';
 
 
 interface DetailModalProps {
@@ -42,7 +43,7 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
   const safeBookingWindow = typeof stay.bookingWindow === 'string' ? stay.bookingWindow : '';
   const safeSurroundings = typeof stay.surroundings === 'string' ? stay.surroundings : '';
   const safeTimeZone = typeof stay.timeZone === 'string' ? stay.timeZone : '';
-  const safeBookingUrl = typeof stay.bookingUrl === 'string' ? stay.bookingUrl : '';
+  const safeBookingUrl = stay.bookingUrl || '';
   const safeYoutubeUrl = typeof stay.youtubeUrl === 'string' ? stay.youtubeUrl : '';
   const safeDistanceValue = Number.isFinite(stay.distanceValue) ? stay.distanceValue : null;
   const safeVibe = typeof stay.vibe === 'string' ? stay.vibe : 'unique';
@@ -776,11 +777,7 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
         <div className="absolute bottom-0 left-0 right-0 bg-white/97 backdrop-blur-md border-t border-border/60 px-4 pt-1 pb-[calc(env(safe-area-inset-bottom)*0.05)] md:px-5 md:py-4 z-20 shadow-[0_-8px_30px_rgba(0,0,0,0.04)] flex flex-col items-center">
           <Button 
             onClick={() => {
-              const fallbackUrl = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(safeName + ' ' + safeLocation)}`;
-              let targetUrl = fallbackUrl;
-              if (safeBookingUrl && safeBookingUrl.trim() !== '') {
-                targetUrl = safeBookingUrl.startsWith('http') ? safeBookingUrl : `https://${safeBookingUrl}`;
-              }
+              const targetUrl = buildAffiliateUrl(safeBookingUrl, safeName, safeLocation);
               window.open(targetUrl, '_blank', 'noopener,noreferrer');
             }}
             className="w-full rounded-full font-bold h-[46px] md:h-[52px] text-[15px] active:scale-[0.98] transition-all flex items-center justify-center gap-2"

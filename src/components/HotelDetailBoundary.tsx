@@ -4,6 +4,7 @@ import { Stay } from '../types';
 import { Button } from '@/components/ui/button';
 import { UI } from '@/lib/ui';
 import { cn } from '@/lib/utils';
+import { buildAffiliateUrl } from '../lib/affiliate';
 
 type Props = {
   children: React.ReactNode;
@@ -46,12 +47,7 @@ export default class HotelDetailBoundary extends React.Component<Props, State> {
       typeof stay.description === 'string' && stay.description.trim()
         ? stay.description
         : 'This hotel opened with incomplete details. You can still continue to the booking page while we tighten the content.';
-    const bookingUrl =
-      typeof stay.bookingUrl === 'string' && stay.bookingUrl.trim()
-        ? stay.bookingUrl.startsWith('http')
-          ? stay.bookingUrl
-          : `https://${stay.bookingUrl}`
-        : `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(`${name} ${location}`)}`;
+    const bookingUrl = buildAffiliateUrl(stay.bookingUrl || '', name, location);
 
     return (
       <div className="fixed inset-0 z-50 bg-white">

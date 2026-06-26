@@ -2,6 +2,35 @@ import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { ensureDir, emptyDir } from 'fs-extra/esm';
+
+function buildAffiliateUrl(rawUrl, hotelName, location) {
+  if (!rawUrl || rawUrl.trim() === '') {
+    const fallback = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(`${hotelName} ${location}`)}`;
+    return applyAffiliateTracking(fallback);
+  }
+  let url = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+  return applyAffiliateTracking(url);
+}
+
+function applyAffiliateTracking(url) {
+  const cjTemplate = process.env.VITE_CJ_AFFILIATE_TEMPLATE;
+  const directAid = process.env.VITE_BOOKING_AID;
+
+  if (cjTemplate && cjTemplate.includes('{url}')) {
+    return cjTemplate.replace('{url}', encodeURIComponent(url));
+  }
+  if (directAid) {
+    try {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set('aid', directAid);
+      return urlObj.toString();
+    } catch (e) {
+      return url;
+    }
+  }
+  return url;
+}
 
 const projectRoot = path.resolve(import.meta.dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
@@ -953,7 +982,7 @@ function buildHotelPage(hotel) {
         </section>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
           <a href="/" style="display: inline-block; border: 1px solid #1540c5; border-radius: 999px; padding: 12px 18px; color: #1540c5; text-decoration: none; font-weight: 600;">Open in My Hotel Vibe</a>
-          ${hotel.bookingUrl ? `<a href="${escapeHtml(hotel.bookingUrl)}" style="display: inline-block; background: #1540c5; border-radius: 999px; padding: 12px 18px; color: white; text-decoration: none; font-weight: 600;">Book now</a>` : ''}
+          <a href="${escapeHtml(buildAffiliateUrl(hotel.bookingUrl, hotel.name, hotel.location))}" style="display: inline-block; background: #1540c5; border-radius: 999px; padding: 12px 18px; color: white; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener noreferrer">Book now</a>
         </div>
       </main>
     </div>
