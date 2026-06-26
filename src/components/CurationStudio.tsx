@@ -206,7 +206,8 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
     setIsExpanded(false);
     setIsSaving(false);
     
-    const needsUpscale = editImages.some(img => img && img.startsWith('http'));
+    const isSupabaseUrl = (url: string) => url && url.includes('supabase.co/storage');
+    const needsUpscale = editImages.some(img => img && !isSupabaseUrl(img));
     if (!needsUpscale) {
       setFetchStatus({ type: 'success', msg: 'Saved successfully!' });
       return;
@@ -279,19 +280,21 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
     }
   };
 
+  const isUpscaled = hotel.images && hotel.images.filter(Boolean).length > 0 && hotel.images.filter(Boolean).every(img => img.includes('supabase.co/storage'));
+
   return (
     <div className="bg-white rounded-2xl border border-border/60 shadow-sm overflow-hidden mb-4 relative">
-      {isLocked && (
-        <div className="absolute inset-0 bg-green-100/50 backdrop-blur-[2px] z-[5] flex flex-col items-center justify-center gap-4">
-          {fetchStatus.msg && (
-            <div className={`px-4 py-2 rounded-xl shadow-sm text-sm font-medium ${fetchStatus.type === 'error' ? 'bg-red-100 text-red-700' : fetchStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-white text-blue-600 animate-pulse'}`}>
-              {fetchStatus.type === 'info' && <Loader2 className="w-4 h-4 inline-block mr-2 animate-spin" />}
-              {fetchStatus.msg}
-            </div>
+      {fetchStatus.msg && (
+        <div className={`m-4 px-4 py-3 rounded-xl shadow-sm text-sm font-medium flex items-center justify-between ${fetchStatus.type === 'error' ? 'bg-red-100 text-red-700' : fetchStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-blue-50 text-blue-700 border border-blue-100'}`}>
+          <div className="flex items-center">
+            {fetchStatus.type === 'info' && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+            {fetchStatus.msg}
+          </div>
+          {(fetchStatus.type === 'error' || fetchStatus.type === 'success') && (
+            <button onClick={() => setFetchStatus({ type: '', msg: '' })} className="ml-4 opacity-50 hover:opacity-100">
+              <X className="w-4 h-4" />
+            </button>
           )}
-          <Button onClick={() => setIsLocked(false)} variant="default" className="bg-green-600 hover:bg-green-700 text-white rounded-full px-6 shadow-lg shadow-green-900/20">
-            Unlock
-          </Button>
         </div>
       )}
       <div className="p-5 flex items-start justify-between gap-4 border-b border-border/60">
@@ -331,6 +334,12 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
               <Clock className="w-3 h-3" /> 
               {justUpdated ? "Updated just now" : getRelativeTime(updatedAt || undefined)}
             </span>
+            {isUpscaled && (
+              <span className="flex items-center gap-1.5 text-xs bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md font-medium border border-emerald-100">
+                <CheckCircle2 className="w-3 h-3" />
+                Upscaled
+              </span>
+            )}
           </div>
         </div>
         
@@ -356,19 +365,9 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
             Save & Done
           </Button>
 
-          <Button onClick={handleDelete} variant="ghost" size="sm" className="h-9 w-9 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full">
+          <Button onClick={handleDelete} variant="ghost" size="sm" className="h-9 w-9 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full ml-2">
             <Trash2 className="w-4 h-4" />
           </Button>
-          <button 
-          onClick={async () => {
-            const newLocked = !isLocked;
-            setIsLocked(newLocked);
-            await updateHotel(hotel.id, { is_locked: newLocked });
-          }}
-            className="h-9 w-9 p-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full ml-2 flex items-center justify-center"
-          >
-            {isLocked ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
-          </button>
           <Button 
             onClick={() => setIsExpanded(!isExpanded)}
             variant="ghost" 
