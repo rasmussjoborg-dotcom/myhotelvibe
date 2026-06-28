@@ -35,6 +35,7 @@ import {
   Filter,
   CalendarDays,
   ArrowUp,
+  CornerRightDown,
 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Drawer as DrawerPrimitive } from 'vaul';
@@ -575,12 +576,17 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
         )}>
           <div
             className={cn(
-              'flex flex-col mx-auto transition-all w-full',
+              'flex flex-col mx-auto transition-all w-full relative',
               isStuck
                 ? 'md:rounded-full md:bg-white md:px-3 md:py-2 md:shadow-[0_-10px_32px_-10px_rgba(0,0,0,0.18),0_10px_24px_-16px_rgba(24,71,195,0.16)]'
                 : 'rounded-[32px] bg-transparent p-0 shadow-none md:rounded-full md:bg-white md:px-4 md:py-3.5 md:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.08)]',
             )}
           >
+            {!isStuck && (
+              <div className="absolute -top-7 left-2 md:left-6 flex items-center gap-1.5 text-[10px] uppercase tracking-widest font-semibold text-muted-foreground/60 select-none">
+                Curate your escape <CornerRightDown className="w-3 h-3 text-muted-foreground/40 translate-y-px" />
+              </div>
+            )}
             <div className={cn('flex w-full flex-1', isStuck ? 'flex-col md:flex-row md:gap-1' : 'flex-col md:flex-row gap-2')}>
               <div
                 ref={chipRailRef}

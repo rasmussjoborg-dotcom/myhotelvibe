@@ -24,7 +24,60 @@ import { buildHotelPath, getHotelSlug } from './lib/site';
 import { getCollectionRouteFromPath, matchesCollectionRoute } from './lib/collections';
 import { isLocalAdminEnabled } from './lib/runtime';
 
+import React from 'react';
+
 type AppTab = 'discover' | 'design' | 'admin';
+
+class AdminErrorBoundary extends React.Component<
+  { children: React.ReactNode; onReset: () => void },
+  { hasError: boolean; error: Error | null }
+> {
+  state = { hasError: false, error: null as Error | null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error) {
+    console.error('[AdminErrorBoundary] Caught error:', error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-6 p-8 text-center">
+          <div className="text-4xl">⚠️</div>
+          <div>
+            <h2 className="text-xl font-semibold text-foreground mb-2">Admin panel crashed</h2>
+            <p className="text-sm text-muted-foreground max-w-sm">
+              Something went wrong in the Curation Studio. Your data is safe — the error was contained.
+            </p>
+            {this.state.error && (
+              <pre className="mt-3 text-xs text-left bg-muted/60 rounded-xl p-4 max-w-md overflow-auto text-red-600">
+                {this.state.error.message}
+              </pre>
+            )}
+          </div>
+          <div className="flex gap-3">
+            <button
+              onClick={() => { this.setState({ hasError: false, error: null }); }}
+              className="px-5 py-2 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary/90"
+            >
+              Try again
+            </button>
+            <button
+              onClick={this.props.onReset}
+              className="px-5 py-2 rounded-full border border-border text-sm font-medium hover:bg-muted"
+            >
+              Back to discover
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 const DEFAULT_PREFERENCES: Preferences = {
   persona: '',
@@ -436,9 +489,11 @@ export default function App() {
           />
         </Suspense>
       ) : currentTab === 'admin' && localAdminEnabled ? (
-        <Suspense fallback={<div className="min-h-screen bg-background" />}>
-          <CurationStudio onClose={() => setTab('discover')} />
-        </Suspense>
+        <AdminErrorBoundary onReset={() => setTab('discover')}>
+          <Suspense fallback={<div className="min-h-screen bg-background" />}>
+            <CurationStudio onClose={() => setTab('discover')} />
+          </Suspense>
+        </AdminErrorBoundary>
       ) : (
         <>
 

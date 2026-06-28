@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Stay, TRIP_PERSONAS, BACKDROP_OPTIONS, PRICE_TIERS } from '../types';
 import { fetchHotels, updateHotel, deleteHotel, insertHotel } from '../lib/api';
-import { ExternalLink, CheckCircle2, AlertCircle, Link as LinkIcon, Image as ImageIcon, Sparkles, Trash2, Clock, Loader2, Edit2, Globe, Map as MapIcon, Save, ChevronDown, ChevronUp, Lock, Unlock, ChevronRight } from 'lucide-react';
+import { ExternalLink, CheckCircle2, AlertCircle, Link as LinkIcon, Image as ImageIcon, Sparkles, Trash2, Clock, Loader2, Edit2, Globe, Map as MapIcon, Save, ChevronDown, ChevronUp, ChevronRight, X } from 'lucide-react';
 import { discoverReplacementHotelDraft } from '../lib/ai';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -132,7 +132,7 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
   const hasImage = !!hotel.image && !hotel.image.includes('placeholder');
   const hasLink = !!hotel.bookingUrl;
 
-  const handleSave = async (forceLock?: boolean) => {
+  const handleSave = async (forceLock?: boolean, skipReload?: boolean) => {
     setIsSaving(true);
     try {
       const finalImages = editImages.filter(Boolean);
@@ -152,7 +152,7 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
         is_locked: forceLock !== undefined ? forceLock : isLocked
       });
       setJustUpdated(true);
-      await onReload();
+      if (!skipReload) await onReload();
     } catch (err) {
       console.error(err);
       alert('Failed to save hotel.');
@@ -200,21 +200,26 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
   };
 
   const handleSaveAndDone = async () => {
+    // Snapshot editImages before any async work — onReload causes parent to
+    // re-render and destroys this component mid-execution
+    const imageSnapshot = [...editImages];
     setIsSaving(true);
-    await handleSave(true);
+    // skipReload=true: keep this component alive through the whole flow
+    await handleSave(true, true);
     setIsLocked(true);
     setIsExpanded(false);
     setIsSaving(false);
-    
+
     const isSupabaseUrl = (url: string) => url && url.includes('supabase.co/storage');
-    const needsUpscale = editImages.some(img => img && !isSupabaseUrl(img));
+    const needsUpscale = imageSnapshot.some(img => img && !isSupabaseUrl(img));
     if (!needsUpscale) {
-      setFetchStatus({ type: 'success', msg: 'Saved successfully!' });
+      setFetchStatus({ type: 'success', msg: 'Saved!' });
+      // Reload the parent list in the background after a short delay
+      setTimeout(onReload, 500);
       return;
     }
 
-    // Trigger background upscaling and wait for it
-    setFetchStatus({ type: 'info', msg: 'Upscaling to 5K resolution... this will take a few minutes.' });
+    setFetchStatus({ type: 'info', msg: 'Upscaling to 5K resolution… this will take a few minutes.' });
     try {
       const res = await fetch('/api/upscale', {
         method: 'POST',
@@ -222,15 +227,16 @@ function HotelEditorRow({ hotel, onReload, onClose }: { hotel: Stay, onReload: (
       });
       if (res.ok) {
         setFetchStatus({ type: 'success', msg: 'Upscaling complete! Images are now 5K.' });
-        // Auto reload to show the new local images
         setTimeout(onReload, 2000);
       } else {
         const errorData = await res.json();
         setFetchStatus({ type: 'error', msg: `Upscale failed: ${errorData.error}` });
+        setTimeout(onReload, 500);
       }
     } catch (err) {
       console.error(err);
       setFetchStatus({ type: 'error', msg: 'Upscale request failed.' });
+      setTimeout(onReload, 500);
     }
   };
 

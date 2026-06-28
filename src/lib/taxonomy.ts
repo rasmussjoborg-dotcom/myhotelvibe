@@ -18,6 +18,7 @@ const COUNTRY_NAMES = [
   'Iceland',
   'Ireland',
   'Netherlands',
+  'Morocco',
 ] as const;
 
 const REGION_TO_COUNTRY_RULES: Array<{ test: RegExp; country: string }> = [
@@ -36,6 +37,7 @@ const REGION_TO_COUNTRY_RULES: Array<{ test: RegExp; country: string }> = [
   { test: /\biceland|reykjavik\b/i, country: 'Iceland' },
   { test: /\bireland\b/i, country: 'Ireland' },
   { test: /\bnetherlands|amsterdam\b/i, country: 'Netherlands' },
+  { test: /\bmorocco|marrakech\b/i, country: 'Morocco' },
 ];
 
 const BACKDROP_ALIAS_RULES: Array<{ test: RegExp; label: (typeof BACKDROP_OPTIONS)[number] }> = [
