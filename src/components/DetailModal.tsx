@@ -603,7 +603,11 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                       <div className="flex flex-col pt-0.5">
                         <span className="text-[14px] font-bold text-foreground leading-none mb-1.5">Getting there</span>
                         <span className="text-[13px] text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
-                          Approximately {safeDistanceValue ?? 'an unknown distance'} km from the nearest major airport. {safeDistanceValue !== null && safeDistanceValue > 50 ? 'A rental car or pre-booked transfer is highly recommended.' : 'A short taxi ride or transfer is usually sufficient.'}
+                          {safeDistanceValue ? (
+                            `Approximately ${safeDistanceValue} km from the nearest major airport. ${safeDistanceValue > 50 ? 'A rental car or pre-booked transfer is highly recommended.' : 'A short taxi ride or transfer is usually sufficient.'}`
+                          ) : (
+                            "Contact the hotel's concierge prior to arrival to arrange a seamless private transfer from the nearest transit hub."
+                          )}
                         </span>
                       </div>
                     </div>
