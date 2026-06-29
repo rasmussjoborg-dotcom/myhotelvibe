@@ -375,7 +375,8 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                 )}
 
                 {/* Audio Mute Button */}
-                {activeAudioUrl && (
+                {/* TODO: Re-enable when music is present */}
+                {false && activeAudioUrl && (
                   <button
                     onClick={(e) => { 
                       e.stopPropagation(); 
