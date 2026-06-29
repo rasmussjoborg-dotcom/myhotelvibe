@@ -92,15 +92,16 @@ export async function generateHotelDraft(hotelName: string, location: string, ba
           distanceValue: { type: SchemaType.NUMBER, description: "Distance from nearest major airport in minutes" },
           spaScore: { type: SchemaType.NUMBER, description: "Score from 1 to 5" },
           description: { type: SchemaType.STRING, description: "A punchy, editorial description of the hotel. MUST be strictly between 2 to 4 sentences and absolutely NO longer than 350 characters. Be concise and impactful." },
+          cardTeaser: { type: SchemaType.STRING, description: "A highly-curated, one-sentence hook (max 120 characters). This will be shown on the hotel preview card in the list view. It MUST be uniquely phrased and not just repeat the first sentence of the main description." },
           tags: { type: SchemaType.ARRAY, items: { type: SchemaType.STRING } },
           whyFits: { type: SchemaType.ARRAY, items: { type: SchemaType.STRING }, description: "CRITICAL: Must contain EXACTLY TWO items. Item 1 must be 'The Draw: [reason]'. Item 2 must be 'The Flex: [reason]'. These should be punchy, salesy, premium arguments for why this hotel made our ultra-luxury list." },
-          tradeoff: { type: SchemaType.STRING },
+          tradeoff: { type: SchemaType.STRING, description: "Identify the exact type of traveler who would absolutely HATE this hotel, and explain why in one punchy sentence. Be brutally honest to build trust (e.g. 'If you want nightlife, skip this...')." },
           amenities: { type: SchemaType.ARRAY, items: { type: SchemaType.STRING } },
           settings: { type: SchemaType.ARRAY, items: { type: SchemaType.STRING } },
           surroundings: { type: SchemaType.STRING, description: "Description of the hotel's setting and proximity to attractions/nature." },
           timeZone: { type: SchemaType.STRING, description: "The standard time zone string for the location (e.g., 'CET (Central European Time)')" },
           bookingWindow: { type: SchemaType.STRING, description: "An educated guess on how far in advance this hotel usually books out based on its exclusivity." },
-          guestSummary: { type: SchemaType.STRING, description: "A 1-2 sentence summary of what real guests typically rave or complain about regarding this hotel." },
+          guestSummary: { type: SchemaType.STRING, description: "Summarize the general consensus of the hotel's atmosphere as a factual, objective observation. DO NOT use the words 'guests', 'reviewers', or 'say'. State the reality of the experience directly." },
           localGems: { 
             type: SchemaType.OBJECT, 
             description: "CRITICAL: MUST be 4 hand-picked, highly-rated RESTAURANTS or DINING EXPERIENCES (not general activities) near the hotel, specifically tailored for each traveler group. Prioritize restaurants bookable on TheFork or OpenTable, and append a dummy affiliate parameter like '?aff_id=STITCH' to the URL.",
@@ -125,7 +126,7 @@ export async function generateHotelDraft(hotelName: string, location: string, ba
             required: ["spring", "summer", "autumn", "winter"]
           }
         },
-        required: ["name", "location", "region", "luxuriousValue", "distanceValue", "spaScore", "description", "tags", "whyFits", "tradeoff", "amenities", "settings", "surroundings", "timeZone", "bookingWindow", "guestSummary", "localGems", "seasonalPrices"]
+        required: ["name", "location", "region", "luxuriousValue", "distanceValue", "spaScore", "description", "cardTeaser", "tags", "whyFits", "tradeoff", "amenities", "settings", "surroundings", "timeZone", "bookingWindow", "guestSummary", "localGems", "seasonalPrices"]
       }
     }
   });
@@ -133,7 +134,8 @@ export async function generateHotelDraft(hotelName: string, location: string, ba
   const prompt = `You are a high-end luxury travel curator for 'My Hotel Vibe'.
 Generate a highly editorial, factual hotel profile for: ${hotelName} in ${location}.
 It must fit the backdrop: "${backdrop}" and the vibe: "${vibe}".
-Tone: Premium, honest, poetic, and highly curated. DO NOT use generic marketing speak. 
+Tone Focus: Since the vibe is "${vibe}", lean heavily into that specific persona. If it's a food vibe, focus on sensory details and tasting menus. If it's a social vibe, focus on the crowd and energy.
+CRITICAL BANNED WORDS: You are strictly FORBIDDEN from using any of the following words in ANY of your output fields: "nestled", "boasts", "oasis", "hidden gem", "guests consistently rave", "impeccable", "unforgettable", "a stone's throw", "bustling", "paradise", "luxury". Do not use them.
 CRITICAL LIMIT: The 'description' field MUST be under 350 characters.
 CRITICAL FORMAT: The 'location' field MUST ALWAYS be formatted strictly as "City, Country" or "Region, Country" (e.g. "Paris, France", "Amalfi Coast, Italy"). Do not omit the country.
 CRITICAL REQUIREMENT for seasonalPrices: You are curating elite, high-end properties. The seasonal prices must be grounded in reality for 5-star/luxury stays. Prices should reflect true €€€€ luxury rates (e.g. €600, €1200, €2500+ depending on the season and location).`;

@@ -178,7 +178,7 @@ export default function StayCard({
             </div>
           ) : null}
           {cardBodyCopy ? (
-            <p className="mx-1 max-w-none text-[14px] italic font-normal leading-[1.7] text-foreground/66 md:mx-1.5 md:text-[15px]">
+            <p className="mx-1 max-w-none text-[14px] italic font-normal leading-[1.7] text-foreground/66 md:mx-1.5 md:text-[15px] line-clamp-3">
               {cardBodyCopy}
             </p>
           ) : null}
@@ -191,7 +191,7 @@ export default function StayCard({
         <div className="mb-4 w-full shrink-0">
           <div className="flex items-start gap-3">
             <div className="mt-1 h-16 w-px shrink-0 bg-primary/25" />
-            <p className="max-w-[32ch] text-[15px] leading-[1.68] text-foreground/82 md:text-[16px]">
+            <p className="max-w-[32ch] text-[15px] leading-[1.68] text-foreground/82 md:text-[16px] line-clamp-3">
               {cardBodyCopy}
             </p>
           </div>
@@ -206,7 +206,7 @@ export default function StayCard({
 
     return (
       <div className="mb-4 w-full shrink-0 space-y-3">
-        <p className="max-w-none text-[15px] font-medium leading-[1.5] text-foreground/82 md:text-[16px]">
+        <p className="max-w-none text-[15px] font-medium leading-[1.5] text-foreground/82 md:text-[16px] line-clamp-3">
           {cardBodyCopy}
         </p>
         {cardSignals.length > 0 ? (

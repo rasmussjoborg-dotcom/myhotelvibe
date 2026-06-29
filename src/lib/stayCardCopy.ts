@@ -98,34 +98,7 @@ function dedupeCopySegments(parts: string[]) {
 }
 
 export function getStayCardBodyCopy(stay: Stay) {
-  const cardTeaser = cleanCardCopy(stay.cardTeaser);
-  const description = cleanSupportCopy(trimToSentence(stay.description || ''));
-  const whyFits = cleanSupportCopy(trimToSentence(stay.whyFits?.[0] || ''));
-
-  const teaserLooksGeneric =
-    !cardTeaser ||
-    /built for/i.test(stay.cardTeaser || '') ||
-    cardTeaser.length < 48;
-
-  const lead = teaserLooksGeneric ? (description || cardTeaser) : cardTeaser;
-  const support = teaserLooksGeneric
-    ? whyFits
-    : description && description.toLowerCase() !== lead.toLowerCase()
-      ? description
-      : whyFits;
-
-  const leadSentence = normalizeCopyEnd(lead);
-  const supportSentence = support ? normalizeCopyEnd(support) : '';
-  const copyParts = dedupeCopySegments([leadSentence, supportSentence]).filter(Boolean);
-
-  if (copyParts.length <= 1) return leadSentence;
-
-  const combined = copyParts.join(' ');
-  const maxLength = 145;
-  if (combined.length <= maxLength) return combined;
-
-  const remaining = maxLength - leadSentence.length - 1;
-  const trimmedSupport = trimSupportSentence(supportSentence, remaining);
-
-  return trimmedSupport ? `${leadSentence} ${trimmedSupport}` : leadSentence;
+  if (stay.cardTeaser) return stay.cardTeaser.trim();
+  if (stay.description) return stay.description.trim();
+  return '';
 }
