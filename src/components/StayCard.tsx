@@ -300,20 +300,6 @@ export default function StayCard({
 
           {renderCardBody()}
         </div>
-
-        {stay.tradeoff && !isCompact && contentMode !== 'teaserNote' && (
-        <div className="mt-auto w-full shrink-0 border-t border-border/50 pt-4 pb-2">
-          <div className="flex items-start gap-2.5 w-full">
-            <Scale className="h-[15px] w-[15px] shrink-0 text-foreground mt-[2px]" />
-            <div className="flex flex-col gap-1 w-full">
-              <span className="font-semibold text-[13px] text-foreground">The reality check</span>
-              <p className="text-[13px] font-normal italic leading-relaxed text-muted-foreground">
-                {tradeoffText}
-              </p>
-            </div>
-          </div>
-        </div>
-        )}
       </div>
     </article>
   );
