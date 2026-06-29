@@ -137,9 +137,15 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isSlideshowMode && !isHovered && galleryImages.length > 1) {
+      // Smart scaling:
+      // More images = faster transitions to show them all.
+      // Fewer images = slower transitions to avoid repetitive flashing.
+      // e.g. 2 images -> 6000ms, 5 images -> 4500ms, 10+ images -> 3000ms
+      const dynamicInterval = Math.max(3000, 7000 - (galleryImages.length * 500));
+      
       interval = setInterval(() => {
         setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
-      }, 5000);
+      }, dynamicInterval);
     }
     return () => clearInterval(interval);
   }, [isSlideshowMode, isHovered, galleryImages.length]);
@@ -315,12 +321,13 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                     src={galleryImages[currentImageIndex]}
                     alt={`${stay.imageAlt || safeName} view ${currentImageIndex + 1}`}
                     style={{ x: parallaxX, y: parallaxY }}
-                    initial={{ scale: 1.0, opacity: 0 }}
-                    animate={{ scale: 1.05, opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    initial={{ scale: 1.0, opacity: 0, zIndex: 10 }}
+                    animate={{ scale: 1.05, opacity: 1, zIndex: 10 }}
+                    exit={{ opacity: 0.99, zIndex: 0 }}
                     transition={{ 
-                      scale: { duration: 6, ease: "linear" },
-                      opacity: { duration: 0.8, ease: "easeInOut" }
+                      scale: { duration: 8, ease: "linear" },
+                      opacity: { duration: 1.2, ease: "easeInOut" },
+                      zIndex: { duration: 1.2 }
                     }}
                     className={cn(
                       "max-w-none object-cover pointer-events-none absolute",
