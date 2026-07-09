@@ -71,7 +71,24 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
     localStorage.setItem('stitch_audio_muted', String(isAudioMuted));
   }, [isAudioMuted]);
 
-  const activeAudioUrl = typeof stay.audioUrl === 'string' ? stay.audioUrl : '';
+  const countryToThemeMap: Record<string, string> = {
+    'italy': 'italy',
+    'portugal': 'portugal',
+    'switzerland': 'switzerland',
+    'spain': 'spain',
+    'greece': 'greece',
+    'morocco': 'morocco',
+    'france': 'france',
+    'united kingdom': 'uk',
+    'denmark': 'denmark',
+    'austria': 'austria',
+    'sweden': 'sweden',
+    'netherlands': 'netherlands'
+  };
+
+  const country = stay.location?.split(',').pop()?.trim().toLowerCase() || '';
+  const theme = countryToThemeMap[country];
+  const activeAudioUrl = theme ? `/audio/themes/${theme}-theme.mp3` : (typeof stay.audioUrl === 'string' ? stay.audioUrl : '');
   
   const youtubeUrls = safeYoutubeUrl ? safeYoutubeUrl.split(',').map(u => u.trim()).filter(Boolean) : [];
   const youtubeIds = youtubeUrls.map(url => url.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]+)/)?.[1]).filter(Boolean);
@@ -376,7 +393,7 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
 
                 {/* Audio Mute Button */}
                 {/* TODO: Re-enable when music is present */}
-                {false && activeAudioUrl && (
+                {activeAudioUrl && (
                   <button
                     onClick={(e) => { 
                       e.stopPropagation(); 
