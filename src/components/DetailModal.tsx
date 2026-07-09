@@ -87,8 +87,8 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
   };
 
   const country = stay.location?.split(',').pop()?.trim().toLowerCase() || '';
-  const theme = countryToThemeMap[country];
-  const activeAudioUrl = theme ? `/audio/themes/${theme}-theme.mp3` : (typeof stay.audioUrl === 'string' ? stay.audioUrl : '');
+  const countryTheme = countryToThemeMap[country];
+  const activeAudioUrl = countryTheme ? `/audio/themes/${countryTheme}-theme.mp3` : (typeof stay.audioUrl === 'string' ? stay.audioUrl : '');
   
   const youtubeUrls = safeYoutubeUrl ? safeYoutubeUrl.split(',').map(u => u.trim()).filter(Boolean) : [];
   const youtubeIds = youtubeUrls.map(url => url.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]+)/)?.[1]).filter(Boolean);
