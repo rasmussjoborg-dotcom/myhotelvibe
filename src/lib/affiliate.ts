@@ -18,7 +18,10 @@ function applyAffiliateTracking(url: string): string {
 
   // If CJ Affiliate template is provided, wrap the URL
   if (cjTemplate && cjTemplate.includes('{url}')) {
-    return cjTemplate.replace('{url}', encodeURIComponent(url));
+    // If the template expects a query parameter, encode it. Otherwise (like DLG path templates), leave it raw.
+    const isQueryParam = cjTemplate.includes('?url={url}') || cjTemplate.includes('&url={url}');
+    const processedUrl = isQueryParam ? encodeURIComponent(url) : url;
+    return cjTemplate.replace('{url}', processedUrl);
   }
 
   // If direct Booking.com AID is provided, append it
