@@ -252,13 +252,19 @@ export default function App() {
   }, [currentRank]);
 
   useEffect(() => {
-    const hasSearchStarted = Boolean(preferences.originAirport || preferences.persona);
+    // Check if actual hotel filter criteria changed
+    const personaChanged = preferences.persona !== appliedPreferences.persona;
+    const backdropChanged = preferences.backdrop !== appliedPreferences.backdrop;
+    const priceTierChanged = JSON.stringify(preferences.priceTier) !== JSON.stringify(appliedPreferences.priceTier);
+    const amenitiesChanged = JSON.stringify(preferences.amenities) !== JSON.stringify(appliedPreferences.amenities);
+    const settingsChanged = JSON.stringify(preferences.settings) !== JSON.stringify(appliedPreferences.settings);
 
-    if (!hasSearchStarted) {
-      if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
-      updateTimerRef.current = null;
+    if (!personaChanged && !backdropChanged && !priceTierChanged && !amenitiesChanged && !settingsChanged) {
+      // Only origin airport changed (or no changes) - sync immediately without unmounting stays
+      if (preferences.originAirport !== appliedPreferences.originAirport) {
+        setAppliedPreferences((prev) => ({ ...prev, originAirport: preferences.originAirport }));
+      }
       setIsUpdating(false);
-      setAppliedPreferences(preferences);
       return;
     }
 
@@ -269,7 +275,7 @@ export default function App() {
     updateTimerRef.current = window.setTimeout(() => {
       setAppliedPreferences(nextPreferences);
       setIsUpdating(false);
-    }, 520);
+    }, 280);
 
     return () => {
       if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
@@ -282,6 +288,12 @@ export default function App() {
     preferences.priceTier,
     preferences.amenities,
     preferences.settings,
+    appliedPreferences.persona,
+    appliedPreferences.backdrop,
+    appliedPreferences.priceTier,
+    appliedPreferences.amenities,
+    appliedPreferences.settings,
+    appliedPreferences.originAirport,
   ]);
 
   useEffect(() => {
@@ -328,7 +340,13 @@ export default function App() {
   }, [discoverScrollEl]);
 
   const handlePreferencesChange = (update: Partial<Preferences>) => {
-    setPreferences((prev) => ({ ...prev, ...update }));
+    setPreferences((prev) => {
+      const next = { ...prev, ...update };
+      if (Object.keys(update).length === 1 && 'originAirport' in update) {
+        setAppliedPreferences((prevApplied) => ({ ...prevApplied, originAirport: update.originAirport }));
+      }
+      return next;
+    });
   };
 
   const resetBrief = () => {
