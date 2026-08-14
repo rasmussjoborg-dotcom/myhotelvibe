@@ -4,12 +4,47 @@ export interface OriginAirport {
   name: string;
   country: string;
   flag: string;
-  region: 'Nordics' | 'UK & Ireland' | 'Western Europe' | 'Central & Southern Europe' | 'North America';
+  region: 'Nordics' | 'UK & Ireland' | 'Western Europe' | 'Central & Southern Europe' | 'North America' | 'Asia & Oceania' | 'Middle East';
   timezones: string[];
   isPopular?: boolean;
 }
 
 export const ORIGIN_AIRPORTS: OriginAirport[] = [
+  // United States & North America (Expanded for ~50% US traffic)
+  { iata: 'JFK', city: 'New York', name: 'John F. Kennedy International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/New_York'], isPopular: true },
+  { iata: 'EWR', city: 'New York / Newark', name: 'Newark Liberty International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'LGA', city: 'New York', name: 'LaGuardia Airport', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'LAX', city: 'Los Angeles', name: 'Los Angeles International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Los_Angeles'], isPopular: true },
+  { iata: 'SFO', city: 'San Francisco', name: 'San Francisco International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'ORD', city: 'Chicago', name: "O'Hare International", country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Chicago'], isPopular: true },
+  { iata: 'MIA', city: 'Miami', name: 'Miami International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'BOS', city: 'Boston', name: 'Logan International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'SEA', city: 'Seattle', name: 'Seattle-Tacoma International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'AUS', city: 'Austin', name: 'Austin-Bergstrom International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'DFW', city: 'Dallas / Fort Worth', name: 'Dallas/Fort Worth International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'DEN', city: 'Denver', name: 'Denver International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Denver'], isPopular: true },
+  { iata: 'ATL', city: 'Atlanta', name: 'Hartsfield-Jackson Atlanta', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'IAD', city: 'Washington D.C.', name: 'Washington Dulles International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [], isPopular: true },
+  { iata: 'DCA', city: 'Washington D.C.', name: 'Ronald Reagan National', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'PHX', city: 'Phoenix', name: 'Sky Harbor International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Phoenix'] },
+  { iata: 'SAN', city: 'San Diego', name: 'San Diego International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'LAS', city: 'Las Vegas', name: 'Harry Reid International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'IAH', city: 'Houston', name: 'George Bush Intercontinental', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'PHL', city: 'Philadelphia', name: 'Philadelphia International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'MSP', city: 'Minneapolis', name: 'Minneapolis-Saint Paul International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'DTW', city: 'Detroit', name: 'Detroit Metropolitan Airport', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Detroit'] },
+  { iata: 'CLT', city: 'Charlotte', name: 'Charlotte Douglas International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'BNA', city: 'Nashville', name: 'Nashville International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'SLC', city: 'Salt Lake City', name: 'Salt Lake City International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'PDX', city: 'Portland', name: 'Portland International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'TPA', city: 'Tampa', name: 'Tampa International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'MCO', city: 'Orlando', name: 'Orlando International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'FLL', city: 'Fort Lauderdale', name: 'Fort Lauderdale-Hollywood International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
+  { iata: 'HNL', city: 'Honolulu', name: 'Daniel K. Inouye International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['Pacific/Honolulu'] },
+  { iata: 'YYZ', city: 'Toronto', name: 'Pearson International', country: 'Canada', flag: '🇨🇦', region: 'North America', timezones: ['America/Toronto'], isPopular: true },
+  { iata: 'YVR', city: 'Vancouver', name: 'Vancouver International', country: 'Canada', flag: '🇨🇦', region: 'North America', timezones: ['America/Vancouver'] },
+  { iata: 'YUL', city: 'Montreal', name: 'Pierre Elliott Trudeau International', country: 'Canada', flag: '🇨🇦', region: 'North America', timezones: ['America/Montreal'] },
+
   // Nordics
   { iata: 'ARN', city: 'Stockholm', name: 'Arlanda Airport', country: 'Sweden', flag: '🇸🇪', region: 'Nordics', timezones: ['Europe/Stockholm'], isPopular: true },
   { iata: 'BMA', city: 'Stockholm', name: 'Bromma Airport', country: 'Sweden', flag: '🇸🇪', region: 'Nordics', timezones: [] },
@@ -21,14 +56,18 @@ export const ORIGIN_AIRPORTS: OriginAirport[] = [
   { iata: 'BGO', city: 'Bergen', name: 'Flesland Airport', country: 'Norway', flag: '🇳🇴', region: 'Nordics', timezones: [] },
   { iata: 'TRD', city: 'Trondheim', name: 'Værnes Airport', country: 'Norway', flag: '🇳🇴', region: 'Nordics', timezones: [] },
   { iata: 'SVG', city: 'Stavanger', name: 'Sola Airport', country: 'Norway', flag: '🇳🇴', region: 'Nordics', timezones: [] },
+  { iata: 'TOS', city: 'Tromsø', name: 'Langnes Airport', country: 'Norway', flag: '🇳🇴', region: 'Nordics', timezones: [] },
   { iata: 'HEL', city: 'Helsinki', name: 'Vantaa Airport', country: 'Finland', flag: '🇫🇮', region: 'Nordics', timezones: ['Europe/Helsinki'], isPopular: true },
+  { iata: 'KEF', city: 'Reykjavik', name: 'Keflavík International', country: 'Iceland', flag: '🇮🇸', region: 'Nordics', timezones: ['Atlantic/Reykjavik'] },
 
   // UK & Ireland
   { iata: 'LHR', city: 'London', name: 'Heathrow Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: ['Europe/London'], isPopular: true },
   { iata: 'LGW', city: 'London', name: 'Gatwick Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [], isPopular: true },
   { iata: 'STN', city: 'London', name: 'Stansted Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [] },
+  { iata: 'LCY', city: 'London', name: 'London City Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [] },
   { iata: 'MAN', city: 'Manchester', name: 'Manchester Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [], isPopular: true },
   { iata: 'EDI', city: 'Edinburgh', name: 'Edinburgh Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [] },
+  { iata: 'BHX', city: 'Birmingham', name: 'Birmingham Airport', country: 'UK', flag: '🇬🇧', region: 'UK & Ireland', timezones: [] },
   { iata: 'DUB', city: 'Dublin', name: 'Dublin Airport', country: 'Ireland', flag: '🇮🇪', region: 'UK & Ireland', timezones: ['Europe/Dublin'], isPopular: true },
 
   // Western Europe
@@ -43,25 +82,35 @@ export const ORIGIN_AIRPORTS: OriginAirport[] = [
   { iata: 'BRU', city: 'Brussels', name: 'Brussels Airport', country: 'Belgium', flag: '🇧🇪', region: 'Western Europe', timezones: ['Europe/Brussels'] },
   { iata: 'ZRH', city: 'Zurich', name: 'Zurich Airport', country: 'Switzerland', flag: '🇨🇭', region: 'Western Europe', timezones: ['Europe/Zurich'], isPopular: true },
   { iata: 'GVA', city: 'Geneva', name: 'Geneva Airport', country: 'Switzerland', flag: '🇨🇭', region: 'Western Europe', timezones: [] },
+  { iata: 'BSL', city: 'Basel', name: 'EuroAirport Basel Mulhouse', country: 'Switzerland', flag: '🇨🇭', region: 'Western Europe', timezones: [] },
   { iata: 'VIE', city: 'Vienna', name: 'Vienna International Airport', country: 'Austria', flag: '🇦🇹', region: 'Western Europe', timezones: ['Europe/Vienna'], isPopular: true },
 
   // Central & Southern Europe
-  { iata: 'MXP', city: 'Milan', name: 'Malpensa Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: ['Europe/Rome'] },
-  { iata: 'FCO', city: 'Rome', name: 'Fiumicino Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: [] },
-  { iata: 'BCN', city: 'Barcelona', name: 'El Prat Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: ['Europe/Madrid'] },
-  { iata: 'MAD', city: 'Madrid', name: 'Barajas Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: [] },
-  { iata: 'LIS', city: 'Lisbon', name: 'Humberto Delgado Airport', country: 'Portugal', flag: '🇵🇹', region: 'Central & Southern Europe', timezones: ['Europe/Lisbon'] },
+  { iata: 'MXP', city: 'Milan', name: 'Malpensa Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: ['Europe/Rome'], isPopular: true },
+  { iata: 'FCO', city: 'Rome', name: 'Fiumicino Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: [], isPopular: true },
+  { iata: 'FLR', city: 'Florence', name: 'Peretola Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'VCE', city: 'Venice', name: 'Marco Polo Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'NAP', city: 'Naples', name: 'Capodichino Airport', country: 'Italy', flag: '🇮🇹', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'BCN', city: 'Barcelona', name: 'El Prat Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: ['Europe/Madrid'], isPopular: true },
+  { iata: 'MAD', city: 'Madrid', name: 'Barajas Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: [], isPopular: true },
+  { iata: 'AGP', city: 'Malaga', name: 'Costa del Sol Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'PMI', city: 'Palma de Mallorca', name: 'Palma Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'IBZ', city: 'Ibiza', name: 'Ibiza Airport', country: 'Spain', flag: '🇪🇸', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'LIS', city: 'Lisbon', name: 'Humberto Delgado Airport', country: 'Portugal', flag: '🇵🇹', region: 'Central & Southern Europe', timezones: ['Europe/Lisbon'], isPopular: true },
+  { iata: 'OPO', city: 'Porto', name: 'Francisco Sá Carneiro Airport', country: 'Portugal', flag: '🇵🇹', region: 'Central & Southern Europe', timezones: [] },
+  { iata: 'ATH', city: 'Athens', name: 'Eleftherios Venizelos', country: 'Greece', flag: '🇬🇷', region: 'Central & Southern Europe', timezones: ['Europe/Athens'], isPopular: true },
   { iata: 'WAW', city: 'Warsaw', name: 'Chopin Airport', country: 'Poland', flag: '🇵🇱', region: 'Central & Southern Europe', timezones: ['Europe/Warsaw'] },
   { iata: 'PRG', city: 'Prague', name: 'Václav Havel Airport', country: 'Czechia', flag: '🇨🇿', region: 'Central & Southern Europe', timezones: ['Europe/Prague'] },
+  { iata: 'BUD', city: 'Budapest', name: 'Ferenc Liszt International', country: 'Hungary', flag: '🇭🇺', region: 'Central & Southern Europe', timezones: ['Europe/Budapest'] },
 
-  // North America
-  { iata: 'JFK', city: 'New York', name: 'John F. Kennedy Airport', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/New_York'], isPopular: true },
-  { iata: 'EWR', city: 'New York / Newark', name: 'Newark Liberty', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
-  { iata: 'LAX', city: 'Los Angeles', name: 'Los Angeles International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Los_Angeles'] },
-  { iata: 'ORD', city: 'Chicago', name: "O'Hare International", country: 'USA', flag: '🇺🇸', region: 'North America', timezones: ['America/Chicago'] },
-  { iata: 'BOS', city: 'Boston', name: 'Logan International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
-  { iata: 'MIA', city: 'Miami', name: 'Miami International', country: 'USA', flag: '🇺🇸', region: 'North America', timezones: [] },
-  { iata: 'YYZ', city: 'Toronto', name: 'Pearson International', country: 'Canada', flag: '🇨🇦', region: 'North America', timezones: ['America/Toronto'] }
+  // Asia & Oceania
+  { iata: 'SYD', city: 'Sydney', name: 'Kingsford Smith Airport', country: 'Australia', flag: '🇦🇺', region: 'Asia & Oceania', timezones: ['Australia/Sydney'], isPopular: true },
+  { iata: 'MEL', city: 'Melbourne', name: 'Melbourne Airport', country: 'Australia', flag: '🇦🇺', region: 'Asia & Oceania', timezones: ['Australia/Melbourne'] },
+  { iata: 'SIN', city: 'Singapore', name: 'Changi Airport', country: 'Singapore', flag: '🇸🇬', region: 'Asia & Oceania', timezones: ['Asia/Singapore'], isPopular: true },
+  { iata: 'HND', city: 'Tokyo', name: 'Haneda Airport', country: 'Japan', flag: '🇯🇵', region: 'Asia & Oceania', timezones: ['Asia/Tokyo'], isPopular: true },
+  { iata: 'NRT', city: 'Tokyo', name: 'Narita International', country: 'Japan', flag: '🇯🇵', region: 'Asia & Oceania', timezones: [] },
+  { iata: 'DXB', city: 'Dubai', name: 'Dubai International', country: 'UAE', flag: '🇦🇪', region: 'Middle East', timezones: ['Asia/Dubai'], isPopular: true },
+  { iata: 'DOH', city: 'Doha', name: 'Hamad International', country: 'Qatar', flag: '🇶🇦', region: 'Middle East', timezones: ['Asia/Qatar'] }
 ];
 
 export function detectDefaultOriginAirport(): string {
@@ -69,6 +118,30 @@ export function detectDefaultOriginAirport(): string {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const match = ORIGIN_AIRPORTS.find((a) => a.timezones.includes(tz));
     if (match) return match.iata;
+
+    // Region / timezone prefix heuristics
+    if (tz.startsWith('America/')) {
+      if (tz.includes('Los_Angeles') || tz.includes('Vancouver') || tz.includes('Tijuana')) return 'LAX';
+      if (tz.includes('Chicago') || tz.includes('Winnipeg')) return 'ORD';
+      if (tz.includes('Denver') || tz.includes('Phoenix') || tz.includes('Edmonton')) return 'DEN';
+      return 'JFK'; // Default US/Americas to JFK
+    }
+    if (tz.startsWith('Europe/')) {
+      if (tz.includes('London')) return 'LHR';
+      if (tz.includes('Paris')) return 'CDG';
+      if (tz.includes('Berlin') || tz.includes('Frankfurt')) return 'FRA';
+      if (tz.includes('Amsterdam')) return 'AMS';
+      if (tz.includes('Rome')) return 'FCO';
+      if (tz.includes('Madrid')) return 'MAD';
+      if (tz.includes('Zurich')) return 'ZRH';
+      if (tz.includes('Copenhagen')) return 'CPH';
+      if (tz.includes('Oslo')) return 'OSL';
+      if (tz.includes('Helsinki')) return 'HEL';
+      return 'ARN';
+    }
+    if (tz.startsWith('Australia/')) return 'SYD';
+    if (tz.startsWith('Asia/Tokyo')) return 'HND';
+    if (tz.startsWith('Asia/Dubai')) return 'DXB';
   } catch {
     // fallback
   }
@@ -440,25 +513,50 @@ export function getHotelLogistics(
   if (isLocalStay) {
     flightDurationText = 'Local staycation';
   } else {
-    // Adjust duration based on origin region
-    let durationMultiplier = 1.0;
-    if (origin.iata === 'LHR' || origin.iata === 'LGW') durationMultiplier = 0.85;
-    if (origin.iata === 'CPH') durationMultiplier = 0.95;
-    if (origin.iata === 'AMS' || origin.iata === 'FRA' || origin.iata === 'CDG') durationMultiplier = 0.8;
-    if (origin.iata === 'JFK') durationMultiplier = 2.4;
+    let totalHours = matchedRule.baseFlightHoursFromARN;
 
-    const totalHours = Math.max(0.8, matchedRule.baseFlightHoursFromARN * durationMultiplier);
+    if (origin.region === 'North America') {
+      // Transatlantic flights to Europe
+      if (['JFK', 'EWR', 'BOS', 'PHL', 'IAD', 'MIA', 'YUL', 'YYZ'].includes(origin.iata)) {
+        totalHours = 7.5 + (matchedRule.baseFlightHoursFromARN - 2.5) * 0.4;
+      } else if (['ORD', 'DTW', 'MSP', 'ATL', 'CLT', 'BNA', 'DFW', 'IAH', 'AUS'].includes(origin.iata)) {
+        totalHours = 9.0 + (matchedRule.baseFlightHoursFromARN - 2.5) * 0.4;
+      } else {
+        // West Coast & Mountain (LAX, SFO, SEA, SAN, PDX, PHX, DEN, SLC, YVR)
+        totalHours = 11.0 + (matchedRule.baseFlightHoursFromARN - 2.5) * 0.4;
+      }
+    } else if (origin.region === 'Asia & Oceania') {
+      totalHours = 13.5 + matchedRule.baseFlightHoursFromARN * 0.3;
+    } else if (origin.region === 'Middle East') {
+      totalHours = 5.5 + (matchedRule.baseFlightHoursFromARN - 2.5) * 0.5;
+    } else {
+      // European origins
+      let durationMultiplier = 1.0;
+      if (['LHR', 'LGW', 'STN', 'LCY', 'MAN', 'EDI', 'DUB'].includes(origin.iata)) durationMultiplier = 0.85;
+      if (['CPH', 'BLL'].includes(origin.iata)) durationMultiplier = 0.95;
+      if (['AMS', 'FRA', 'CDG', 'BRU', 'BER', 'MUC', 'HAM', 'DUS'].includes(origin.iata)) durationMultiplier = 0.8;
+      if (['MXP', 'FCO', 'BCN', 'MAD', 'LIS', 'ZRH', 'VIE', 'ATH'].includes(origin.iata)) durationMultiplier = 0.75;
+      totalHours = Math.max(0.8, matchedRule.baseFlightHoursFromARN * durationMultiplier);
+    }
+
     const hours = Math.floor(totalHours);
-    const mins = Math.round(((totalHours - hours) * 60) / 5) * 5; // round to nearest 5 mins
+    const mins = Math.round(((totalHours - hours) * 60) / 5) * 5;
     flightDurationText = mins > 0 ? `${hours}h ${mins}m` : `${hours}h`;
   }
+
+  const isMajorEuropeanHub = ['LHR', 'CDG', 'FCO', 'MAD', 'BCN', 'ZRH', 'AMS', 'FRA', 'DUB', 'LIS', 'MXP', 'MUC', 'VIE', 'ATH', 'CPH', 'ARN'].includes(matchedRule.airport.iata);
+  const isDirect = isLocalStay
+    ? true
+    : origin.region === 'North America'
+      ? isMajorEuropeanHub && ['JFK', 'EWR', 'BOS', 'ORD', 'LAX', 'SFO', 'IAD', 'ATL', 'MIA', 'YYZ'].includes(origin.iata)
+      : true;
 
   return {
     originIata: origin.iata,
     originCity: origin.city,
     destinationAirport: matchedRule.airport,
     flightDurationText,
-    isDirect: isLocalStay ? true : origin.region !== 'North America', // Most intra-Europe holidays are direct
+    isDirect,
     isLocalStay,
     transferTimeMinutes: matchedRule.defaultTransferMinutes,
     transferDescription: isLocalStay
