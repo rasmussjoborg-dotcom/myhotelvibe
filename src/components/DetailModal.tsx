@@ -1038,20 +1038,18 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
             </Button>
             {logistics.isLocalStay ? (
               <Button 
-                variant="outline"
                 type="button"
                 onClick={() => {
                   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(safeName + ' ' + safeLocation)}`;
                   window.open(mapsUrl, '_blank', 'noopener,noreferrer');
                 }}
-                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] border-primary/30 text-primary hover:bg-primary/5 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
               >
                 <MapPin className="w-4 h-4" />
                 <span className="truncate">Open in Maps</span>
               </Button>
             ) : (
               <Button 
-                variant="outline"
                 type="button"
                 onClick={() => {
                   const flightUrl = buildKayakFlightUrl(
@@ -1062,7 +1060,7 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                   );
                   window.open(flightUrl, '_blank', 'noopener,noreferrer');
                 }}
-                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] border-primary/30 text-primary hover:bg-primary/5 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer"
               >
                 <Plane className="w-4 h-4" />
                 <span className="truncate">
