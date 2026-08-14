@@ -105,7 +105,6 @@ export default async function handler(req, res) {
     available: true,
     returnPrice,
     currency: 'EUR',
-    isDirect: true,
     source: 'estimate'
   }));
 }

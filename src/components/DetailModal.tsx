@@ -632,7 +632,11 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                     </h4>
                   </div>
                   <span className="text-[11.5px] font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">
-                    {logistics.isLocalStay ? 'Local Staycation' : logistics.isDirect ? 'Direct Flight' : 'Connecting Flight'}
+                    {logistics.isLocalStay 
+                      ? 'Local Staycation' 
+                      : flightRate?.source === 'duffel'
+                        ? (flightRate.isDirect ? 'Direct Flight' : '1+ Stops')
+                        : 'Flight & Transfer Route'}
                   </span>
                 </div>
 
@@ -694,12 +698,14 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                           </div>
                         </div>
                         <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium">
-                          <span>{logistics.isDirect ? 'Non-stop' : '1 layover'}</span>
-                          {flightRate?.returnPrice && (
+                          {flightRate?.returnPrice ? (
                             <>
-                              <span>•</span>
                               <span className="text-primary font-semibold">from €{flightRate.returnPrice} return</span>
+                              <span>•</span>
+                              <span>via KAYAK</span>
                             </>
+                          ) : (
+                            <span>Search flights on KAYAK</span>
                           )}
                         </div>
                       </div>
