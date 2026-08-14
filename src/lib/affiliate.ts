@@ -49,8 +49,16 @@ const DEFAULT_CJ_TEMPLATE = 'https://www.dpbolvw.net/links/101775158/type/dlg/si
 
 function applyAffiliateTracking(url: string, sid: string = 'myhotelvibe'): string {
   const kayakTemplate = import.meta.env.VITE_KAYAK_CJ_TEMPLATE;
-  const cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE || DEFAULT_CJ_TEMPLATE;
+  let cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE || DEFAULT_CJ_TEMPLATE;
   const directAid = import.meta.env.VITE_BOOKING_AID;
+
+  // Auto-correct any legacy Company ID to Property ID 101775158
+  if (cjTemplate.includes('7984144')) {
+    cjTemplate = cjTemplate.replace('7984144', '101775158');
+  }
+  if (cjTemplate.includes('anrdoezrs.net')) {
+    cjTemplate = cjTemplate.replace('anrdoezrs.net', 'dpbolvw.net');
+  }
 
   // 1. KAYAK specific CJ link template
   if (url.includes('kayak.com') && kayakTemplate && kayakTemplate.includes('{url}')) {
