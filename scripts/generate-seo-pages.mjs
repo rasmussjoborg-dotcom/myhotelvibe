@@ -42,7 +42,7 @@ dotenv.config({ path: path.join(projectRoot, '.env.local'), override: true, quie
 const siteUrl = (process.env.VITE_SITE_URL || process.env.APP_URL || 'https://myhotelvibe.com').replace(/\/+$/, '');
 const siteName = 'My Hotel Vibe';
 const defaultDescription =
-  'Editorial hotel discovery for travelers choosing by mood, setting, and the kind of stay they want to remember.';
+  'Editorial hotel discovery by vibe, setting & travel logistics. Match your mood with handpicked stays, real-time room rates, direct flight routes, and transfer times.';
 const backdropOptions = [
   'Pristine Shores',
   'Iconic Cities',

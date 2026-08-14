@@ -12,19 +12,19 @@ const principles = [
   {
     title: 'What This Is',
     body:
-      'My Hotel Vibe is an independent hotel discovery project built and curated by one person. The goal is to make hotel search feel more editorial, more specific, and a little less exhausting.',
+      'My Hotel Vibe is an independent travel discovery project. The goal is to match how you want to feel with where you should stay—combining editorial taste, handpicked stays, flight times from your home airport, and real-time room availability.',
     icon: Sparkles,
   },
   {
     title: 'How It Works',
     body:
-      'Hotels are grouped through structured tags, visual curation, editorial notes, and vibe-based filters. The language is intentionally more emotional than a traditional booking site, but still meant to help narrow the field quickly.',
+      'Set your departure airport, travel dates, budget, and vibe. We calculate real flight durations, ground transfer times, and check live room availability across vetted boutique hotels and iconic resorts.',
     icon: BookOpen,
   },
   {
     title: 'What It Is Not',
     body:
-      'This is not a booking platform, a travel agency, or a guarantee of price, availability, amenities, or hotel policies. Final details should always be verified with the hotel or booking provider before you book.',
+      'This is an editorial discovery guide, not a direct booking platform or airline. We surface real-time rates and route estimates, then deep-link you directly to Booking.com and KAYAK for seamless reservations.',
     icon: CircleHelp,
   },
 ];
