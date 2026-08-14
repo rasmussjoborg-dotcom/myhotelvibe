@@ -145,7 +145,7 @@ export function detectDefaultOriginAirport(): string {
   } catch {
     // fallback
   }
-  return 'ARN'; // Default to Stockholm
+  return 'LHR'; // Default fallback to London Heathrow
 }
 
 export function searchOriginAirports(query: string): OriginAirport[] {
@@ -485,7 +485,7 @@ const DESTINATION_AIRPORT_RULES: Array<{
 
 export function getHotelLogistics(
   hotel: { name: string; location: string; region?: string; surroundings?: string },
-  originIata: string = 'ARN'
+  originIata: string = 'LHR'
 ): HotelLogistics {
   const fullText = `${hotel.name} ${hotel.location} ${hotel.region || ''} ${hotel.surroundings || ''}`;
   

@@ -683,7 +683,7 @@ export default function App() {
                 isFavorite={favorites.includes(activeStay.id)}
                 onClose={closeActiveStay}
                 onToggleFavorite={(id) => handleToggleFavorite('internal', id)}
-                originAirport={appliedPreferences?.originAirport || 'ARN'}
+                originAirport={appliedPreferences?.originAirport || 'LHR'}
               />
             </HotelDetailBoundary>
           </Suspense>

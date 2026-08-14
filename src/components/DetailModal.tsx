@@ -36,7 +36,7 @@ interface DetailModalProps {
   originAirport?: string;
 }
 
-export default function DetailModal({ stay, allStays, isFavorite, onClose, onToggleFavorite, originAirport = 'ARN' }: DetailModalProps) {
+export default function DetailModal({ stay, allStays, isFavorite, onClose, onToggleFavorite, originAirport = 'LHR' }: DetailModalProps) {
   const theme = useTheme();
   const initialDates = useMemo(() => getRecommendedFlightDates('weekend'), []);
   const [departureDate, setDepartureDate] = useState<string>(initialDates.departureDate);

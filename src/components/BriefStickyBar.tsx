@@ -727,7 +727,7 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
     preferences.priceTier || 
     currentRank !== 'default'
   );
-  const currentOrigin = getAirportByIata(preferences.originAirport || 'ARN');
+  const currentOrigin = getAirportByIata(preferences.originAirport || 'LHR');
   const originLabel = currentOrigin ? `${currentOrigin.city} (${currentOrigin.iata})` : 'Select origin';
   const priceTier = preferences.priceTier && preferences.priceTier.length > 0 && !preferences.priceTier.includes('All tiers') 
     ? preferences.priceTier.map(t => t.split(' (')[0]).join(', ') 
@@ -886,7 +886,7 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
               </FilterMenu>
 
               <OriginAirportCombobox
-                value={preferences.originAirport || 'ARN'}
+                value={preferences.originAirport || 'LHR'}
                 onSelect={updateOrigin}
                 compact={isStuck}
               />

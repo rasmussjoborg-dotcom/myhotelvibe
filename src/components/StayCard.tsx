@@ -125,7 +125,7 @@ export default function StayCard({
   className,
   hideFavoriteButton = false,
   contentMode = 'teaserChips',
-  originAirport = 'ARN',
+  originAirport = 'LHR',
 }: StayCardProps) {
   const shouldFeature = featureLayout;
   const isCompact = compact || imageShape === 'tall';
