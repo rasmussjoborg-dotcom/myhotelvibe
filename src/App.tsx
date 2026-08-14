@@ -596,7 +596,7 @@ export default function App() {
                                 <HomeCollectionHub stays={allStays} />
                               ) : null}
                               <footer className="w-full pt-3 md:pt-4">
-                                <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 border-t border-border/70 bg-white px-5 pb-8 pt-4 text-left md:px-10 md:pb-28 md:pt-4">
+                                <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 border-t border-border/70 bg-transparent px-5 pb-8 pt-4 text-left md:px-10 md:pb-28 md:pt-4">
                                   <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] font-medium text-foreground/80">
                                     <button
                                       type="button"
