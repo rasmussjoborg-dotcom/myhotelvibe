@@ -45,15 +45,19 @@ export function buildKayakFlightUrl(
   return applyAffiliateTracking(rawUrl, 'flights');
 }
 
-function applyAffiliateTracking(url: string, sid: string = 'simployer'): string {
+const DEFAULT_CJ_TEMPLATE = 'https://www.anrdoezrs.net/links/7984144/type/dlg/sid/myhotelvibe/{url}';
+
+function applyAffiliateTracking(url: string, sid: string = 'myhotelvibe'): string {
   const kayakTemplate = import.meta.env.VITE_KAYAK_CJ_TEMPLATE;
-  const cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE; // e.g. "https://www.anrdoezrs.net/links/7984144/type/dlg/sid/simployer/{url}"
-  const directAid = import.meta.env.VITE_BOOKING_AID; // e.g. "123456"
+  const cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE || DEFAULT_CJ_TEMPLATE;
+  const directAid = import.meta.env.VITE_BOOKING_AID;
 
   // 1. KAYAK specific CJ link template
   if (url.includes('kayak.com') && kayakTemplate && kayakTemplate.includes('{url}')) {
     let customKayak = kayakTemplate;
-    if (sid && kayakTemplate.includes('/sid/simployer/')) {
+    if (sid && kayakTemplate.includes('/sid/myhotelvibe/')) {
+      customKayak = kayakTemplate.replace('/sid/myhotelvibe/', `/sid/${sid}/`);
+    } else if (sid && kayakTemplate.includes('/sid/simployer/')) {
       customKayak = kayakTemplate.replace('/sid/simployer/', `/sid/${sid}/`);
     }
     const isQueryParam = customKayak.includes('?url={url}') || customKayak.includes('&url={url}');
@@ -63,7 +67,9 @@ function applyAffiliateTracking(url: string, sid: string = 'simployer'): string 
   // 2. Generic / Booking CJ Affiliate template
   if (cjTemplate && cjTemplate.includes('{url}')) {
     let customizedTemplate = cjTemplate;
-    if (sid !== 'simployer' && cjTemplate.includes('/sid/simployer/')) {
+    if (sid !== 'myhotelvibe' && cjTemplate.includes('/sid/myhotelvibe/')) {
+      customizedTemplate = cjTemplate.replace('/sid/myhotelvibe/', `/sid/${sid}/`);
+    } else if (sid !== 'simployer' && cjTemplate.includes('/sid/simployer/')) {
       customizedTemplate = cjTemplate.replace('/sid/simployer/', `/sid/${sid}/`);
     }
 
@@ -72,7 +78,7 @@ function applyAffiliateTracking(url: string, sid: string = 'simployer'): string 
     return customizedTemplate.replace('{url}', processedUrl);
   }
 
-  // 3. Direct Booking.com AID
+  // 3. Direct Booking.com AID fallback
   if (directAid && url.includes('booking.com')) {
     try {
       const urlObj = new URL(url);
