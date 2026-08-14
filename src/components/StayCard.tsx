@@ -4,11 +4,12 @@
  */
 
 import React from 'react';
-import { Asterisk, Heart, MapPin, Scale } from 'lucide-react';
+import { Asterisk, Heart, MapPin, Plane, Scale, Car } from 'lucide-react';
 import { Stay, StayCardContentMode } from '../types';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getStayCardBodyCopy } from '../lib/stayCardCopy';
+import { getHotelLogistics } from '../lib/airports';
 
 function normalizeTradeoff(text: string | null | undefined) {
   if (!text) return '';
@@ -110,6 +111,7 @@ interface StayCardProps {
   className?: string;
   hideFavoriteButton?: boolean;
   contentMode?: StayCardContentMode;
+  originAirport?: string;
 }
 
 export default function StayCard({
@@ -123,9 +125,11 @@ export default function StayCard({
   className,
   hideFavoriteButton = false,
   contentMode = 'teaserChips',
+  originAirport = 'ARN',
 }: StayCardProps) {
   const shouldFeature = featureLayout;
   const isCompact = compact || imageShape === 'tall';
+  const logistics = getHotelLogistics(stay, originAirport);
 
   const getThumbnailUrl = (url: string) => {
     if (!url) return url;
@@ -166,10 +170,10 @@ export default function StayCard({
       return (
         <div className="mb-4 w-full shrink-0">
           {visibleNotes.length > 0 ? (
-            <div className={cn('text-[12px] text-primary/78 md:text-[13px]', cardBodyCopy ? 'mb-4' : 'mt-1')}>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className={cn('text-[12px] text-primary/78 md:text-[13px]', cardBodyCopy ? 'mb-4.5 md:mb-5' : 'mt-1')}>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2.5">
                 {visibleNotes.map((note) => (
-                  <span key={note} className="inline-flex items-center gap-1.5 leading-none">
+                  <span key={note} className="inline-flex items-center gap-1.5 leading-snug">
                     <Asterisk className="h-3.5 w-3.5 shrink-0 text-primary/60" />
                     <span className="font-medium tracking-[0.01em]">{note}</span>
                   </span>
@@ -178,7 +182,7 @@ export default function StayCard({
             </div>
           ) : null}
           {cardBodyCopy ? (
-            <p className="mx-1 max-w-none text-[14px] italic font-normal leading-[1.7] text-foreground/66 md:mx-1.5 md:text-[15px]">
+            <p className="mx-1 max-w-none text-[14px] italic font-normal leading-[1.75] text-foreground/66 md:mx-1.5 md:text-[15px]">
               {cardBodyCopy}
             </p>
           ) : null}
@@ -282,7 +286,7 @@ export default function StayCard({
       <div className="flex grow flex-col gap-4">
         <div className="flex-1">
 
-          <div className="flex flex-wrap gap-2 mb-2">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
             {isAdultsOnly && (
               <div className="w-fit rounded-full bg-accent/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-accent">
                 Adults Only
@@ -291,6 +295,22 @@ export default function StayCard({
             {stay.priceTier && (
               <div className="w-fit rounded-full bg-muted/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary transition-colors duration-200 md:group-hover:bg-primary md:group-hover:text-primary-foreground">
                 {stay.priceTier.split(' (')[0]}
+              </div>
+            )}
+            {logistics.isLocalStay ? (
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-muted/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary transition-colors duration-200 md:group-hover:bg-primary md:group-hover:text-primary-foreground">
+                <Car className="h-3 w-3 shrink-0" />
+                <span>Local staycation</span>
+                <span className="opacity-50">•</span>
+                <span>{logistics.transferTimeMinutes}m</span>
+              </div>
+            ) : (
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-muted/40 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary transition-colors duration-200 md:group-hover:bg-primary md:group-hover:text-primary-foreground">
+                <Plane className="h-3 w-3 shrink-0" />
+                <span>~{logistics.flightDurationText} from {logistics.originIata}</span>
+                <span className="opacity-50">•</span>
+                <Car className="h-3 w-3 shrink-0" />
+                <span>{logistics.transferTimeMinutes}m</span>
               </div>
             )}
           </div>

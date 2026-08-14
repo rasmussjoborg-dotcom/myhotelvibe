@@ -22,3 +22,14 @@ scripts/check_db.ts
 scripts/get_countries.ts
 scripts/recover_images.ts
 scripts/upscale-retry.mjs
+test_db.ts
+test-render.js
+test_suno.js
+update_mcp.cjs
+upscale-progress-bak.json
+get_countries.ts
+hotels_clean.json
+scripts/social/
+scripts/seed_10_hotels.ts
+scripts/test_generation.ts
+temp/

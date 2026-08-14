@@ -23,6 +23,7 @@ import { applySeo, buildCollectionSeo, buildHomeSeo, buildHotelSeo } from './lib
 import { buildHotelPath, getHotelSlug } from './lib/site';
 import { getCollectionRouteFromPath, matchesCollectionRoute } from './lib/collections';
 import { isLocalAdminEnabled } from './lib/runtime';
+import { detectDefaultOriginAirport } from './lib/airports';
 
 import React from 'react';
 
@@ -81,6 +82,7 @@ class AdminErrorBoundary extends React.Component<
 
 const DEFAULT_PREFERENCES: Preferences = {
   persona: '',
+  originAirport: detectDefaultOriginAirport(),
   backdrop: '',
   priceTier: ['All tiers'],
   amenities: [],
@@ -119,6 +121,7 @@ const loadPreferences = () => {
       amenities: Array.isArray(parsed.amenities) ? (parsed.amenities as any) : [],
       settings: Array.isArray(parsed.settings) ? (parsed.settings as any) : [],
       persona: typeof parsed.persona === 'string' ? parsed.persona : '',
+      originAirport: typeof parsed.originAirport === 'string' && parsed.originAirport ? parsed.originAirport : detectDefaultOriginAirport(),
       backdrop: typeof parsed.backdrop === 'string' ? parsed.backdrop : '',
       priceTier: Array.isArray(parsed.priceTier) ? parsed.priceTier : ['All tiers'],
     };
@@ -249,7 +252,7 @@ export default function App() {
   }, [currentRank]);
 
   useEffect(() => {
-    const hasSearchStarted = Boolean(preferences.backdrop && preferences.persona);
+    const hasSearchStarted = Boolean(preferences.originAirport || preferences.persona);
 
     if (!hasSearchStarted) {
       if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
@@ -274,6 +277,7 @@ export default function App() {
     };
   }, [
     preferences.persona,
+    preferences.originAirport,
     preferences.backdrop,
     preferences.priceTier,
     preferences.amenities,
@@ -679,6 +683,7 @@ export default function App() {
                 isFavorite={favorites.includes(activeStay.id)}
                 onClose={closeActiveStay}
                 onToggleFavorite={(id) => handleToggleFavorite('internal', id)}
+                originAirport={appliedPreferences?.originAirport || 'ARN'}
               />
             </HotelDetailBoundary>
           </Suspense>

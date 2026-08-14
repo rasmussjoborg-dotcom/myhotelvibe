@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { X, Heart, MapPin, Check, TriangleAlert, Sparkles, Scale, Flame, Calendar, Waves, Utensils, UtensilsCrossed, Wine, Coffee, Dog, TreePine, Mountain, Trees, ChevronLeft, ChevronRight, Plane, Clock, CalendarDays, MessageSquareText, Wallet, ArrowUpRight, Play, Pause, Volume2, VolumeX, MessageSquareQuote, List, Map, Images, Eye, Gem, Compass, Link2, Building2 } from 'lucide-react';
+import { X, Heart, MapPin, Check, TriangleAlert, Sparkles, Scale, Flame, Calendar, Waves, Utensils, UtensilsCrossed, Wine, Coffee, Dog, TreePine, Mountain, Trees, ChevronLeft, ChevronRight, Plane, Clock, CalendarDays, MessageSquareText, Wallet, ArrowUpRight, Play, Pause, Volume2, VolumeX, MessageSquareQuote, List, Map, Images, Eye, Gem, Compass, Link2, Building2, Sun, Car, CalendarRange } from 'lucide-react';
 import { Stay } from '../types';
 import { ALL_STAY_IMAGES } from '../data';
 import { Badge } from '@/components/ui/badge';
@@ -21,7 +21,10 @@ import { calculatePriceMultiplier } from "../lib/pricingEngine";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { getRelatedHotels, getStayCollectionLinks } from '../lib/collections';
 import { buildHotelPath, getHotelSlug } from '../lib/site';
-import { buildAffiliateUrl } from '../lib/affiliate';
+import { buildAffiliateUrl, buildKayakFlightUrl } from '../lib/affiliate';
+import { getHotelLogistics, getRecommendedFlightDates } from '../lib/airports';
+import { useHotelRates } from '../lib/useHotelRates';
+import { useFlightRates } from '../lib/useFlightRates';
 
 
 interface DetailModalProps {
@@ -30,10 +33,52 @@ interface DetailModalProps {
   isFavorite: boolean;
   onClose: () => void;
   onToggleFavorite: (id: string) => void;
+  originAirport?: string;
 }
 
-export default function DetailModal({ stay, allStays, isFavorite, onClose, onToggleFavorite }: DetailModalProps) {
+export default function DetailModal({ stay, allStays, isFavorite, onClose, onToggleFavorite, originAirport = 'ARN' }: DetailModalProps) {
   const theme = useTheme();
+  const initialDates = useMemo(() => getRecommendedFlightDates('weekend'), []);
+  const [departureDate, setDepartureDate] = useState<string>(initialDates.departureDate);
+  const [returnDate, setReturnDate] = useState<string>(initialDates.returnDate);
+  const [tripDuration, setTripDuration] = useState<'weekend' | 'week' | 'custom'>('weekend');
+
+  const logistics = useMemo(() => getHotelLogistics(stay, originAirport), [stay, originAirport]);
+  const { rateInfo, isLoading: isRatesLoading } = useHotelRates(
+    typeof stay.name === 'string' ? stay.name : 'Hotel',
+    typeof stay.location === 'string' ? stay.location : '',
+    stay.priceTier || 'BOUTIQUE',
+    departureDate,
+    returnDate
+  );
+  const { flightRate, isLoading: isFlightLoading } = useFlightRates(
+    logistics.originIata,
+    logistics.destinationAirport.iata,
+    departureDate,
+    returnDate,
+    logistics.isLocalStay
+  );
+
+  const handleSelectDuration = (duration: 'weekend' | 'week') => {
+    setTripDuration(duration);
+    const recommended = getRecommendedFlightDates(duration);
+    setDepartureDate(recommended.departureDate);
+    setReturnDate(recommended.returnDate);
+  };
+
+  const handleCustomDateChange = (type: 'departure' | 'return', dateVal: string) => {
+    setTripDuration('custom');
+    if (type === 'departure') {
+      setDepartureDate(dateVal);
+      if (dateVal >= returnDate) {
+        const next = new Date(dateVal);
+        next.setDate(next.getDate() + 3);
+        setReturnDate(next.toISOString().split('T')[0]);
+      }
+    } else {
+      setReturnDate(dateVal);
+    }
+  };
   const safeName = typeof stay.name === 'string' ? stay.name : 'Hotel';
   const safeLocation = typeof stay.location === 'string' ? stay.location : 'Unknown location';
   const safeRegion = typeof stay.region === 'string' ? stay.region : 'the area';
@@ -573,7 +618,200 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
 
 
 
-              {/* Good to know */}
+              {/* Getting There & Flights / Location Standalone Section */}
+              <div className="w-full shrink-0 transition-all duration-300">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    {logistics.isLocalStay ? (
+                      <Car className="h-5 w-5 shrink-0 text-primary" />
+                    ) : (
+                      <Plane className="h-5 w-5 shrink-0 text-primary" />
+                    )}
+                    <h4 className="font-sans font-semibold text-[18px] text-foreground">
+                      {logistics.isLocalStay ? 'Getting There & Location' : 'Getting There & Flights'}
+                    </h4>
+                  </div>
+                  <span className="text-[11.5px] font-bold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary">
+                    {logistics.isLocalStay ? 'Local Staycation' : logistics.isDirect ? 'Direct Flight' : 'Connecting Flight'}
+                  </span>
+                </div>
+
+                <div className="flex flex-col bg-white rounded-2xl border border-primary/30 p-5 md:p-6 gap-4 relative shadow-xs">
+                  {/* Route Overview */}
+                  {logistics.isLocalStay ? (
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-border/60">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0">
+                          {logistics.originIata}
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[14px] font-bold text-foreground">{logistics.originCity}</span>
+                          <span className="text-[12px] text-muted-foreground">Your starting point</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center px-4">
+                        <span className="text-[12.5px] font-bold text-primary flex items-center gap-1">
+                          <span>~{logistics.transferTimeMinutes}m drive / transit</span>
+                        </span>
+                        <div className="w-28 md:w-36 h-px bg-primary/30 relative my-2 flex items-center justify-center">
+                          <div className="bg-white px-1.5 flex items-center justify-center z-10">
+                            <Car className="w-3.5 h-3.5 text-primary" />
+                          </div>
+                        </div>
+                        <span className="text-[11px] text-muted-foreground">In your home region</span>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0">
+                          <MapPin className="w-4 h-4" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[14px] font-bold text-foreground">{safeName}</span>
+                          <span className="text-[12px] text-muted-foreground truncate max-w-[180px]">{safeLocation}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-border/60">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0">
+                          {logistics.originIata}
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[14px] font-bold text-foreground">{logistics.originCity}</span>
+                          <span className="text-[12px] text-muted-foreground">Departure airport</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center px-4">
+                        <span className="text-[12.5px] font-bold text-primary flex items-center gap-1">
+                          <span>~{logistics.flightDurationText} flight</span>
+                        </span>
+                        <div className="w-28 md:w-36 h-px bg-primary/30 relative my-2 flex items-center justify-center">
+                          <div className="bg-white px-1.5 flex items-center justify-center z-10">
+                            <Plane className="w-3.5 h-3.5 text-primary rotate-45" />
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground font-medium">
+                          <span>{logistics.isDirect ? 'Non-stop' : '1 layover'}</span>
+                          {flightRate?.returnPrice && (
+                            <>
+                              <span>•</span>
+                              <span className="text-primary font-semibold">from €{flightRate.returnPrice} return</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm shrink-0">
+                          {logistics.destinationAirport.iata}
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="text-[14px] font-bold text-foreground">{logistics.destinationAirport.city}</span>
+                          <span className="text-[12px] text-muted-foreground truncate max-w-[180px]">{logistics.destinationAirport.name}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Transfer & Seasonality Rows */}
+                  <div className="flex flex-col gap-2.5 text-[13px] text-muted-foreground pt-1">
+                    <div className="flex items-start gap-2.5">
+                      <Car className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span>Transfer: <strong className="text-foreground font-semibold">{logistics.transferDescription}</strong></span>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <Sun className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <span>Best time: <strong className="text-foreground font-semibold">{logistics.seasonality.bestMonths}</strong></span>
+                    </div>
+                  </div>
+
+                  {/* Pre-fill Dates Duration & Custom Picker */}
+                  <div className="flex flex-col gap-2.5 pt-3 border-t border-border/50 bg-muted/20 -mx-5 -mb-5 md:-mx-6 md:-mb-6 p-4 md:px-6 rounded-b-2xl">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                        Select travel dates:
+                      </span>
+                      {/* Interactive Date Inputs */}
+                      <div className="flex items-center gap-1.5 bg-white border border-primary/30 rounded-xl px-2.5 py-1 shadow-2xs">
+                        <Calendar className="w-3.5 h-3.5 text-primary shrink-0" />
+                        <div className="flex items-center gap-1 text-[12px] font-semibold text-foreground">
+                          <input
+                            type="date"
+                            value={departureDate}
+                            min={new Date().toISOString().split('T')[0]}
+                            onChange={(e) => handleCustomDateChange('departure', e.target.value)}
+                            className="bg-transparent text-foreground focus:outline-none cursor-pointer font-sans"
+                            title="Check-in / Departure date"
+                          />
+                          <span className="text-muted-foreground font-normal">➔</span>
+                          <input
+                            type="date"
+                            value={returnDate}
+                            min={departureDate}
+                            onChange={(e) => handleCustomDateChange('return', e.target.value)}
+                            className="bg-transparent text-foreground focus:outline-none cursor-pointer font-sans"
+                            title="Check-out / Return date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-0.5">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => handleSelectDuration('weekend')}
+                          className={cn(
+                            "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-semibold transition-all border cursor-pointer",
+                            tripDuration === 'weekend' 
+                              ? "bg-primary text-primary-foreground border-primary shadow-xs" 
+                              : "bg-white text-foreground border-border/80 hover:border-primary/40"
+                          )}
+                        >
+                          <CalendarRange className="w-3.5 h-3.5 shrink-0" />
+                          <span>3–4 Day Weekend</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSelectDuration('week')}
+                          className={cn(
+                            "inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[12px] font-semibold transition-all border cursor-pointer",
+                            tripDuration === 'week' 
+                              ? "bg-primary text-primary-foreground border-primary shadow-xs" 
+                              : "bg-white text-foreground border-border/80 hover:border-primary/40"
+                          )}
+                        >
+                          <Calendar className="w-3.5 h-3.5 shrink-0" />
+                          <span>7-Day Vacation</span>
+                        </button>
+                      </div>
+
+                      {/* Live Rate / Availability Badge */}
+                      {isRatesLoading ? (
+                        <span className="text-[11.5px] text-muted-foreground animate-pulse flex items-center gap-1.5 font-medium">
+                          <span className="w-2 h-2 rounded-full bg-primary/40 animate-ping" /> Checking live rates...
+                        </span>
+                      ) : rateInfo?.available ? (
+                        <span className="text-[11.5px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-full flex items-center gap-1.5 shrink-0">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                          <span>Rooms from <strong>€{rateInfo.nightlyRate}</strong>/nt</span>
+                          <span className="text-emerald-700/80 font-normal">({rateInfo.nights}n total: €{rateInfo.totalPrice})</span>
+                        </span>
+                      ) : (
+                        <span className="text-[11.5px] font-semibold text-rose-800 bg-rose-50 border border-rose-200/80 px-2.5 py-1 rounded-full flex items-center gap-1.5 shrink-0">
+                          <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0" />
+                          <span>Sold out for selected dates</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* The Details */}
               <div className="w-full shrink-0 transition-all duration-300">
                 <div className="flex items-center gap-2 mb-4">
                   <List className="h-5 w-5 shrink-0 text-primary" />
@@ -606,25 +844,6 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
                         <span className="text-[14px] font-bold text-foreground leading-none mb-1.5">The surroundings</span>
                         <span className="text-[13px] text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
                           {safeSurroundings || `Located in the heart of ${safeRegion}. It offers a great balance of seclusion while still being close enough to local restaurants and attractions.`}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Getting there */}
-                  <div className="group flex flex-col gap-1.5 p-5 py-4 transition-colors hover:bg-background">
-                    <div className="flex items-start gap-4">
-                      <div className="mt-0.5 w-6 h-6 flex items-center justify-center shrink-0 text-primary">
-                        <Plane className="w-4 h-4" />
-                      </div>
-                      <div className="flex flex-col pt-0.5">
-                        <span className="text-[14px] font-bold text-foreground leading-none mb-1.5">Getting there</span>
-                        <span className="text-[13px] text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
-                          {safeDistanceValue ? (
-                            `Approximately ${safeDistanceValue} km from the nearest major airport. ${safeDistanceValue > 50 ? 'A rental car or pre-booked transfer is highly recommended.' : 'A short taxi ride or transfer is usually sufficient.'}`
-                          ) : (
-                            "Contact the hotel's concierge prior to arrival to arrange a seamless private transfer from the nearest transit hub."
-                          )}
                         </span>
                       </div>
                     </div>
@@ -803,21 +1022,61 @@ export default function DetailModal({ stay, allStays, isFavorite, onClose, onTog
         </div>
 
         {/* Sticky CTA Bar */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/97 backdrop-blur-md border-t border-border/60 px-4 pt-1 pb-[calc(env(safe-area-inset-bottom)*0.05)] md:px-5 md:py-4 z-20 shadow-[0_-8px_30px_rgba(0,0,0,0.04)] flex flex-col items-center">
-          <Button 
-            onClick={() => {
-              const targetUrl = buildAffiliateUrl(safeBookingUrl, safeName, safeLocation);
-              window.open(targetUrl, '_blank', 'noopener,noreferrer');
-            }}
-            className="w-full rounded-full font-bold h-[46px] md:h-[52px] text-[15px] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
-          >
-            <CalendarDays className="w-4 h-4" />
-            {ctaCopy}
-          </Button>
-          <span className="mb-0 mt-0.5 text-[10px] md:mb-0 md:mt-2.5 md:text-[11.5px] text-muted-foreground font-medium text-center leading-snug whitespace-nowrap">
-            You’ll finish your booking on Booking.com.
-          </span>
+        <div className="absolute bottom-0 left-0 right-0 bg-white/97 backdrop-blur-md border-t border-border/60 px-4 py-3 md:px-6 md:py-4 z-20 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] flex flex-col gap-1.5">
+          <div className="flex items-center gap-2.5 w-full">
+            <Button 
+              onClick={() => {
+                const targetUrl = buildAffiliateUrl(safeBookingUrl, safeName, safeLocation, departureDate, returnDate);
+                window.open(targetUrl, '_blank', 'noopener,noreferrer');
+              }}
+              className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[14px] md:text-[15px] active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-xs"
+            >
+              <CalendarDays className="w-4 h-4" />
+              <span className="truncate">
+                {rateInfo?.totalPrice ? `Book from €${rateInfo.totalPrice.toLocaleString()}` : 'Book on Booking.com'}
+              </span>
+            </Button>
+            {logistics.isLocalStay ? (
+              <Button 
+                variant="outline"
+                type="button"
+                onClick={() => {
+                  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(safeName + ' ' + safeLocation)}`;
+                  window.open(mapsUrl, '_blank', 'noopener,noreferrer');
+                }}
+                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] border-primary/30 text-primary hover:bg-primary/5 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              >
+                <MapPin className="w-4 h-4" />
+                <span className="truncate">Open in Maps</span>
+              </Button>
+            ) : (
+              <Button 
+                variant="outline"
+                type="button"
+                onClick={() => {
+                  const flightUrl = buildKayakFlightUrl(
+                    logistics.originIata,
+                    logistics.destinationAirport.iata,
+                    departureDate,
+                    returnDate
+                  );
+                  window.open(flightUrl, '_blank', 'noopener,noreferrer');
+                }}
+                className="flex-1 rounded-full font-bold h-[46px] md:h-[50px] text-[13.5px] md:text-[14.5px] border-primary/30 text-primary hover:bg-primary/5 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+              >
+                <Plane className="w-4 h-4" />
+                <span className="truncate">
+                  {flightRate?.returnPrice ? `Flights from €${flightRate.returnPrice}` : `Flights from ${logistics.originIata}`}
+                </span>
+              </Button>
+            )}
           </div>
+          <span className="text-[10px] md:text-[11px] text-muted-foreground font-medium text-center leading-snug">
+            {logistics.isLocalStay 
+              ? `Live rates on Booking.com • Local stay in ${logistics.originCity}`
+              : `Live rates on Booking.com • Route: ${logistics.originIata} ➔ ${logistics.destinationAirport.iata}`}
+          </span>
+        </div>
         </motion.div>
       </motion.div>
     </div>

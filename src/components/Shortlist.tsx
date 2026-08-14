@@ -268,6 +268,7 @@ export default function Shortlist({
                   imageShape={item.imageShape}
                   compact={item.compact}
                   contentMode="teaserCues"
+                  originAirport={preferences?.originAirport || 'ARN'}
                 />
               );
             })}

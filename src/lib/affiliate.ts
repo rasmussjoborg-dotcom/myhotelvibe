@@ -1,31 +1,79 @@
-export function buildAffiliateUrl(rawUrl: string, hotelName: string, location: string): string {
+export function buildAffiliateUrl(
+  rawUrl: string,
+  hotelName: string,
+  location: string,
+  checkinDate?: string,
+  checkoutDate?: string
+): string {
+  let targetUrl: string;
+
   // 1. Fallback if no URL is provided
   if (!rawUrl || rawUrl.trim() === '') {
-    const fallback = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(`${hotelName} ${location}`)}`;
-    return applyAffiliateTracking(fallback);
+    targetUrl = `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(`${hotelName} ${location}`)}`;
+  } else {
+    targetUrl = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
   }
 
-  // 2. Ensure URL has protocol
-  let url = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+  // 2. Append check-in & check-out dates if provided
+  if (checkinDate && checkoutDate) {
+    try {
+      const urlObj = new URL(targetUrl);
+      urlObj.searchParams.set('checkin', checkinDate);
+      urlObj.searchParams.set('checkout', checkoutDate);
+      targetUrl = urlObj.toString();
+    } catch {
+      // fallback
+    }
+  }
 
   // 3. Apply tracking
-  return applyAffiliateTracking(url);
+  return applyAffiliateTracking(targetUrl);
 }
 
-function applyAffiliateTracking(url: string): string {
-  const cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE; // e.g. "https://www.jdoqocy.com/click-123456-765432?url={url}"
+export function buildKayakFlightUrl(
+  originIata: string,
+  destinationIata: string,
+  departureDate?: string,
+  returnDate?: string
+): string {
+  // If dates are provided: https://www.kayak.com/flights/ARN-IBZ/2026-09-10/2026-09-17
+  // If dates are omitted: https://www.kayak.com/flights/ARN-IBZ
+  let rawUrl = `https://www.kayak.com/flights/${originIata.toUpperCase()}-${destinationIata.toUpperCase()}`;
+  if (departureDate && returnDate) {
+    rawUrl += `/${departureDate}/${returnDate}`;
+  }
+  return applyAffiliateTracking(rawUrl, 'flights');
+}
+
+function applyAffiliateTracking(url: string, sid: string = 'simployer'): string {
+  const kayakTemplate = import.meta.env.VITE_KAYAK_CJ_TEMPLATE;
+  const cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE; // e.g. "https://www.anrdoezrs.net/links/7984144/type/dlg/sid/simployer/{url}"
   const directAid = import.meta.env.VITE_BOOKING_AID; // e.g. "123456"
 
-  // If CJ Affiliate template is provided, wrap the URL
-  if (cjTemplate && cjTemplate.includes('{url}')) {
-    // If the template expects a query parameter, encode it. Otherwise (like DLG path templates), leave it raw.
-    const isQueryParam = cjTemplate.includes('?url={url}') || cjTemplate.includes('&url={url}');
-    const processedUrl = isQueryParam ? encodeURIComponent(url) : url;
-    return cjTemplate.replace('{url}', processedUrl);
+  // 1. KAYAK specific CJ link template
+  if (url.includes('kayak.com') && kayakTemplate && kayakTemplate.includes('{url}')) {
+    let customKayak = kayakTemplate;
+    if (sid && kayakTemplate.includes('/sid/simployer/')) {
+      customKayak = kayakTemplate.replace('/sid/simployer/', `/sid/${sid}/`);
+    }
+    const isQueryParam = customKayak.includes('?url={url}') || customKayak.includes('&url={url}');
+    return customKayak.replace('{url}', isQueryParam ? encodeURIComponent(url) : url);
   }
 
-  // If direct Booking.com AID is provided, append it
-  if (directAid) {
+  // 2. Generic / Booking CJ Affiliate template
+  if (cjTemplate && cjTemplate.includes('{url}')) {
+    let customizedTemplate = cjTemplate;
+    if (sid !== 'simployer' && cjTemplate.includes('/sid/simployer/')) {
+      customizedTemplate = cjTemplate.replace('/sid/simployer/', `/sid/${sid}/`);
+    }
+
+    const isQueryParam = customizedTemplate.includes('?url={url}') || customizedTemplate.includes('&url={url}');
+    const processedUrl = isQueryParam ? encodeURIComponent(url) : url;
+    return customizedTemplate.replace('{url}', processedUrl);
+  }
+
+  // 3. Direct Booking.com AID
+  if (directAid && url.includes('booking.com')) {
     try {
       const urlObj = new URL(url);
       urlObj.searchParams.set('aid', directAid);
@@ -37,3 +85,4 @@ function applyAffiliateTracking(url: string): string {
 
   return url;
 }
+

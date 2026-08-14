@@ -62,6 +62,24 @@ const upscalePlugin = () => ({
         });
       }
     });
+    server.middlewares.use('/api/availability', async (req, res) => {
+      try {
+        const { default: handler } = await import('./api/availability.js');
+        await handler(req, res);
+      } catch (e) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    server.middlewares.use('/api/flight-prices', async (req, res) => {
+      try {
+        const { default: handler } = await import('./api/flight-prices.js');
+        await handler(req, res);
+      } catch (e) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
   }
 });
 

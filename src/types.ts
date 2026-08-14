@@ -77,7 +77,8 @@ export interface Stay {
 
 export interface Preferences {
   persona: '' | string;
-  backdrop: '' | string;
+  originAirport: string; // e.g. 'ARN', 'CPH', 'LHR'
+  backdrop?: '' | string;
   priceTier: string[];
   amenities: ('Spa' | 'Pool' | 'Fine Dining' | 'Pet Friendly')[];
   settings: ('Secluded' | 'Mountain View' | 'Forest')[];

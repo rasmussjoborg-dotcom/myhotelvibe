@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {
   Bath,
@@ -36,6 +36,7 @@ import {
   CalendarDays,
   ArrowUp,
   CornerRightDown,
+  Plane,
 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Drawer as DrawerPrimitive } from 'vaul';
@@ -43,7 +44,8 @@ import { DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { useMediaQuery } from '../hooks/use-media-query';
 import { UI } from '@/lib/ui';
 import { cn } from '@/lib/utils';
-import { Preferences, QuickRankType, TRIP_PERSONAS, BACKDROP_OPTIONS, PRICE_TIERS } from '@/src/types';
+import { Preferences, QuickRankType, TRIP_PERSONAS, PRICE_TIERS } from '@/src/types';
+import { ORIGIN_AIRPORTS, getAirportByIata, searchOriginAirports } from '@/src/lib/airports';
 
 function Drawer({
   shouldScaleBackground = false,
@@ -306,6 +308,271 @@ function ChoicePills({
   );
 }
 
+function OriginAirportCombobox({
+  value,
+  onSelect,
+  compact = false,
+}: {
+  value: string;
+  onSelect: (iata: string) => void;
+  compact?: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const currentAirport = useMemo(() => getAirportByIata(value) || ORIGIN_AIRPORTS[0], [value]);
+  const results = useMemo(() => searchOriginAirports(query), [query]);
+
+  const displayValue = isFocused ? query : `${currentAirport.city} (${currentAirport.iata})`;
+
+  const handleSelect = (iata: string) => {
+    onSelect(iata);
+    setQuery('');
+    setOpen(false);
+    setIsFocused(false);
+    inputRef.current?.blur();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && results.length > 0) {
+      e.preventDefault();
+      handleSelect(results[0].iata);
+    } else if (e.key === 'Escape') {
+      setOpen(false);
+      setIsFocused(false);
+      inputRef.current?.blur();
+    }
+  };
+
+  if (isMobile) {
+    const mobileChipElement = (
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className={cn(
+          'group flex flex-col bg-muted/30 text-left relative cursor-pointer w-full',
+          compact
+            ? 'rounded-full px-6 py-3 shadow-[0_2px_8px_rgb(0,0,0,0.06),0_1px_3px_rgb(0,0,0,0.04)]'
+            : 'rounded-[32px] px-7 py-3.5 border border-primary pr-14',
+          'transition-all duration-200 hover:bg-muted/40 active:scale-[0.98]',
+          open ? 'bg-secondary/10 border-primary ring-2 ring-primary/20' : '',
+          'min-w-[180px] snap-start snap-always'
+        )}
+      >
+        {compact ? (
+          <div className="flex items-center gap-2 w-full">
+            <span className="shrink-0 text-primary [&>svg]:w-[16px] [&>svg]:h-[16px]">
+              <Plane className="h-4 w-4" />
+            </span>
+            <span className="block truncate font-semibold text-[13.5px] leading-none text-foreground">
+              {currentAirport.city} ({currentAirport.iata})
+            </span>
+          </div>
+        ) : (
+          <div className="w-full">
+            <span className="block text-[13px] font-bold leading-none mb-1 text-primary select-none">
+              From
+            </span>
+            <span className="block truncate font-semibold text-[13.5px] leading-tight text-foreground">
+              {currentAirport.city} ({currentAirport.iata})
+            </span>
+            <span className="absolute right-7 top-1/2 -translate-y-1/2 shrink-0 text-primary [&>svg]:h-[16px] [&>svg]:w-[16px] pointer-events-none">
+              <Plane className="h-4 w-4" />
+            </span>
+          </div>
+        )}
+      </button>
+    );
+
+    return (
+      <Drawer open={open} onOpenChange={setOpen} shouldScaleBackground={false}>
+        <DrawerTrigger asChild>
+          <div>{mobileChipElement}</div>
+        </DrawerTrigger>
+        <DrawerContent className="h-[75dvh] max-h-[75dvh] border-t border-primary/30 bg-white shadow-[0_-12px_40px_rgba(0,0,0,0.08)]">
+          <div className="relative flex h-full flex-col overflow-y-auto no-scrollbar bg-white px-6 pt-4 pb-[calc(env(safe-area-inset-bottom)+1.5rem)]">
+            <div className="flex items-start justify-between pr-8 mb-3">
+              <div>
+                <span className="sf-kicker block text-primary mb-1 uppercase">From</span>
+                <h2 className="font-semibold text-lg text-foreground">Search departure airport</h2>
+              </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border border-primary bg-white text-primary transition-colors hover:bg-background"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5 text-primary" />
+              </button>
+            </div>
+            <div className="relative w-full mb-3">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-primary/70 pointer-events-none" />
+              <input
+                autoFocus
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search city or airport (e.g. Stockholm, Paris, LHR)..."
+                className="w-full h-11 pl-10 pr-8 rounded-xl border border-primary/35 bg-white text-[14px] font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary/25"
+              />
+            </div>
+            <div className="flex flex-col flex-1 divide-y divide-border/40 overflow-y-auto">
+              {results.map((airport) => {
+                const isSelected = value === airport.iata;
+                return (
+                  <button
+                    key={airport.iata}
+                    type="button"
+                    onClick={() => handleSelect(airport.iata)}
+                    className={cn(
+                      'flex items-center justify-between py-3 text-left transition-colors min-h-[48px]',
+                      isSelected ? 'text-primary font-semibold' : 'text-foreground'
+                    )}
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted/60 text-primary shrink-0">
+                        <Plane className="h-4 w-4" />
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[14px] font-semibold truncate">{airport.city}</span>
+                          <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-muted text-muted-foreground font-mono">
+                            {airport.iata}
+                          </span>
+                        </div>
+                        <span className="text-[12px] text-muted-foreground truncate">{airport.name} • {airport.country}</span>
+                      </div>
+                    </div>
+                    {isSelected && <Check className="h-4 w-4 text-primary shrink-0 ml-2" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+
+  const desktopChipElement = (
+    <div
+      onClick={() => {
+        inputRef.current?.focus();
+        setOpen(true);
+      }}
+      className={cn(
+        'group flex flex-col bg-muted/30 text-left relative cursor-text',
+        compact
+          ? 'rounded-full px-6 py-3 shadow-[0_2px_8px_rgb(0,0,0,0.06),0_1px_3px_rgb(0,0,0,0.04)] md:rounded-full md:shadow-none md:border md:border-primary md:px-7 md:py-2.5 md:pr-14'
+          : 'rounded-[32px] md:rounded-full px-7 py-3.5 border border-primary pr-14',
+        'transition-all duration-200 hover:bg-muted/40 active:scale-[0.98]',
+        open || isFocused ? 'bg-secondary/10 border-primary ring-2 ring-primary/20' : '',
+        'min-w-[180px] md:min-w-0 snap-start snap-always'
+      )}
+    >
+      <div className="w-full">
+        <span className="block text-[13px] font-bold leading-none mb-1 text-primary select-none">
+          From
+        </span>
+        <input
+          ref={inputRef}
+          type="text"
+          value={displayValue}
+          placeholder="Type city or airport..."
+          onFocus={() => {
+            setIsFocused(true);
+            setQuery('');
+            setOpen(true);
+          }}
+          onBlur={() => {
+            setTimeout(() => {
+              setIsFocused(false);
+            }, 200);
+          }}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            if (!open) setOpen(true);
+          }}
+          onKeyDown={handleKeyDown}
+          className="w-full bg-transparent border-0 p-0 text-[13.5px] font-semibold text-foreground placeholder:text-muted-foreground/70 focus:outline-none truncate cursor-text leading-tight"
+        />
+        <span className="absolute right-7 top-1/2 -translate-y-1/2 shrink-0 text-primary [&>svg]:h-[16px] [&>svg]:w-[16px] pointer-events-none">
+          <Plane className="h-4 w-4" />
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <div>{desktopChipElement}</div>
+      </PopoverTrigger>
+      <PopoverContent
+        side="bottom"
+        align="center"
+        sideOffset={12}
+        avoidCollisions={false}
+        onOpenAutoFocus={(e) => e.preventDefault()}
+        className="w-[min(480px,calc(100vw-2rem))] rounded-2xl bg-white border border-primary/30 p-2.5 shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50"
+      >
+        <div className="flex items-center justify-between px-2 py-1 mb-1 border-b border-border/50">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
+            {query ? `${results.length} airports matching "${query}"` : 'Popular airport hubs'}
+          </span>
+          <span className="text-[11px] text-muted-foreground/70">Select to update routes</span>
+        </div>
+
+        <div className="flex flex-col max-h-[300px] overflow-y-auto no-scrollbar rounded-xl divide-y divide-border/40 bg-white">
+          {results.length > 0 ? (
+            results.map((airport) => {
+              const isSelected = value === airport.iata;
+              return (
+                <button
+                  key={airport.iata}
+                  type="button"
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    handleSelect(airport.iata);
+                  }}
+                  className={cn(
+                    'flex items-center justify-between px-3 py-2.5 text-left transition-colors cursor-pointer rounded-lg',
+                    isSelected
+                      ? 'bg-primary/10 text-primary font-semibold'
+                      : 'hover:bg-muted/40 active:bg-muted/60 text-foreground'
+                  )}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted/60 text-primary shrink-0">
+                      <Plane className="h-4 w-4" />
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13.5px] font-semibold text-foreground truncate">{airport.city}</span>
+                        <span className="text-[10.5px] font-bold px-1.5 py-0.5 rounded-md bg-muted text-muted-foreground font-mono">
+                          {airport.iata}
+                        </span>
+                      </div>
+                      <span className="text-[11.5px] text-muted-foreground truncate">{airport.name} • {airport.country}</span>
+                    </div>
+                  </div>
+                  {isSelected && <Check className="h-4 w-4 text-primary shrink-0 ml-2" />}
+                </button>
+              );
+            })
+          ) : (
+            <div className="p-6 text-center text-sm text-muted-foreground">
+              No airports found matching "{query}".
+            </div>
+          )}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
+}
+
 function MultiChoicePills({
   options,
   value,
@@ -456,12 +723,12 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
 
   const briefStarted = Boolean(
     preferences.persona || 
-    preferences.backdrop || 
+    preferences.originAirport || 
     preferences.priceTier || 
     currentRank !== 'default'
   );
-  const persona = preferences.persona || "What's the feeling?";
-  const backdrop = preferences.backdrop || "Where are we heading?";
+  const currentOrigin = getAirportByIata(preferences.originAirport || 'ARN');
+  const originLabel = currentOrigin ? `${currentOrigin.city} (${currentOrigin.iata})` : 'Select origin';
   const priceTier = preferences.priceTier && preferences.priceTier.length > 0 && !preferences.priceTier.includes('All tiers') 
     ? preferences.priceTier.map(t => t.split(' (')[0]).join(', ') 
     : "All tiers";
@@ -511,16 +778,16 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
     });
 
     return () => window.cancelAnimationFrame(raf);
-  }, [preferences.persona, preferences.backdrop, preferences.priceTier]);
+  }, [preferences.persona, preferences.originAirport, preferences.priceTier]);
 
   const updatePersona = (next: string) => {
     if (next === preferences.persona) return;
     onChange({ persona: next });
   };
 
-  const updateBackdrop = (next: string) => {
-    if (next === preferences.backdrop) return;
-    onChange({ backdrop: next });
+  const updateOrigin = (nextIata: string) => {
+    if (nextIata === preferences.originAirport) return;
+    onChange({ originAirport: nextIata });
   };
 
   const updatePriceTier = (next: string[]) => {
@@ -538,16 +805,10 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
     { label: 'The Sun-Drenched Escape', icon: <Sun className="h-4 w-4" /> },
   ];
 
-  const backdropOptions: ReadonlyArray<ChoiceOption> = [
-    { label: 'Pristine Shores', icon: <Sun className="h-4 w-4" /> },
-    { label: 'Iconic Cities', icon: <Building2 className="h-4 w-4" /> },
-    { label: 'Alpine & Peaks', icon: <Mountain className="h-4 w-4" /> },
-    { label: 'Remote Sanctuaries', icon: <Trees className="h-4 w-4" /> },
-    { label: 'Exclusive Islands', icon: <Palmtree className="h-4 w-4" /> },
-    { label: 'Lakeside Estates', icon: <Waves className="h-4 w-4" /> },
-    { label: 'Desert Oases', icon: <MapPin className="h-4 w-4" /> },
-    { label: 'Winter Escapes', icon: <Snowflake className="h-4 w-4" /> },
-  ];
+  const originOptions: ReadonlyArray<ChoiceOption> = ORIGIN_AIRPORTS.map((airport) => ({
+    label: `${airport.flag} ${airport.city} (${airport.iata})`,
+    icon: <Plane className="h-4 w-4" />
+  }));
 
   const priceTierOptions: ReadonlyArray<ChoiceOption> = [
     { label: 'All tiers', icon: <Gem className="h-4 w-4" /> },
@@ -624,30 +885,11 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
                 />
               </FilterMenu>
 
-              <FilterMenu 
-                title="Where to?" 
-                label="Backdrop"
-                align="center"
-                trigger={
-                  <BriefChip
-                    data-sf-brief-chip="true"
-                    className="min-w-[180px] md:min-w-0"
-                    label="Backdrop"
-                    value={preferences.backdrop || "What's the backdrop?"}
-                    icon={<MapPin className="h-4 w-4" />}
-                    selectedIcon={backdropOptions.find((o) => o.label === preferences.backdrop)?.icon}
-                    filled={Boolean(preferences.backdrop)}
-                    mutedValue={!preferences.backdrop}
-                    compact={isStuck}
-                  />
-                }
-              >
-                <ChoicePills
-                  options={backdropOptions}
-                  value={preferences.backdrop}
-                  onSelect={updateBackdrop}
-                />
-              </FilterMenu>
+              <OriginAirportCombobox
+                value={preferences.originAirport || 'ARN'}
+                onSelect={updateOrigin}
+                compact={isStuck}
+              />
 
               <FilterMenu 
                 title="What's your budget?" 
