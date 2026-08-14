@@ -45,7 +45,7 @@ export function buildKayakFlightUrl(
   return applyAffiliateTracking(rawUrl, 'flights');
 }
 
-const DEFAULT_CJ_TEMPLATE = 'https://www.anrdoezrs.net/links/7984144/type/dlg/sid/myhotelvibe/{url}';
+const DEFAULT_CJ_TEMPLATE = 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}';
 
 function applyAffiliateTracking(url: string, sid: string = 'myhotelvibe'): string {
   const kayakTemplate = import.meta.env.VITE_KAYAK_CJ_TEMPLATE;

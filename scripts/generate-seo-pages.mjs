@@ -14,7 +14,7 @@ function buildAffiliateUrl(rawUrl, hotelName, location) {
 }
 
 function applyAffiliateTracking(url) {
-  const cjTemplate = process.env.VITE_CJ_AFFILIATE_TEMPLATE;
+  const cjTemplate = process.env.VITE_CJ_AFFILIATE_TEMPLATE || 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}';
   const directAid = process.env.VITE_BOOKING_AID;
 
   if (cjTemplate && cjTemplate.includes('{url}')) {
