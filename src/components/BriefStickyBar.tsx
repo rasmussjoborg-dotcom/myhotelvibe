@@ -887,14 +887,14 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
 
               <FilterMenu 
                 title="Where to?" 
-                label="To"
+                label="Where to"
                 description="Explore stays in your favorite region or anywhere in the world."
                 align="center"
                 trigger={
                   <BriefChip
                     data-sf-brief-chip="true"
                     className={cn("min-w-[160px] md:min-w-0")}
-                    label="To"
+                    label="Where to"
                     value={destinationLabel}
                     icon={<Globe className="h-4 w-4" />}
                     selectedIcon={destinationOptions.find((o) => o.label === destinationLabel)?.icon || <Globe className="h-4 w-4" />}
