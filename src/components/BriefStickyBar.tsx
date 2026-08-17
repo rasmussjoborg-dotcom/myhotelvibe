@@ -896,10 +896,10 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
                     className={cn("min-w-[160px] md:min-w-0")}
                     label="To"
                     value={destinationLabel}
-                    icon={<MapPin className="h-4 w-4" />}
-                    selectedIcon={destinationOptions.find((o) => o.label === destinationLabel)?.icon}
-                    filled={Boolean(preferences.destination && preferences.destination !== 'Anywhere')}
-                    mutedValue={!preferences.destination || preferences.destination === 'Anywhere'}
+                    icon={<Globe className="h-4 w-4" />}
+                    selectedIcon={destinationOptions.find((o) => o.label === destinationLabel)?.icon || <Globe className="h-4 w-4" />}
+                    filled={true}
+                    mutedValue={false}
                     compact={isStuck}
                   />
                 }
