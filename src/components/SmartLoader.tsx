@@ -63,14 +63,14 @@ export default function SmartLoader({ preferences, className }: SmartLoaderProps
     <div className={cn("w-full relative pb-20 pt-4", className)}>
       
       {/* Centered Curating Pill Indicator */}
-      <div className="sticky top-20 z-30 flex justify-center py-3 pointer-events-none">
+      <div className="sticky top-20 z-30 flex justify-center py-3 pointer-events-none px-4">
         <motion.div 
           initial={{ opacity: 0, y: -10, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          className="flex items-center gap-3 bg-white/95 backdrop-blur-md text-foreground shadow-[0_8px_30px_rgb(0,0,0,0.1)] rounded-full pl-3 pr-5 py-2 overflow-hidden border border-border/80"
+          className="flex items-center gap-2.5 bg-white/95 backdrop-blur-md text-foreground shadow-[0_8px_30px_rgb(0,0,0,0.1)] rounded-full pl-2.5 pr-4 py-1.5 border border-border/80 whitespace-nowrap max-w-[95vw]"
         >
           
-          <div className="relative flex items-center justify-center h-8 w-8 shrink-0 rounded-full bg-primary/10">
+          <div className="relative flex items-center justify-center h-7 w-7 shrink-0 rounded-full bg-primary/10">
             {/* Smooth continuous spinner */}
             <svg className="absolute inset-0 w-full h-full animate-[spin_2s_linear_infinite] text-primary" viewBox="0 0 100 100">
               <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeWidth="10" strokeDasharray="50 180" strokeLinecap="round" />
@@ -82,26 +82,26 @@ export default function SmartLoader({ preferences, className }: SmartLoaderProps
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.25 }}
                 className="absolute inset-0 flex items-center justify-center text-primary"
               >
                 {(() => {
                   const Icon = phrases[step].icon;
-                  return <Icon className="h-4 w-4" strokeWidth={2.5} />;
+                  return <Icon className="h-3.5 w-3.5" strokeWidth={2.5} />;
                 })()}
               </motion.div>
             </AnimatePresence>
           </div>
 
-          <div className="relative h-5 min-w-[210px] flex items-center">
+          <div className="relative h-5 flex items-center overflow-visible">
             <AnimatePresence mode="wait">
               <motion.div
                 key={step}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.3 }}
-                className="absolute inset-x-0 flex items-center text-[14px] font-medium tracking-tight text-foreground/90"
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-center text-[13px] font-medium tracking-tight text-foreground/90 whitespace-nowrap"
               >
                 {phrases[step].text}...
               </motion.div>
