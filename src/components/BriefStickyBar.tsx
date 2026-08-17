@@ -39,6 +39,7 @@ import {
   Landmark,
   Compass,
   Plane,
+  CornerRightDown,
 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Drawer as DrawerPrimitive } from 'vaul';
