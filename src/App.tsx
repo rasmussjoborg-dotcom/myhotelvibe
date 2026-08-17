@@ -6,7 +6,7 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Preferences, QuickRankType, Stay } from './types';
-import { runWalledGardenSearch } from './lib/walledGardenSearch';
+import { filterStays } from './lib/walledGardenSearch';
 import Shortlist from './components/Shortlist';
 import CollectionIntro from './components/CollectionIntro';
 import CollectionSeoFooter from './components/CollectionSeoFooter';
@@ -165,9 +165,7 @@ export default function App() {
     }
   });
 
-  const [stays, setStays] = useState<Stay[]>([]);
   const [allStays, setAllStays] = useState<Stay[]>([]);
-  const [isLoadingStays, setIsLoadingStays] = useState(true);
   const [pathname, setPathname] = useState(() =>
     typeof window !== 'undefined' ? window.location.pathname : '/'
   );
@@ -179,7 +177,6 @@ export default function App() {
 
   const [activeStay, setActiveStay] = useState<Stay | null>(null);
   const [preferences, setPreferences] = useState<Preferences>(() => loadPreferences());
-  const [appliedPreferences, setAppliedPreferences] = useState<Preferences>(() => loadPreferences());
 
   const activeCollectionRoute = useMemo(() => getCollectionRouteFromPath(pathname), [pathname]);
   const routeScopedStays = useMemo(() => {
@@ -187,34 +184,25 @@ export default function App() {
     return allStays.filter((stay) => matchesCollectionRoute(stay, activeCollectionRoute));
   }, [activeCollectionRoute, allStays]);
 
-  useEffect(() => {
-    async function load() {
-      // If NO exact brief options are applied, return top stays
-      const isDefaultBrief =
-        !appliedPreferences.backdrop &&
-        !appliedPreferences.persona &&
-        (!appliedPreferences.destination || appliedPreferences.destination === 'Anywhere') &&
-        appliedPreferences.priceTier.includes('All tiers');
+  // Instant in-memory filtering (<1ms)
+  const stays = useMemo(() => {
+    if (allStays.length === 0) return [];
+    const isDefaultBrief =
+      !preferences.backdrop &&
+      !preferences.persona &&
+      (!preferences.destination || preferences.destination === 'Anywhere') &&
+      preferences.priceTier.includes('All tiers');
 
-      if (isDefaultBrief) {
-        setStays(routeScopedStays);
-        setIsLoadingStays(routeScopedStays.length === 0 && allStays.length === 0);
-        return;
-      }
-      setIsLoadingStays(true);
-      const data = await runWalledGardenSearch(appliedPreferences, routeScopedStays);
-      setStays(data);
-      setIsLoadingStays(false);
+    if (isDefaultBrief) {
+      return routeScopedStays;
     }
-    load();
-  }, [appliedPreferences, allStays, routeScopedStays]);
+    return filterStays(preferences, routeScopedStays);
+  }, [preferences, allStays.length, routeScopedStays]);
 
   const handleTrendSelect = (backdrop: string, persona: string) => {
     const newPrefs = { ...preferences, backdrop, persona };
     setPreferences(newPrefs);
-    setAppliedPreferences(newPrefs);
 
-    
     // Scroll to results
     if (discoverScrollRef.current) {
       discoverScrollRef.current.scrollTo({ top: 300, behavior: 'smooth' });
@@ -238,8 +226,6 @@ export default function App() {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  const [isUpdating, setIsUpdating] = useState(false);
-  const updateTimerRef = useRef<number | null>(null);
   const [briefBarStuck, setBriefBarStuck] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -247,6 +233,7 @@ export default function App() {
   const briefBarStuckRef = useRef(false);
   const isScrolledRef = useRef(false);
   const showBackToTopRef = useRef(false);
+
   useEffect(() => {
     safeStorageSet('stayfirst_favorites', JSON.stringify(favorites));
   }, [favorites]);
@@ -258,54 +245,6 @@ export default function App() {
   useEffect(() => {
     safeStorageSet(RANK_STORAGE_KEY, currentRank);
   }, [currentRank]);
-
-  useEffect(() => {
-    // Check if actual hotel filter criteria changed
-    const personaChanged = preferences.persona !== appliedPreferences.persona;
-    const destinationChanged = (preferences.destination || '') !== (appliedPreferences.destination || '');
-    const backdropChanged = preferences.backdrop !== appliedPreferences.backdrop;
-    const priceTierChanged = JSON.stringify(preferences.priceTier) !== JSON.stringify(appliedPreferences.priceTier);
-    const amenitiesChanged = JSON.stringify(preferences.amenities) !== JSON.stringify(appliedPreferences.amenities);
-    const settingsChanged = JSON.stringify(preferences.settings) !== JSON.stringify(appliedPreferences.settings);
-
-    if (!personaChanged && !destinationChanged && !backdropChanged && !priceTierChanged && !amenitiesChanged && !settingsChanged) {
-      // Only origin airport changed (or no changes) - sync immediately without unmounting stays
-      if (preferences.originAirport !== appliedPreferences.originAirport) {
-        setAppliedPreferences((prev) => ({ ...prev, originAirport: preferences.originAirport }));
-      }
-      setIsUpdating(false);
-      return;
-    }
-
-    setIsUpdating(true);
-    if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
-
-    const nextPreferences = preferences;
-    updateTimerRef.current = window.setTimeout(() => {
-      setAppliedPreferences(nextPreferences);
-      setIsUpdating(false);
-    }, 280);
-
-    return () => {
-      if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
-      updateTimerRef.current = null;
-    };
-  }, [
-    preferences.persona,
-    preferences.destination,
-    preferences.originAirport,
-    preferences.backdrop,
-    preferences.priceTier,
-    preferences.amenities,
-    preferences.settings,
-    appliedPreferences.persona,
-    appliedPreferences.destination,
-    appliedPreferences.backdrop,
-    appliedPreferences.priceTier,
-    appliedPreferences.amenities,
-    appliedPreferences.settings,
-    appliedPreferences.originAirport,
-  ]);
 
   useEffect(() => {
     let rafId: number;
@@ -351,22 +290,12 @@ export default function App() {
   }, [discoverScrollEl]);
 
   const handlePreferencesChange = (update: Partial<Preferences>) => {
-    setPreferences((prev) => {
-      const next = { ...prev, ...update };
-      if (Object.keys(update).length === 1 && 'originAirport' in update) {
-        setAppliedPreferences((prevApplied) => ({ ...prevApplied, originAirport: update.originAirport }));
-      }
-      return next;
-    });
+    setPreferences((prev) => ({ ...prev, ...update }));
   };
 
   const resetBrief = () => {
-    if (updateTimerRef.current) window.clearTimeout(updateTimerRef.current);
-    updateTimerRef.current = null;
     setPreferences(DEFAULT_PREFERENCES);
-    setAppliedPreferences(DEFAULT_PREFERENCES);
     setCurrentRank('default');
-    setIsUpdating(false);
   };
 
   const setTab = (nextTab: AppTab) => {
@@ -572,91 +501,73 @@ export default function App() {
                         currentRank={currentRank}
                         onRankChange={setCurrentRank}
                         isStuck={briefBarStuck}
-                        isUpdating={isUpdating}
                         className=""
                       />
 
                       <div className="relative min-h-[50vh]">
-                        <AnimatePresence mode="wait">
-                          {isLoadingStays || isUpdating ? (
-                            <motion.div
-                              key="loader"
-                              initial={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
-                              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                              exit={{ opacity: 0, scale: 1.05, filter: 'blur(4px)' }}
-                              transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                              className="w-full flex justify-center absolute inset-x-0"
-                            >
-                              <SmartLoader preferences={appliedPreferences} />
-                            </motion.div>
-                          ) : (
-                            <motion.div
-                              key="list"
-                              initial={{ opacity: 0, y: 40, filter: 'blur(8px)' }}
-                              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                              exit={{ opacity: 0, y: -40, filter: 'blur(4px)' }}
-                              transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-                              className={cn("w-full", isUpdating ? 'pointer-events-none select-none' : '')}
-                            >
-                              {activeCollectionRoute && routeScopedStays.length > 0 ? (
-                                <CollectionIntro
-                                  route={activeCollectionRoute}
-                                  stays={routeScopedStays}
-                                  onClose={() => {
-                                    window.history.pushState({}, '', '/');
-                                    setPathname('/');
-                                  }}
-                                />
-                              ) : null}
-                              <Shortlist
-                                stays={stays}
-                                favorites={favorites}
-                                onToggleFavorite={handleToggleFavorite}
-                                onOpenDetails={setActiveStay}
-                                preferences={appliedPreferences}
-                                currentRank={currentRank}
-                                onRankChange={setCurrentRank}
-                                isUpdating={isUpdating}
+                        {allStays.length === 0 ? (
+                          <div className="w-full flex justify-center py-8">
+                            <SmartLoader preferences={preferences} />
+                          </div>
+                        ) : (
+                          <div className="w-full">
+                            {activeCollectionRoute && routeScopedStays.length > 0 ? (
+                              <CollectionIntro
+                                route={activeCollectionRoute}
+                                stays={routeScopedStays}
+                                onClose={() => {
+                                  window.history.pushState({}, '', '/');
+                                  setPathname('/');
+                                }}
                               />
-                              {activeCollectionRoute && routeScopedStays.length > 0 ? (
-                                <CollectionSeoFooter route={activeCollectionRoute} stays={routeScopedStays} />
-                              ) : null}
-                              {!activeCollectionRoute && allStays.length > 0 ? (
-                                <HomeCollectionHub stays={allStays} />
-                              ) : null}
-                              <footer className="w-full pt-3 md:pt-4">
-                                <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 border-t border-border/70 bg-transparent px-5 pb-8 pt-4 text-left md:px-10 md:pb-28 md:pt-4">
-                                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] font-medium text-foreground/80">
-                                    <button
-                                      type="button"
-                                      onClick={() => setIsAboutDrawerOpen(true)}
-                                      className="transition-colors hover:text-primary"
-                                    >
-                                      About
-                                    </button>
-                                    <button
-                                      type="button"
-                                      onClick={() => setIsAboutDrawerOpen(true)}
-                                      className="transition-colors hover:text-primary"
-                                    >
-                                      Privacy & notes
-                                    </button>
-                                    <a
-                                      href="mailto:contact@myhotelvibe.com"
-                                      className="transition-colors hover:text-primary"
-                                    >
-                                      Contact
-                                    </a>
-                                  </div>
-                                  <p className="max-w-[780px] text-[12px] leading-relaxed text-muted-foreground md:max-w-[1200px] md:text-[13px]">
-                                    All hotel links on My Hotel Vibe are affiliate links. If you book through them, My
-                                    Hotel Vibe may earn a commission at no extra cost to you.
-                                  </p>
-                                </div>
-                              </footer>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                            ) : null}
+                            <Shortlist
+                              stays={stays}
+                              favorites={favorites}
+                              onToggleFavorite={handleToggleFavorite}
+                              onOpenDetails={setActiveStay}
+                              preferences={preferences}
+                              currentRank={currentRank}
+                              onRankChange={setCurrentRank}
+                            />
+                            {activeCollectionRoute && routeScopedStays.length > 0 ? (
+                              <CollectionSeoFooter route={activeCollectionRoute} stays={routeScopedStays} />
+                            ) : null}
+                            {!activeCollectionRoute && allStays.length > 0 ? (
+                              <HomeCollectionHub stays={allStays} />
+                            ) : null}
+                          </div>
+                        )}
+                        <footer className="w-full pt-3 md:pt-4">
+                          <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 border-t border-border/70 bg-transparent px-5 pb-8 pt-4 text-left md:px-10 md:pb-28 md:pt-4">
+                            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] font-medium text-foreground/80">
+                              <button
+                                type="button"
+                                onClick={() => setIsAboutDrawerOpen(true)}
+                                className="transition-colors hover:text-primary"
+                              >
+                                About
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setIsAboutDrawerOpen(true)}
+                                className="transition-colors hover:text-primary"
+                              >
+                                Privacy & notes
+                              </button>
+                              <a
+                                href="mailto:contact@myhotelvibe.com"
+                                className="transition-colors hover:text-primary"
+                              >
+                                Contact
+                              </a>
+                            </div>
+                            <p className="max-w-[780px] text-[12px] leading-relaxed text-muted-foreground md:max-w-[1200px] md:text-[13px]">
+                              All hotel links on My Hotel Vibe are affiliate links. If you book through them, My
+                              Hotel Vibe may earn a commission at no extra cost to you.
+                            </p>
+                          </div>
+                        </footer>
                       </div>
                     </div>
                     
