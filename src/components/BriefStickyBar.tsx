@@ -35,7 +35,9 @@ import {
   Filter,
   CalendarDays,
   ArrowUp,
-  CornerRightDown,
+  Globe,
+  Landmark,
+  Compass,
   Plane,
 } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -723,16 +725,15 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
 
   const briefStarted = Boolean(
     preferences.persona || 
+    preferences.destination ||
     preferences.originAirport || 
-    preferences.priceTier || 
     currentRank !== 'default'
   );
   const currentOrigin = getAirportByIata(preferences.originAirport || 'LHR');
   const originLabel = currentOrigin ? `${currentOrigin.city} (${currentOrigin.iata})` : 'Select origin';
-  const priceTier = preferences.priceTier && preferences.priceTier.length > 0 && !preferences.priceTier.includes('All tiers') 
-    ? preferences.priceTier.map(t => t.split(' (')[0]).join(', ') 
-    : "All tiers";
-
+  const destinationLabel = preferences.destination && preferences.destination !== 'Anywhere'
+    ? preferences.destination
+    : 'Anywhere';
 
   const LENSES: { id: QuickRankType; icon: React.ReactNode; label: string; description: string }[] = [
     { id: 'default', icon: <Sparkles className="h-4 w-4" />, label: 'Best match', description: 'Best overall fit for your brief' },
@@ -778,22 +779,22 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
     });
 
     return () => window.cancelAnimationFrame(raf);
-  }, [preferences.persona, preferences.originAirport, preferences.priceTier]);
+  }, [preferences.persona, preferences.destination, preferences.originAirport]);
 
   const updatePersona = (next: string) => {
     if (next === preferences.persona) return;
     onChange({ persona: next });
   };
 
+  const updateDestination = (next: string) => {
+    const value = next === 'Anywhere' ? '' : next;
+    if (value === preferences.destination) return;
+    onChange({ destination: value });
+  };
+
   const updateOrigin = (nextIata: string) => {
     if (nextIata === preferences.originAirport) return;
     onChange({ originAirport: nextIata });
-  };
-
-  const updatePriceTier = (next: string[]) => {
-    // If the array is exactly the same, do nothing
-    if (next.length === preferences.priceTier.length && next.every(v => preferences.priceTier.includes(v))) return;
-    onChange({ priceTier: next });
   };
 
   const personaOptions: ReadonlyArray<ChoiceOption> = [
@@ -805,20 +806,18 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
     { label: 'The Sun-Drenched Escape', icon: <Sun className="h-4 w-4" /> },
   ];
 
-  const originOptions: ReadonlyArray<ChoiceOption> = ORIGIN_AIRPORTS.map((airport) => ({
-    label: `${airport.flag} ${airport.city} (${airport.iata})`,
-    icon: <Plane className="h-4 w-4" />
-  }));
-
-  const priceTierOptions: ReadonlyArray<ChoiceOption> = [
-    { label: 'All tiers', icon: <Gem className="h-4 w-4" /> },
-    ...PRICE_TIERS.map(label => ({
-      label,
-      icon: <Gem className="h-4 w-4" />
-    }))
+  const destinationOptions: ReadonlyArray<ChoiceOption> = [
+    { label: 'Anywhere', icon: <Globe className="h-4 w-4" /> },
+    { label: 'Italy', icon: <Landmark className="h-4 w-4" /> },
+    { label: 'Spain & Balearics', icon: <Sun className="h-4 w-4" /> },
+    { label: 'France & Riviera', icon: <Sparkles className="h-4 w-4" /> },
+    { label: 'Greece & Islands', icon: <Waves className="h-4 w-4" /> },
+    { label: 'The Nordics', icon: <Trees className="h-4 w-4" /> },
+    { label: 'Portugal & Azores', icon: <Compass className="h-4 w-4" /> },
+    { label: 'UK & Ireland', icon: <Building2 className="h-4 w-4" /> },
+    { label: 'Switzerland & Alps', icon: <Mountain className="h-4 w-4" /> },
+    { label: 'Worldwide Escapes', icon: <Palmtree className="h-4 w-4" /> },
   ];
-
-
 
   const content = (
         <div 
@@ -885,37 +884,37 @@ const BriefStickyBar = forwardRef<HTMLDivElement, BriefStickyBarProps>(function 
                 />
               </FilterMenu>
 
+              <FilterMenu 
+                title="Where to?" 
+                label="To"
+                description="Explore stays in your favorite region or anywhere in the world."
+                align="center"
+                trigger={
+                  <BriefChip
+                    data-sf-brief-chip="true"
+                    className={cn("min-w-[160px] md:min-w-0")}
+                    label="To"
+                    value={destinationLabel}
+                    icon={<MapPin className="h-4 w-4" />}
+                    selectedIcon={destinationOptions.find((o) => o.label === destinationLabel)?.icon}
+                    filled={Boolean(preferences.destination && preferences.destination !== 'Anywhere')}
+                    mutedValue={!preferences.destination || preferences.destination === 'Anywhere'}
+                    compact={isStuck}
+                  />
+                }
+              >
+                <ChoicePills
+                  options={destinationOptions}
+                  value={preferences.destination || 'Anywhere'}
+                  onSelect={updateDestination}
+                />
+              </FilterMenu>
+
               <OriginAirportCombobox
                 value={preferences.originAirport || 'LHR'}
                 onSelect={updateOrigin}
                 compact={isStuck}
               />
-
-              <FilterMenu 
-                title="What's your budget?" 
-                label="Price Tier"
-                description="We'll show you places that match your price point."
-                align="end"
-                trigger={
-                  <BriefChip
-                    data-sf-brief-chip="true"
-                    className={cn("min-w-[160px] md:min-w-0", isStuck ? "mr-5 md:mr-0" : "")}
-                    label="Price Tier"
-                    value={preferences.priceTier.length > 0 ? preferences.priceTier.join(', ') : "What's the budget?"}
-                    icon={<Gem className="h-4 w-4" />}
-                    selectedIcon={priceTierOptions.find((o) => preferences.priceTier.includes(o.label))?.icon}
-                    filled={preferences.priceTier.length > 0}
-                    mutedValue={preferences.priceTier.length === 0}
-                    compact={isStuck}
-                  />
-                }
-              >
-                <MultiChoicePills
-                  options={priceTierOptions}
-                  value={preferences.priceTier}
-                  onSelect={updatePriceTier}
-                />
-              </FilterMenu>
               </div>
               </div>
           </div>

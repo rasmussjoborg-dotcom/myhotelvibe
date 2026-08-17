@@ -1,6 +1,7 @@
 import { Preferences, Stay } from '../types';
 import { fetchHotels } from './api';
 import { mapSceneToDestinations } from './dateLocationParser';
+import { matchesDestination } from './destinations';
 
 const BUDGET_MAP: Record<string, string[]> = {
   'Save it for the wine': ['€', '€€'],
@@ -20,6 +21,11 @@ export async function runWalledGardenSearch(preferences: Preferences, sourceHote
       // --- Safety Filter ---
       // Hide from the consumer site until the admin assigns an image
       if (!hotel.image || hotel.image.includes('placeholder')) return false;
+
+      // --- Destination / Region Filter ("TO") ---
+      if (preferences.destination && !matchesDestination(hotel, preferences.destination)) {
+        return false;
+      }
 
       // --- Backdrop Filter ---
       if (preferences.backdrop) {

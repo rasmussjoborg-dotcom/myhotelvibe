@@ -82,6 +82,7 @@ class AdminErrorBoundary extends React.Component<
 
 const DEFAULT_PREFERENCES: Preferences = {
   persona: '',
+  destination: '',
   originAirport: detectDefaultOriginAirport(),
   backdrop: '',
   priceTier: ['All tiers'],
@@ -121,6 +122,7 @@ const loadPreferences = () => {
       amenities: Array.isArray(parsed.amenities) ? (parsed.amenities as any) : [],
       settings: Array.isArray(parsed.settings) ? (parsed.settings as any) : [],
       persona: typeof parsed.persona === 'string' ? parsed.persona : '',
+      destination: typeof parsed.destination === 'string' ? parsed.destination : '',
       originAirport: typeof parsed.originAirport === 'string' && parsed.originAirport ? parsed.originAirport : detectDefaultOriginAirport(),
       backdrop: typeof parsed.backdrop === 'string' ? parsed.backdrop : '',
       priceTier: Array.isArray(parsed.priceTier) ? parsed.priceTier : ['All tiers'],
@@ -188,7 +190,13 @@ export default function App() {
   useEffect(() => {
     async function load() {
       // If NO exact brief options are applied, return top stays
-      if (!appliedPreferences.backdrop && !appliedPreferences.persona && appliedPreferences.priceTier.includes('All tiers')) {
+      const isDefaultBrief =
+        !appliedPreferences.backdrop &&
+        !appliedPreferences.persona &&
+        (!appliedPreferences.destination || appliedPreferences.destination === 'Anywhere') &&
+        appliedPreferences.priceTier.includes('All tiers');
+
+      if (isDefaultBrief) {
         setStays(routeScopedStays);
         setIsLoadingStays(routeScopedStays.length === 0 && allStays.length === 0);
         return;
@@ -254,12 +262,13 @@ export default function App() {
   useEffect(() => {
     // Check if actual hotel filter criteria changed
     const personaChanged = preferences.persona !== appliedPreferences.persona;
+    const destinationChanged = (preferences.destination || '') !== (appliedPreferences.destination || '');
     const backdropChanged = preferences.backdrop !== appliedPreferences.backdrop;
     const priceTierChanged = JSON.stringify(preferences.priceTier) !== JSON.stringify(appliedPreferences.priceTier);
     const amenitiesChanged = JSON.stringify(preferences.amenities) !== JSON.stringify(appliedPreferences.amenities);
     const settingsChanged = JSON.stringify(preferences.settings) !== JSON.stringify(appliedPreferences.settings);
 
-    if (!personaChanged && !backdropChanged && !priceTierChanged && !amenitiesChanged && !settingsChanged) {
+    if (!personaChanged && !destinationChanged && !backdropChanged && !priceTierChanged && !amenitiesChanged && !settingsChanged) {
       // Only origin airport changed (or no changes) - sync immediately without unmounting stays
       if (preferences.originAirport !== appliedPreferences.originAirport) {
         setAppliedPreferences((prev) => ({ ...prev, originAirport: preferences.originAirport }));
@@ -283,12 +292,14 @@ export default function App() {
     };
   }, [
     preferences.persona,
+    preferences.destination,
     preferences.originAirport,
     preferences.backdrop,
     preferences.priceTier,
     preferences.amenities,
     preferences.settings,
     appliedPreferences.persona,
+    appliedPreferences.destination,
     appliedPreferences.backdrop,
     appliedPreferences.priceTier,
     appliedPreferences.amenities,

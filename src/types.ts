@@ -77,6 +77,7 @@ export interface Stay {
 
 export interface Preferences {
   persona: '' | string;
+  destination?: '' | string; // e.g. 'Anywhere', 'Italy', 'Spain & Balearics', etc.
   originAirport: string; // e.g. 'ARN', 'CPH', 'LHR'
   backdrop?: '' | string;
   priceTier: string[];
