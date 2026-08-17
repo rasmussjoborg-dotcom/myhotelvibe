@@ -127,8 +127,9 @@ export default function SearchSection({
       <header className="flex w-full items-center justify-between border-none bg-transparent px-5 py-4 transition-colors duration-300 md:px-10 relative z-10">
         <button
           type="button"
-          className="font-display absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 text-[24px] md:text-[26px] font-bold leading-none tracking-[-0.04em] text-foreground"
-          aria-label="My Hotel Vibe home"
+          onClick={onGoHome}
+          className="font-display absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 text-[24px] md:text-[26px] font-bold leading-none tracking-[-0.04em] text-foreground cursor-pointer hover:opacity-80 transition-opacity"
+          aria-label="My Hotel Vibe home - Reset search"
         >
           My Hotel Vibe
         </button>

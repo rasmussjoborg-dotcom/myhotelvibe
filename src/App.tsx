@@ -485,9 +485,15 @@ export default function App() {
                           setIsSavedDrawerOpen(false);
                           setIsAboutDrawerOpen(false);
                           setActiveStay(null);
+                          resetBrief();
                           if (typeof window !== 'undefined' && window.location.pathname !== '/') {
                             window.history.pushState({}, '', '/');
                             setPathname('/');
+                          }
+                          if (discoverScrollRef.current) {
+                            discoverScrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+                          } else if (typeof window !== 'undefined') {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                           }
                         }}
                         isScrolled={isScrolled}
