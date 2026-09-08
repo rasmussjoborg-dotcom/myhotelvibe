@@ -149,6 +149,12 @@ const CurationStudio = lazy(() => import('./components/CurationStudio'));
 export default function App() {
   const localAdminEnabled = isLocalAdminEnabled();
   const [currentTab, setCurrentTab] = useState<AppTab>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('admin') === 'true' || params.get('admin') === '1' || params.get('tab') === 'admin' || window.location.pathname === '/admin') {
+        return 'admin';
+      }
+    }
     return (safeStorageGet('stayfirst_current_tab') as AppTab) || 'discover';
   });
   const [isSavedDrawerOpen, setIsSavedDrawerOpen] = useState(false);
