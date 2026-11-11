@@ -1,0 +1,36 @@
+name: Autonomous Weekly Hotel Curator
+
+on:
+  schedule:
+    # Run every Sunday morning at 08:30 UTC
+    - cron: '30 8 * * 0'
+  workflow_dispatch: # Allows manual 1-click trigger anytime from GitHub Actions tab
+
+jobs:
+  curate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Autonomous Weekly Curator
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
+          VITE_SERPER_API_KEY: ${{ secrets.VITE_SERPER_API_KEY }}
+          VITE_CJ_PUBLISHER_ID: ${{ secrets.VITE_CJ_PUBLISHER_ID || '101775158' }}
+          VITE_CJ_AFFILIATE_TEMPLATE: ${{ secrets.VITE_CJ_AFFILIATE_TEMPLATE || 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}' }}
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+          NOTIFICATION_WEBHOOK: ${{ secrets.NOTIFICATION_WEBHOOK }}
+        run: npx tsx scripts/weekly_curator.ts
