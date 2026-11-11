@@ -13,12 +13,46 @@ function buildAffiliateUrl(rawUrl, hotelName, location) {
   return applyAffiliateTracking(url);
 }
 
-function applyAffiliateTracking(url) {
-  const cjTemplate = process.env.VITE_CJ_AFFILIATE_TEMPLATE || 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}';
+function cleanTargetUrl(rawUrl) {
+  if (!rawUrl) return rawUrl;
+  try {
+    const urlObj = new URL(rawUrl);
+    if (urlObj.hostname.includes('booking.com')) {
+      const allowedParams = ['checkin', 'checkout', 'group_adults', 'no_rooms', 'ss'];
+      const cleanParams = new URLSearchParams();
+      for (const [key, val] of urlObj.searchParams.entries()) {
+        if (allowedParams.includes(key)) {
+          cleanParams.set(key, val);
+        }
+      }
+      urlObj.search = cleanParams.toString();
+      return urlObj.toString();
+    }
+    return rawUrl;
+  } catch {
+    return rawUrl;
+  }
+}
+
+function applyAffiliateTracking(rawUrl) {
+  const url = cleanTargetUrl(rawUrl);
+  let cjTemplate = process.env.VITE_CJ_AFFILIATE_TEMPLATE || 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}';
   const directAid = process.env.VITE_BOOKING_AID;
 
+  if (cjTemplate.includes('7984144')) {
+    cjTemplate = cjTemplate.replace('7984144', '101775158');
+  }
+  if (cjTemplate.includes('anrdoezrs.net')) {
+    cjTemplate = cjTemplate.replace('anrdoezrs.net', 'dpbolvw.net');
+  }
+  if (cjTemplate.includes('/sid/simployer/')) {
+    cjTemplate = cjTemplate.replace('/sid/simployer/', '/sid/myhotelvibe/');
+  }
+
   if (cjTemplate && cjTemplate.includes('{url}')) {
-    return cjTemplate.replace('{url}', encodeURIComponent(url));
+    const isQueryParam = cjTemplate.includes('?url={url}') || cjTemplate.includes('&url={url}');
+    const processedUrl = isQueryParam ? encodeURIComponent(url) : url;
+    return cjTemplate.replace('{url}', processedUrl);
   }
   if (directAid) {
     try {

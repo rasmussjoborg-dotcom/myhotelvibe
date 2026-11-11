@@ -47,7 +47,29 @@ export function buildKayakFlightUrl(
 
 const DEFAULT_CJ_TEMPLATE = 'https://www.dpbolvw.net/links/101775158/type/dlg/sid/myhotelvibe/{url}';
 
-function applyAffiliateTracking(url: string, sid: string = 'myhotelvibe'): string {
+function cleanTargetUrl(rawUrl: string): string {
+  if (!rawUrl) return rawUrl;
+  try {
+    const urlObj = new URL(rawUrl);
+    if (urlObj.hostname.includes('booking.com')) {
+      const allowedParams = ['checkin', 'checkout', 'group_adults', 'no_rooms', 'ss'];
+      const cleanParams = new URLSearchParams();
+      for (const [key, val] of urlObj.searchParams.entries()) {
+        if (allowedParams.includes(key)) {
+          cleanParams.set(key, val);
+        }
+      }
+      urlObj.search = cleanParams.toString();
+      return urlObj.toString();
+    }
+    return rawUrl;
+  } catch {
+    return rawUrl;
+  }
+}
+
+function applyAffiliateTracking(rawUrl: string, sid: string = 'myhotelvibe'): string {
+  const url = cleanTargetUrl(rawUrl);
   const kayakTemplate = import.meta.env.VITE_KAYAK_CJ_TEMPLATE;
   let cjTemplate = import.meta.env.VITE_CJ_AFFILIATE_TEMPLATE || DEFAULT_CJ_TEMPLATE;
   const directAid = import.meta.env.VITE_BOOKING_AID;
